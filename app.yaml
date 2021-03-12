@@ -3,7 +3,7 @@ service: default
 
 handlers:
   - url: /
-    static_files: dist/index.html
-    upload: dist/index.html
+    static_files: dist/front/index.html
+    upload: dist/front/index.html
   - url: /
-    static_dir: dist
+    static_dir: dist/front
