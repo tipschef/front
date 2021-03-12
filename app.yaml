@@ -1,0 +1,14 @@
+runtime: python37
+service: default
+
+handlers:
+  - url: /(.*\.(png|jpg|ttf|woff|svg|css|js|webmanifest|json)(|\.map))$
+    static_files: dist/\1
+    upload: dist/(.*)(|\.map)
+    secure: always
+  - url: /(.*)
+    static_files: dist/index.html
+    upload: dist/index.html
+    secure: always
+    http_headers:
+      Cache-Control: no-cache
