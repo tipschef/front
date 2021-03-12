@@ -12,4 +12,3 @@ steps:
   - id: 'Deploy front on AppEngine'
     name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy', 'app.yaml', '--version', '$COMMIT_SHA']
-    dir: 'frontend'
