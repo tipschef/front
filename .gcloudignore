@@ -1,3 +1,4 @@
+
 # This file specifies files that are *not* uploaded to Google Cloud Platform
 # using gcloud. It follows the same syntax as .gitignore, with the addition of
 # "#!include" directives (which insert the entries of the given .gitignore-style
@@ -13,15 +14,11 @@
 .git
 .gitignore
 
-# Node.js dependencies:
-node_modules/
-webpack.config.js
-src/
-tsconfig.json
-readme.md
-ssl/
-tslint.json
-LICENSE
-.editorconfig
-.dockerignore
-.gitignore
+
+# Python pycache:
+__pycache__/
+# Ignored by the build system
+/setup.cfg
+
+/node_modules
+/e2e
