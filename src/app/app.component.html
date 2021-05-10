@@ -1,11 +1,15 @@
 <mat-toolbar color="primary">
+  <button mat-icon-button  routerLink="/home">
+    <mat-icon>home</mat-icon>
+  </button>
   <span>TipsChef</span>
   <span class="tc-spacer"></span>
   <div class="header-button-row">
-    <button mat-raised-button>Basic</button>
-    <button mat-raised-button color="accent">Accent</button>
+    <button mat-raised-button routerLink="/sign-up">Connexion</button>
+    <button mat-raised-button color="accent" routerLink="/log-in">Inscription</button>
   </div>
   <button mat-icon-button>
     <mat-icon>account_circle</mat-icon>
   </button>
 </mat-toolbar>
+<router-outlet></router-outlet>
