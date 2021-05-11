@@ -1,0 +1,11 @@
+.tc-spacer {
+  flex: 1 1 auto;
+}
+
+.header-button-row {
+  display: table-cell;
+}
+
+.header-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
