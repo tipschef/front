@@ -43,6 +43,7 @@ export class LogInComponent implements OnInit {
       console.log(username);
       console.log(password);
       this.authService.authenticate(username, password).subscribe(authData => {
+          this.authService.authData = authData.body;
           this.router.navigate([this.returnUrl]);
         },
         error => {

@@ -10,6 +10,8 @@ import {AuthData} from '../../models/auth/auth-data.model';
 })
 export class AuthService {
 
+  authData: AuthData = null;
+
   constructor(private http: HttpClient,
               private constantsService: ConstantsService) {
   }

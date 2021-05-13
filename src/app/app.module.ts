@@ -10,13 +10,15 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import { WallComponent } from './components/wall/wall.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SignUpComponent,
-    LogInComponent
+    LogInComponent,
+    WallComponent
   ],
   imports: [
     BrowserModule,
