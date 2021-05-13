@@ -12,13 +12,6 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    const user: User = {
-      email: 'test@test.fr',
-      password: 'test'
-    };
-    this.userService.createUser(user).subscribe( httpReturn => {
-      console.log(httpReturn);
-    });
   }
 
 }
