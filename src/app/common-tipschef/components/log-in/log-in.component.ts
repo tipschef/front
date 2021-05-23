@@ -40,8 +40,6 @@ export class LogInComponent implements OnInit {
     if (this.form.valid) {
       const username = this.form.get('username')?.value;
       const password = this.form.get('password')?.value;
-      console.log(username);
-      console.log(password);
       this.authService.authenticate(username, password).subscribe(authData => {
           this.authService.authData = authData.body;
           this.router.navigate([this.returnUrl]);

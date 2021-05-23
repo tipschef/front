@@ -21,7 +21,6 @@ export class UserService {
       username: username,
       password: password
     };
-    console.log(JSON.stringify(user));
     return this.http.post<User>(url, user, {observe: 'response'});
   }
 
