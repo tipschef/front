@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
-import {AuthService} from '../../services/auth/auth.service';
+import {AuthService} from '../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-log-in',
@@ -42,6 +42,7 @@ export class LogInComponent implements OnInit {
       const password = this.form.get('password')?.value;
       this.authService.authenticate(username, password).subscribe(authData => {
           this.authService.authData = authData.body;
+          this.authService.updateUserRoles();
           this.router.navigate([this.returnUrl]);
         },
         error => {
