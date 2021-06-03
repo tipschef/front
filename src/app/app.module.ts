@@ -11,6 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import { WallComponent } from './common-tipschef/components/wall/wall.component';
 import {MaterialModule} from './shared/material-module/material.module';
+import {CommonTipschefModule} from "./common-tipschef/common-tipschef.module";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MaterialModule} from './shared/material-module/material.module';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonTipschefModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import {WallComponent} from './common-tipschef/components/wall/wall.component';
 import {AuthGuard} from './common-tipschef/guard/auth.guard';
 import {CookComponent} from './cook/cook.component';
 import {DashboardComponent} from './cook/components/dashboard/dashboard.component';
+import {ProfileComponent} from "./common-tipschef/components/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -40,8 +41,10 @@ const routes: Routes = [
     }
   },
   {
-    path: '**',
-    redirectTo: 'home',
+    path: ':username',
+    component: ProfileComponent,
+    pathMatch: 'full',
+    // canActivate: [AuthGuard]
   },
 ];
 
