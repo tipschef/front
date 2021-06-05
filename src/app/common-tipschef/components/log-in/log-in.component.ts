@@ -41,9 +41,9 @@ export class LogInComponent implements OnInit {
       const username = this.form.get('username')?.value;
       const password = this.form.get('password')?.value;
       this.authService.authenticate(username, password).subscribe(authData => {
-          this.authService.authData = authData.body;
-          this.authService.updateUserRoles();
-          this.router.navigate([this.returnUrl]);
+          if (this.authService.authData != null){
+            this.router.navigate([this.returnUrl]);
+          }
         },
         error => {
           this.loginInvalid = true;

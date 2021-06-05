@@ -5,6 +5,8 @@ import {ConstantsService} from '../constants/constants.service';
 import {Observable} from 'rxjs';
 import {AuthData} from '../../models/auth-data.model';
 import {UserRoles} from '../../models/user-roles';
+import {map} from 'rxjs/operators';
+import {LocalStorageService} from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ export class AuthService {
   userRoles: UserRoles = null;
 
   constructor(private http: HttpClient,
-              private constantsService: ConstantsService) {
+              private constantsService: ConstantsService,
+              private localStorageService: LocalStorageService) {
   }
 
   isLoggedIn(): boolean {
@@ -23,7 +26,7 @@ export class AuthService {
   }
 
 
-  authenticate(username: string, password: string): Observable<HttpResponse<AuthData>> {
+  authenticate(username: string, password: string): Observable<any> {
     const url = this.constantsService.getConstant('AUTH_TOKEN');
     const body = new HttpParams()
       .set('username', username)
@@ -31,9 +34,13 @@ export class AuthService {
     return this.http.post<AuthData>(url, body.toString(), {
       observe: 'response', headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
-    });
+    }).pipe(map(user => {
+      this.authData = user.body;
+      this.localStorageService.set('currentUser', user.body);
+      this.updateUserRoles();
+    })) ;
   }
-
+// localStorage.setItem('currentUser', JSON.stringify(user));
   updateUserRoles(): void {
     this.getUserRoles().subscribe(httpResponse => {
       this.userRoles = httpResponse.body;
