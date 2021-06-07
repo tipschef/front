@@ -16,7 +16,8 @@ export class RecipeCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      min_tier: [0, [Validators.required, Validators.min(0), Validators.max(3)]],
+      name: ['', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]

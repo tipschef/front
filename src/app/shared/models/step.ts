@@ -3,5 +3,5 @@ export interface Step {
   content?: string;
   order?: number;
   is_deleted?: boolean;
-  created_date: Date;
+  created_date?: Date;
 }
