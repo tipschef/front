@@ -1,5 +1,6 @@
 import {Media} from './media';
 import {Step} from './step';
+import {Ingredient} from './ingredient';
 
 export interface Recipe {
   id?: number;
@@ -25,4 +26,5 @@ export interface Recipe {
   recipe_category_id?: number;
   recipe_cooking_type_id?: number;
   medias?: Media[];
+  ingredients?: Ingredient[];
 }
