@@ -9,3 +9,18 @@
 mat-form-field {
   display: flex;
 }
+
+
+.inline-block {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.margin-right {
+  margin-right: 8px;
+}
+
