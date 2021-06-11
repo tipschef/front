@@ -2,8 +2,11 @@ runtime: python37
 service: default
 
 handlers:
-  - url: .*
+  - url: /
     static_files: dist/front/index.html
     upload: dist/front/index.html
-  - url: .*
+  - url: /(.*)$
+      static_files: dist/front/\1
+      upload: dist/front/(.*)
+  - url: /
     static_dir: dist/front
