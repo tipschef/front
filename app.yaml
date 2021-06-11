@@ -9,5 +9,5 @@ handlers:
     static_files: dist/front/index.html
     upload: dist/front/index.html
   - url: /(.*)
-      static_files: dist/front/\1
+      static_files: dist/front/(.*)
       upload: dist/front/(.*)
