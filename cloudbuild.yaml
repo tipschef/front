@@ -7,7 +7,7 @@ steps:
   - id: 'Build application'
     name: 'node:14.16.0'
     entrypoint: 'npm'
-    args: ['run', 'build_dev']
+    args: ['run', 'build_$_ENVNAME']
 
   - id: 'Deploy front on AppEngine'
     name: 'gcr.io/cloud-builders/gcloud'
