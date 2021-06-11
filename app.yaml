@@ -5,5 +5,5 @@ handlers:
   - url: .*
     static_files: dist/front/index.html
     upload: dist/front/index.html
-  - url: /
+  - url: .*
     static_dir: dist/front
