@@ -80,4 +80,12 @@ export class RecipeService {
 
     return this.http.post<Array<Media>>(url + recipeId +'/', formData, {headers, observe: 'response'});
   }
+
+  getAllRecipeCreatedByUser(): Observable<HttpResponse<Array<Recipe>>> {
+    const url = this.constantsService.getConstant('RECIPE_CREATOR');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<Recipe>>(url, {headers, observe: 'response'});
+  }
 }
