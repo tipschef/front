@@ -8,11 +8,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
 import { BookCardComponent } from './components/book-card/book-card.component';
 import {MatListModule} from "@angular/material/list";
+import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
 
 
 
 @NgModule({
-  declarations: [ProfileComponent, RecipeCardComponent, BookCardComponent],
+  declarations: [ProfileComponent, RecipeCardComponent, BookCardComponent, RecipeDetailComponent],
   exports: [
     RecipeCardComponent
   ],
