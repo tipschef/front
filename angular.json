@@ -38,12 +38,12 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/index.html",
-                  "with": "src/index.prod.html"
                 }
               ],
+              "index": {
+                "input": "src/index.prod.html",
+                "output": "index.html"
+              },
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -69,12 +69,12 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dev.ts"
-                },
-                {
-                  "replace": "src/index.html",
-                  "with": "src/index.dev.html"
                 }
               ],
+              "index": {
+                "input": "src/index.dev.html",
+                "output": "index.html"
+              },
               "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
