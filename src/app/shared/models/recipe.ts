@@ -12,7 +12,7 @@ export interface Recipe {
   steps?: Step[];
   creator_id?: number;
   last_updated?: Date;
-  created_at?: Date;
+  created_date?: Date;
   portion_number?: number;
   portion_unit?: string;
   preparation_hours?: number;

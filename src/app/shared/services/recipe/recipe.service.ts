@@ -81,11 +81,46 @@ export class RecipeService {
     return this.http.post<Array<Media>>(url + recipeId +'/', formData, {headers, observe: 'response'});
   }
 
+
+  deleteMedias(recipeId: number, medias: Media[]): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('RECIPE_MEDIA');
+    const headers = {
+      'Authorization': `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.put<any>(url + recipeId + '/', medias, {headers, observe: 'response'});
+  }
+
   getAllRecipeCreatedByUser(): Observable<HttpResponse<Array<Recipe>>> {
     const url = this.constantsService.getConstant('RECIPE_CREATOR');
     const headers = {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
     return this.http.get<Array<Recipe>>(url, {headers, observe: 'response'});
+  }
+
+  updateRecipe(recipe: Recipe): Observable<HttpResponse<Recipe>> {
+    const url = this.constantsService.getConstant('RECIPE');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.patch<Recipe>(url + recipe.id+'/', recipe, {headers, observe: 'response'});
+  }
+
+  getRecipeById(recipe_id: number) : Observable<HttpResponse<Recipe>>{
+    const url = this.constantsService.getConstant('RECIPE');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+
+    return this.http.get<Recipe>(url + recipe_id + '/', {headers, observe: 'response'});
+  }
+
+  deleteRecipe(recipe_id: number): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('RECIPE');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.delete<any>(url + recipe_id, {headers, observe: 'response'});
   }
 }
