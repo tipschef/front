@@ -39,7 +39,7 @@
 
         <div class="bottom-button"  >
           <span class="tc-spacer"></span>
-          <button  mat-button matStepperNext class="right">Suivant</button>
+          <button  mat-button matStepperNext class="right mat-raised-button mat-primary">Suivant</button>
         </div>
       </form>
     </mat-step>
@@ -136,9 +136,9 @@
         <label for="input-file-id" class="mat-primary mat-raised-button">Ajouter des médias</label>
 
         <div class="bottom-button">
-          <button  mat-button matStepperPrevious>Précédent</button>
+          <button  mat-button matStepperPrevious class="mat-primary mat-raised-button">Précédent</button>
           <span class="tc-spacer"></span>
-          <button  mat-button matStepperNext class="right">Suivant</button>
+          <button  mat-button matStepperNext class="right  mat-raised-button mat-primary">Suivant</button>
         </div>
       </form>
     </mat-step>
@@ -182,19 +182,19 @@
       </form>
       <button type="button"  class="mat-primary mat-raised-button" (click)="addStep()">Ajouter une étape</button>
       <div class="bottom-button">
-        <button  mat-button matStepperPrevious>Précédent</button>
+        <button  mat-button matStepperPrevious class="mat-primary mat-raised-button">Précédent</button>
         <span class="tc-spacer"></span>
-        <button  mat-button matStepperNext class="right">Suivant</button>
+        <button  mat-button matStepperNext class="right mat-raised-button mat-primary">Suivant</button>
       </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Finalisation</ng-template>
       <p class="center">Vous êtes arrivé à la fin de la création de votre recette. Vérifiez les informations saisies et vous pouvez procéder à la création.</p>
       <div class="bottom-button">
-        <button  mat-button matStepperPrevious>Précédent</button>
+        <button  mat-button matStepperPrevious class="mat-primary mat-raised-button">Précédent</button>
         <span class="tc-spacer"></span>
-        <button mat-button type="button" class="right" (click)="createRecipe()" *ngIf="!is_update">Créer</button>
-        <button mat-button type="button" class="right" (click)="createRecipe()" *ngIf="is_update">Mettre à jour</button>
+        <button mat-button type="button" class="right mat-raised-button mat-primary" (click)="createRecipe()" *ngIf="!is_update">Créer</button>
+        <button mat-button type="button" class="right mat-raised-button mat-primary" (click)="createRecipe()" *ngIf="is_update">Mettre à jour</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
