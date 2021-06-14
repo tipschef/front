@@ -27,6 +27,13 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
   isDataAvailable: boolean= false;
   mediaToDelete: Media[];
 
+  is_loading: boolean;
+  maxStep: number;
+  currentStep: number;
+
+  thumbnail: {};
+  video: {};
+
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private recipeService: RecipeService,
@@ -36,6 +43,10 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.is_update = !!this.route.snapshot.paramMap.get('recipe_id');
+
+    this.is_loading = false;
+    this.maxStep = this.is_update ? 5 : 4;
+    this.currentStep = 0;
 
     this.medias = [];
     this.ingredients = [];
@@ -110,6 +121,14 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
     for (let media of this.recipe.medias){
       this.medias.push({'data': media, 'path': media.path, 'is_created': true});
+    }
+
+    if (!!this.recipe.thumbnail){
+      this.thumbnail= {'data': this.recipe.thumbnail, 'path': this.recipe.thumbnail.path, 'is_created': true};
+    }
+
+    if (!!this.recipe.video){
+      this.video= {'data': this.recipe.video, 'path': this.recipe.video.path, 'is_created': true};
     }
     this.isDataAvailable = true;
   }
@@ -193,6 +212,52 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     }
   }
 
+
+  addThumbnail(event: any): void {
+    const files = event.target.files;
+    if (files.length === 0) {
+      return;
+    }
+
+    let reader;
+
+    for (const key in files) {
+      if (!files.hasOwnProperty(key)) {
+        continue;
+      }
+
+      const file = files[key];
+      reader = new FileReader();
+      reader.readAsDataURL(file);
+      // tslint:disable-next-line:no-shadowed-variable
+      reader.onload = (event) => {
+        this.thumbnail = {'data': file, 'path': reader.result, 'is_created':false};
+      };
+    }
+  }
+  addVideo(event: any): void {
+    const files = event.target.files;
+    if (files.length === 0) {
+      return;
+    }
+
+    let reader;
+
+    for (const key in files) {
+      if (!files.hasOwnProperty(key)) {
+        continue;
+      }
+
+      const file = files[key];
+      reader = new FileReader();
+      reader.readAsDataURL(file);
+      // tslint:disable-next-line:no-shadowed-variable
+      reader.onload = (event) => {
+        this.video = {'data': file, 'path': reader.result, 'is_created':false};
+      };
+    }
+  }
+
   removeMedias(i: number): void {
     if (this.medias[i]) {
       if(this.medias[i]['is_created'] == true){
@@ -229,6 +294,9 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
   }
 
   createRecipe(): void {
+    this.currentStep=0;
+    this.is_loading = true;
+
     this.recipe.min_tier = this.firstFormGroup.value.min_tier;
     this.recipe.description = this.firstFormGroup.value.description;
     this.recipe.name = this.firstFormGroup.value.name;
@@ -263,14 +331,27 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
       order+=1;
     }
 
-
+    this.currentStep+=1;
     if (this.is_update){
       this.recipeService.updateRecipe(this.recipe).subscribe(httpReturn => {
+        this.currentStep+=1;
         if (httpReturn.body['status']){
 
           if (this.mediaToDelete.length != 0) {
             this.recipeService.deleteMedias(this.recipe.id, this.mediaToDelete).subscribe(httpReturn => {
+              this.currentStep+=1;
+            });
+          }
 
+          if (this.thumbnail && this.thumbnail['is_created'] == false){
+            this.recipeService.postThumbnail(this.recipe.id, this.thumbnail['data']).subscribe(httpReturn => {
+              this.currentStep+=1;
+            });
+          }
+
+          if (this.video && this.video['is_created'] == false){
+            this.recipeService.postVideo(this.recipe.id, this.video['data']).subscribe(httpReturn => {
+              this.currentStep+=1;
             });
           }
 
@@ -283,15 +364,18 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
           if (mediaToAdd.length != 0){
             this.recipeService.postMedias(this.recipe.id, mediaToAdd).subscribe(httpReturn => {
+              this.currentStep+=1;
               this.router.navigate(['/cook/recipe']);
             });
           }else{
+            this.currentStep+=1;
             this.router.navigate(['/cook/recipe']);
           }
         }
       });
     }else{
       this.recipeService.postRecipe(this.recipe).subscribe(httpReturn => {
+        this.currentStep+=1;
         if (httpReturn.body.recipe_id){
           let mediaToAdd = [];
           for(let media of this.medias){
@@ -300,11 +384,25 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
             }
           }
 
+          if (this.thumbnail && this.thumbnail['is_created'] == false){
+            this.recipeService.postThumbnail(httpReturn.body.recipe_id, this.thumbnail['data']).subscribe(httpReturn => {
+              this.currentStep+=1;
+            });
+          }
+
+          if (this.video && this.video['is_created'] == false){
+            this.recipeService.postVideo(httpReturn.body.recipe_id, this.video['data']).subscribe(httpReturn => {
+              this.currentStep+=1;
+            });
+          }
+
           if (mediaToAdd.length != 0){
             this.recipeService.postMedias(httpReturn.body.recipe_id, mediaToAdd).subscribe(httpReturn => {
+              this.currentStep+=1;
               this.router.navigate(['/cook/recipe']);
             });
           }else{
+            this.currentStep+=1;
             this.router.navigate(['/cook/recipe']);
           }
 

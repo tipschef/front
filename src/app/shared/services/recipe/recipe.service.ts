@@ -81,6 +81,28 @@ export class RecipeService {
     return this.http.post<Array<Media>>(url + recipeId +'/', formData, {headers, observe: 'response'});
   }
 
+  postThumbnail(recipeId: number, thumbnail: File): Observable<HttpResponse<Media>> {
+    const url = this.constantsService.getConstant('RECIPE_THUMBNAIL');
+    const headers = {
+      'Authorization': `Bearer ${this.authService.authData.access_token}`
+    };
+    let formData: FormData = new FormData();
+    formData.append('thumbnail', thumbnail);
+
+    return this.http.post<Media>(url + recipeId +'/', formData, {headers, observe: 'response'});
+  }
+
+  postVideo(recipeId: number, video: File): Observable<HttpResponse<Media>> {
+    const url = this.constantsService.getConstant('RECIPE_VIDEO');
+    const headers = {
+      'Authorization': `Bearer ${this.authService.authData.access_token}`
+    };
+    let formData: FormData = new FormData();
+    formData.append('video', video);
+
+    return this.http.post<Media>(url + recipeId +'/', formData, {headers, observe: 'response'});
+  }
+
 
   deleteMedias(recipeId: number, medias: Media[]): Observable<HttpResponse<any>>{
     const url = this.constantsService.getConstant('RECIPE_MEDIA');

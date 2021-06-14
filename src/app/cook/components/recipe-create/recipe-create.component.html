@@ -1,11 +1,15 @@
 <div *ngIf="isDataAvailable">
   <h2 *ngIf="!is_update">Ajouter une recette</h2>
   <h2 *ngIf="is_update">Mettre à jour la recette {{recipe.name}}</h2>
-  <mat-horizontal-stepper [linear]="true" #stepper >
+  <div class="center" *ngIf="is_loading">
+    <img src="/assets/loader-2_food.gif" alt="loading-gif">
+    <div>{{currentStep}}/{{maxStep}}</div>
+  </div>
+  <mat-horizontal-stepper [linear]="true" #stepper *ngIf="!is_loading">
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Informations générale</ng-template>
-        <div class="center">Bienvenu sur le formulaire d'ajout de recette de TipsChef. <br> Suivez les différents étapes, saisissez les informations nécessaires à votre recette et visualisez-la en ligne.</div>
+        <div class="center">Bienvenu sur le formulaire d'ajout de recette de TipsChef. <br> Suivez les différentes étapes, saisissez les informations nécessaires à votre recette et visualisez-la en ligne.</div>
 
         <mat-form-field>
           <mat-label>Tier d'accès : </mat-label>
@@ -20,8 +24,23 @@
           <mat-label>Description : </mat-label>
           <input matInput placeholder="Saisissez un nom de recette" formControlName="description" required>
         </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Suivant</button>
+
+        <div>Thumbnail :</div>
+        <img *ngIf="!!thumbnail" class="margin-right" style="height:100px; width:100px" src="{{thumbnail['path']}}">
+
+        <input class="hidden" id="input-thumbnail-id" type="file" (change)="addThumbnail($event)"/>
+        <br>
+        <label for="input-thumbnail-id" class="mat-primary mat-raised-button">Ajouter un thumbnail</label>
+
+        <div>Vidéo :</div>
+        <div *ngIf="!!video">Uploaded video : {{video['data']['name'] ? video['data']['name'] : video['data']['path']}}</div>
+        <input class="hidden" id="input-video-id" type="file" (change)="addVideo($event)"/>
+        <br>
+        <label for="input-video-id" class="mat-primary mat-raised-button">Ajouter une vidéo</label>
+
+        <div class="bottom-button"  >
+          <span class="tc-spacer"></span>
+          <button  mat-button matStepperNext class="right">Suivant</button>
         </div>
       </form>
     </mat-step>
@@ -117,8 +136,10 @@
         <input class="hidden" id="input-file-id" type="file" (change)="addMedias($event)"/>
         <label for="input-file-id" class="mat-primary mat-raised-button">Ajouter des médias</label>
 
-        <div>
-          <button mat-button matStepperNext >Suivant</button>
+        <div class="bottom-button">
+          <button  mat-button matStepperPrevious>Précédent</button>
+          <span class="tc-spacer"></span>
+          <button  mat-button matStepperNext class="right">Suivant</button>
         </div>
       </form>
     </mat-step>
@@ -161,16 +182,20 @@
         <button type="button"  class="mat-warn mat-raised-button inline-block" *ngIf="steps.length > 1" (click)="deleteStep(i)">Supprimer étape</button>
       </form>
       <button type="button"  class="mat-primary mat-raised-button" (click)="addStep()">Ajouter une étape</button>
-      <div>
-        <button mat-button matStepperNext>Suivant</button>
+      <div class="bottom-button">
+        <button  mat-button matStepperPrevious>Précédent</button>
+        <span class="tc-spacer"></span>
+        <button  mat-button matStepperNext class="right">Suivant</button>
       </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p class="center">Vous êtes arrivé à la fin de la création de votre recette. Vérifiez les informations saisies et vous pouvez procéder à la création.</p>
-      <div>
-        <button mat-button type="button" (click)="createRecipe()" *ngIf="!is_update">Créer</button>
-        <button mat-button type="button" (click)="createRecipe()" *ngIf="is_update">Mettre à jour</button>
+      <div class="bottom-button">
+        <button  mat-button matStepperPrevious>Précédent</button>
+        <span class="tc-spacer"></span>
+        <button mat-button type="button" class="right" (click)="createRecipe()" *ngIf="!is_update">Créer</button>
+        <button mat-button type="button" class="right" (click)="createRecipe()" *ngIf="is_update">Mettre à jour</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

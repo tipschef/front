@@ -36,9 +36,6 @@ const routes: Routes = [
     path: 'cook',
     loadChildren: () => import('./cook/cook.module').then(m => m.CookModule),
     canActivate: [AuthGuard],
-    data: {
-      roles: ['cook']
-    }
   },
   {
     path: ':username',

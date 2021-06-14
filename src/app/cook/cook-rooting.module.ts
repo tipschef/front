@@ -14,34 +14,22 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component : DashboardComponent,
-        canActivate: [AuthGuard],
-        data : {
-          roles : ['cook']
-        }
+        canActivate: [AuthGuard]
       },
       {
         path: 'recipe',
         component : RecipeListComponent,
-        canActivate: [AuthGuard],
-        data : {
-          roles : ['cook']
-        }
+        canActivate: [AuthGuard]
       },
       {
         path: 'recipe-create',
         component : RecipeCreateComponent,
-        canActivate: [AuthGuard],
-        data : {
-          roles : ['cook']
-        }
+        canActivate: [AuthGuard]
       },
       {
         path: '**',
         component : DashboardComponent,
-        canActivate: [AuthGuard],
-        data : {
-          roles : ['cook']
-        }
+        canActivate: [AuthGuard]
       },
     ]
   }

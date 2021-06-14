@@ -7,4 +7,6 @@ export const constants = {
   RECIPE_MEDIA: '/recipe/media/',
   RECIPE_COOKING_TYPE: '/recipe_cooking_type/',
   RECIPE_CREATOR: '/recipe/creator/',
+  RECIPE_THUMBNAIL: '/recipe/thumbnail_media/',
+  RECIPE_VIDEO: '/recipe/video_media/',
 };
