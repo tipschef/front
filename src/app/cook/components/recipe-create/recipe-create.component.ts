@@ -8,6 +8,7 @@ import {RecipeCookingType} from '../../../shared/models/recipe-cooking-type';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Step} from '../../../shared/models/step';
 import {Media} from '../../../shared/models/media';
+import {AuthService} from '../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-recipe-create',
@@ -37,6 +38,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private recipeService: RecipeService,
+              private authService: AuthService,
               private route: ActivatedRoute) {
 
   }
@@ -76,6 +78,9 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     this.recipeService.getRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'))).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
         this.recipe = httpReturn.body;
+        if (this.recipe.creator_id != this.authService.userRoles.id){
+          this.router.navigate(['/cook/recipe']);
+        }
         this.fill_form();
       }
     });

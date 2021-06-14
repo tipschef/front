@@ -31,11 +31,10 @@
         <input class="hidden" id="input-thumbnail-id" type="file" (change)="addThumbnail($event)"/>
         <br>
         <label for="input-thumbnail-id" class="mat-primary mat-raised-button">Ajouter un thumbnail</label>
-
-        <div>Vidéo :</div>
+        <br>
+        <div  class="bottom-button">Vidéo :</div>
         <div *ngIf="!!video">Uploaded video : {{video['data']['name'] ? video['data']['name'] : video['data']['path']}}</div>
         <input class="hidden" id="input-video-id" type="file" (change)="addVideo($event)"/>
-        <br>
         <label for="input-video-id" class="mat-primary mat-raised-button">Ajouter une vidéo</label>
 
         <div class="bottom-button"  >
@@ -145,7 +144,7 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Ingrédients et étapes</ng-template>
-      <div>Ingredients </div>
+      <div>Ingrédients </div>
       <form *ngFor="let ingredient of ingredients; index as i" [formGroup]="ingredient">
 
         <mat-form-field appearance="fill"  class="inline-block">
@@ -161,16 +160,16 @@
 
         <div class="inline-block">  &nbsp; </div>
         <mat-form-field appearance="fill" class="inline-block">
-          <mat-label>Ingrédient : </mat-label>
+          <mat-label>Ingrédients : </mat-label>
           <input matInput placeholder="Pomme, farine, boeuf ..." formControlName="ingredient_name">
         </mat-form-field>
 
         <button type="button" class="mat-warn mat-raised-button inline-block" *ngIf="ingredients.length > 1" (click)="deleteIngredient(i)">Supprimer ingrédient</button>
       </form>
-      <button type="button" class="mat-primary mat-raised-button" (click)="addIngredient()">Ajouter un ingredient</button>
+      <button type="button" class="mat-primary mat-raised-button" (click)="addIngredient()">Ajouter un ingrédient</button>
 
       <br>
-      <div>Étapes </div>
+      <div  class="margin-top-20">Étapes !</div>
       <form *ngFor="let step of steps; index as i" [formGroup]="step">
 
         <div class="inline-block">  &nbsp; </div>
@@ -189,7 +188,7 @@
       </div>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
+      <ng-template matStepLabel>Finalisation</ng-template>
       <p class="center">Vous êtes arrivé à la fin de la création de votre recette. Vérifiez les informations saisies et vous pouvez procéder à la création.</p>
       <div class="bottom-button">
         <button  mat-button matStepperPrevious>Précédent</button>
