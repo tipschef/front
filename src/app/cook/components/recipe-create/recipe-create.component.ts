@@ -47,7 +47,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     this.is_update = !!this.route.snapshot.paramMap.get('recipe_id');
 
     this.is_loading = false;
-    this.maxStep = this.is_update ? 5 : 4;
+    this.maxStep = this.is_update ? 6 : 5;
     this.currentStep = 0;
 
     this.medias = [];
