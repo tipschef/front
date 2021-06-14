@@ -144,7 +144,7 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Ingrédients et étapes</ng-template>
-      <div>Ingrédients </div>
+      <div>Ingrédients :</div>
       <form *ngFor="let ingredient of ingredients; index as i" [formGroup]="ingredient">
 
         <mat-form-field appearance="fill"  class="inline-block">
@@ -169,7 +169,7 @@
       <button type="button" class="mat-primary mat-raised-button" (click)="addIngredient()">Ajouter un ingrédient</button>
 
       <br>
-      <div  class="margin-top-20">Étapes !</div>
+      <div  class="margin-top-20">Étapes :</div>
       <form *ngFor="let step of steps; index as i" [formGroup]="step">
 
         <div class="inline-block">  &nbsp; </div>

@@ -65,7 +65,6 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
     this.recipeService.getAllRecipeCreatedByUser().subscribe(httpReturn => {
       if (httpReturn.body != null && httpReturn.body) {
         this.recipes = httpReturn.body;
-        console.log(this.recipes);
         this.dataSource = new MatTableDataSource(this.recipes);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
