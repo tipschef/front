@@ -345,19 +345,43 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
           if (this.mediaToDelete.length != 0) {
             this.recipeService.deleteMedias(this.recipe.id, this.mediaToDelete).subscribe(httpReturn => {
               this.currentStep+=1;
+              if(this.currentStep == this.maxStep){
+                this.router.navigate(['/cook/recipe']);
+              }
             });
+          }else{
+            this.currentStep+=1;
+            if(this.currentStep == this.maxStep){
+              this.router.navigate(['/cook/recipe']);
+            }
           }
 
           if (this.thumbnail && this.thumbnail['is_created'] == false){
             this.recipeService.postThumbnail(this.recipe.id, this.thumbnail['data']).subscribe(httpReturn => {
               this.currentStep+=1;
+              if(this.currentStep == this.maxStep){
+                this.router.navigate(['/cook/recipe']);
+              }
             });
+          }else{
+            this.currentStep+=1;
+            if(this.currentStep == this.maxStep){
+              this.router.navigate(['/cook/recipe']);
+            }
           }
 
           if (this.video && this.video['is_created'] == false){
             this.recipeService.postVideo(this.recipe.id, this.video['data']).subscribe(httpReturn => {
               this.currentStep+=1;
+              if(this.currentStep == this.maxStep){
+                this.router.navigate(['/cook/recipe']);
+              }
             });
+          }else{
+            this.currentStep+=1;
+            if(this.currentStep == this.maxStep){
+              this.router.navigate(['/cook/recipe']);
+            }
           }
 
           let mediaToAdd = [];
@@ -370,11 +394,15 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
           if (mediaToAdd.length != 0){
             this.recipeService.postMedias(this.recipe.id, mediaToAdd).subscribe(httpReturn => {
               this.currentStep+=1;
-              this.router.navigate(['/cook/recipe']);
+              if(this.currentStep == this.maxStep){
+                this.router.navigate(['/cook/recipe']);
+              }
             });
           }else{
             this.currentStep+=1;
-            this.router.navigate(['/cook/recipe']);
+            if(this.currentStep == this.maxStep){
+              this.router.navigate(['/cook/recipe']);
+            }
           }
         }
       });
@@ -392,23 +420,43 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
           if (this.thumbnail && this.thumbnail['is_created'] == false){
             this.recipeService.postThumbnail(httpReturn.body.recipe_id, this.thumbnail['data']).subscribe(httpReturn => {
               this.currentStep+=1;
+              if(this.currentStep == this.maxStep){
+                this.router.navigate(['/cook/recipe']);
+              }
             });
+          }else{
+            this.currentStep+=1;
+            if(this.currentStep == this.maxStep){
+              this.router.navigate(['/cook/recipe']);
+            }
           }
 
           if (this.video && this.video['is_created'] == false){
             this.recipeService.postVideo(httpReturn.body.recipe_id, this.video['data']).subscribe(httpReturn => {
               this.currentStep+=1;
+              if(this.currentStep == this.maxStep){
+                this.router.navigate(['/cook/recipe']);
+              }
             });
+          }else{
+            this.currentStep+=1;
+            if(this.currentStep == this.maxStep){
+              this.router.navigate(['/cook/recipe']);
+            }
           }
 
           if (mediaToAdd.length != 0){
             this.recipeService.postMedias(httpReturn.body.recipe_id, mediaToAdd).subscribe(httpReturn => {
               this.currentStep+=1;
-              this.router.navigate(['/cook/recipe']);
+              if(this.currentStep == this.maxStep){
+                this.router.navigate(['/cook/recipe']);
+              }
             });
           }else{
             this.currentStep+=1;
-            this.router.navigate(['/cook/recipe']);
+            if(this.currentStep == this.maxStep){
+              this.router.navigate(['/cook/recipe']);
+            }
           }
 
         }
