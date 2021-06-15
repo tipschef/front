@@ -52,7 +52,31 @@
 }
 
 .recipe-content-information{
-  padding-top: 25px;
+  padding-top: 52px;
   display: flex;
   justify-content: space-between;
+}
+
+/*.recipe-content-steps >::ng-deep .mat-figure{*/
+/*  display: block;*/
+/*  border: 4px solid #E85800;*/
+/*  border-radius: 8px;*/
+/*  margin: 20px;*/
+/*  background-color: darkgray;*/
+/*}*/
+
+.recipe-content-steps{
+  background-color: #6e84ff;
+  border: 4px solid #E85800;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+.recipe-title{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.recipe-content-preparation{
+  padding-top: 52px;
 }
