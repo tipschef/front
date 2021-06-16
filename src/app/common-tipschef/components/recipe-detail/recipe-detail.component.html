@@ -29,18 +29,22 @@
           <mat-card-title>{{recipe.name}}</mat-card-title>
           <mat-card-subtitle>{{likes}} ⭐</mat-card-subtitle>
         </mat-card-header>
+
         <video width="100%" height="400" controls *ngIf="recipe.video != null" >
           <source src="{{recipe.video.path}}" type="video/mp4">
         </video>
         <img *ngIf="recipe.video == null" src="{{recipe.thumbnail.path}}" width="100%" height="400">
 
         <div class="recipe-content-pictures">
-          <img *ngIf="recipe.video != null"
-            src="{{recipe.thumbnail.path}}"
-            class="recipe-content-pictures-img">
-          <img *ngFor="let media of recipe.medias;"
-            src="{{media.path}}"
-            class="recipe-content-pictures-img">
+          <img *ngIf="recipe.video != null && recipe.thumbnail != null" src="{{recipe.thumbnail.path}}" class="recipe-content-pictures-img">
+          <img src="{{recipe.medias[0].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[0] != null">
+          <img src="{{recipe.medias[1].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[1] != null">
+          <img src="{{recipe.medias[2].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[2] != null">
+          <img *ngIf="recipe.thumbnail == null" src="{{recipe.medias[3].path}}" class="recipe-content-pictures-img">
+          <div *ngIf="recipe.medias.length > 3" class="pomme" >
+            <p *ngIf="recipe.thumbnail != null" class="recipe-content-pictures-img-more">+{{recipe.medias.length - 3}}</p>
+            <p *ngIf="recipe.thumbnail == null" class="recipe-content-pictures-img-more">+{{recipe.medias.length - 4}}</p>
+          </div>
         </div>
         <div class="recipe-content-information">
           <p>Cuisson: {{recipe.cooking_hours}}h{{recipe.cooking_minutes}}min</p>
