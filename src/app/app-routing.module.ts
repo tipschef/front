@@ -41,7 +41,7 @@ const routes: Routes = [
     path: ':username',
     component: ProfileComponent,
     pathMatch: 'full',
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 ];
 

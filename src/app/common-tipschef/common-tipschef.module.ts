@@ -8,21 +8,24 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
 import { BookCardComponent } from './components/book-card/book-card.component';
 import {MatListModule} from "@angular/material/list";
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { RecipeScrollComponent } from './components/recipe-scroll/recipe-scroll.component';
 
 
 
 @NgModule({
-  declarations: [ProfileComponent, RecipeCardComponent, BookCardComponent],
+  declarations: [ProfileComponent, RecipeCardComponent, BookCardComponent, RecipeScrollComponent],
   exports: [
     RecipeCardComponent
   ],
-  imports: [
-    CommonModule,
-    MatGridListModule,
-    MatCardModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatListModule
-  ]
+    imports: [
+        CommonModule,
+        MatGridListModule,
+        MatCardModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatListModule,
+        ScrollingModule
+    ]
 })
 export class CommonTipschefModule { }

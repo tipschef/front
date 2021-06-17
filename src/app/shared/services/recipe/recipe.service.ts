@@ -145,4 +145,12 @@ export class RecipeService {
     };
     return this.http.delete<any>(url + recipe_id, {headers, observe: 'response'});
   }
+
+  getRecipesFromUsername(username: string, per_page: number, page: number): Observable<HttpResponse<Array<Recipe>>>{
+    const url = this.constantsService.getConstant('USER');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<Recipe>>(url + username+'/recipes/?per_page='+per_page+'&page='+page, {headers,observe: 'response'});
+  }
 }

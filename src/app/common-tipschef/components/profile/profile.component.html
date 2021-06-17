@@ -1,65 +1,11 @@
-<div class="profile">
-  <div class="profile-banner"
-       style="background-image: url('https://i.ibb.co/PMYJLDC/12479430-1703832329880212-769062836-n.jpg')">
-  </div>
-  <div class="profile-about">
-    <div class="profile-description">
-      <img src="https://i.ibb.co/WF845xr/Screenshot-2016-08-28-03-57-36.png" class="profile-picture">
-      <p>Bastien NISOLE</p>
-      <p>Patissier pro</p>
-      <div class="profile-description-count">
-        <div class="profile-description-count-subscriber">
-          <p style="display: block">50</p>
-          <p style="display: block">Abonnées</p>
-        </div>
-        <div class="profile-description-count-like">
-          <p style="display: block">50</p>
-          <p style="display: block">Likes</p>
-        </div>
-      </div>
-      <div>
-        <button class="profile-description-button mat-button mat-primary">S'abonner</button>
-        <button class="profile-description-button mat-button mat-primary">Suivre</button>
-        <button class="profile-description-button mat-button mat-primary">Plus</button>
-      </div>
-    </div>
-    <div class="profile-content">
-      <mat-tab-group>
-        <mat-tab label="Posts">
-          <mat-list role="list" class="inline-list">
-            <mat-list-item class="profile-content-recipe-list-item">
-              <app-recipe-card>1</app-recipe-card>
-            </mat-list-item>
-            <mat-list-item class="profile-content-recipe-list-item" >
-              <app-recipe-card>4</app-recipe-card>
-            </mat-list-item>
-            <mat-list-item class="profile-content-recipe-list-item">
-              <app-recipe-card>3</app-recipe-card>
-            </mat-list-item>
-            <mat-list-item class="profile-content-recipe-list-item">
-              <app-recipe-card>2</app-recipe-card>
-            </mat-list-item>
-          </mat-list>
-        </mat-tab>
-        <mat-tab label="Livres">
-          <div>
-            <mat-grid-list cols="1">
-              <mat-grid-tile>
-                <app-book-card></app-book-card>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <app-book-card></app-book-card>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <app-book-card></app-book-card>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <app-book-card></app-book-card>
-              </mat-grid-tile>
-            </mat-grid-list>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-  </div>
+<div>
+  <mat-tab-group>
+    <mat-tab label="Recettes">
+      <app-recipe-scroll (loadData)="loadData()" [pagination]="pagination">
+
+      </app-recipe-scroll>
+    </mat-tab>
+    <mat-tab label="Livres">
+    </mat-tab>
+  </mat-tab-group>
 </div>
