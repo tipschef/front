@@ -39,7 +39,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: ':username/recipe/:recipe_id',
+    path: 'recipe/:recipe_id',
     component: RecipeDetailComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
