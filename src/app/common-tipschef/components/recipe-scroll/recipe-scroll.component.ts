@@ -13,7 +13,7 @@ import {Pagination} from '../../../shared/models/pagination';
   styleUrls: ['./recipe-scroll.component.css']
 })
 export class RecipeScrollComponent implements OnInit, AfterViewInit  {
-  cardSize = 430;
+  cardSize = 530;
   @Input() pagination: Pagination;
 
   @Output() loadData = new EventEmitter();

@@ -11,6 +11,8 @@ export interface Recipe {
   video?: Media;
   steps?: Step[];
   creator_id?: number;
+  creator_username?: string;
+  creator_icon?: string;
   last_updated?: Date;
   created_date?: Date;
   portion_number?: number;
