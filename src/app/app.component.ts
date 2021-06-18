@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './shared/services/auth/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ export class AppComponent implements OnInit {
   title = 'TipsChef';
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,4 +25,8 @@ export class AppComponent implements OnInit {
   /*get is_cook(): boolean {
     return this.authService.is_cook();
   }*/
+  disconnect(): void {
+    this.authService.disconnect();
+    this.router.navigate(['/log-in'], {queryParams: {returnUrl: '/home'}});
+  }
 }

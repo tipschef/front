@@ -26,7 +26,7 @@
     <mat-icon>favorite</mat-icon>
     <span>Votre recette aimées</span>
   </button>
-  <button mat-menu-item *ngIf="isLoggedIn">
+  <button mat-menu-item (click)="disconnect()" *ngIf="isLoggedIn">
     <mat-icon>logout</mat-icon>
     <span>Déconnexion</span>
   </button>

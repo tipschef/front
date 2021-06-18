@@ -13,6 +13,7 @@ import { RecipeScrollComponent } from './components/recipe-scroll/recipe-scroll.
 import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
 import { LikedRecipeComponent } from './components/liked-recipe/liked-recipe.component';
 import {WallComponent} from './components/wall/wall.component';
+import {RouterModule} from '@angular/router';
 
 
 @NgModule({
@@ -28,14 +29,15 @@ import {WallComponent} from './components/wall/wall.component';
   exports: [
     RecipeCardComponent
   ],
-    imports: [
-        CommonModule,
-        MatGridListModule,
-        MatCardModule,
-        MatButtonModule,
-        MatTabsModule,
-        MatListModule,
-        ScrollingModule
-    ]
+  imports: [
+    CommonModule,
+    MatGridListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatListModule,
+    ScrollingModule,
+    RouterModule
+  ]
 })
 export class CommonTipschefModule { }

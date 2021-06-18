@@ -24,4 +24,8 @@ export class RecipeCardComponent implements OnInit {
       this.router.navigate(['/home/' ]);
     }
   }
+
+  redirectCook(): void {
+    this.router.navigate(['/' + this.recipe.creator_username]);
+  }
 }

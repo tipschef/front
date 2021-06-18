@@ -25,6 +25,12 @@ export class AuthService {
     return this.authData != null;
   }
 
+  disconnect(): void {
+    this.localStorageService.remove('currentUser');
+    this.authData = null;
+    this.authData = null;
+  }
+
 
   authenticate(username: string, password: string): Observable<any> {
     const url = this.constantsService.getConstant('AUTH_TOKEN');

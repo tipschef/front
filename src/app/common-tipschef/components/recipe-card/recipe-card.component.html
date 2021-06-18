@@ -1,10 +1,10 @@
-<mat-card class="example-card" (click)="redirect()">
-  <mat-card-header>
-    <img src="{{recipe.creator_icon? recipe.creator_icon : '/assets/no-image-found.jpg'}}" alt=""  mat-card-avatar class="example-header-image">
-    <mat-card-title>{{recipe.creator_username}}</mat-card-title>
+<mat-card class="example-card" >
+  <mat-card-header >
+    <img (click)="redirectCook()" src="{{recipe.creator_icon? recipe.creator_icon : '/assets/no-image-found.jpg'}}" alt=""  mat-card-avatar class="example-header-image clickable">
+    <mat-card-title  (click)="redirectCook()"  class="clickable">{{recipe.creator_username}}</mat-card-title>
   </mat-card-header>
-  <img class="card-image" mat-card-image src="{{recipe.thumbnail?.path ? recipe.thumbnail.path:'/assets/no-image-found.jpg'}}" alt="Photo of a Shiba Inu">
-  <mat-card-content>
+  <img class="card-image clickable" mat-card-image src="{{recipe.thumbnail?.path ? recipe.thumbnail.path:'/assets/no-image-found.jpg'}}" alt="Photo of a Shiba Inu" (click)="redirect()">
+  <mat-card-content (click)="redirect()" class="clickable">
     <h2>{{recipe.name}}</h2>
     <p>
       {{recipe.can_be_seen?recipe.description:'Vous n\'avez pas le tier suffisant d\'abonnement pour accéder à cette recette ('+recipe.min_tier+')'}}
