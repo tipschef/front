@@ -1,0 +1,5 @@
+<div *ngIf="pagination.items">
+  <div  *ngFor="let recipe of pagination.items; let i = index">
+    <app-recipe-card [recipe]="recipe"></app-recipe-card>
+  </div>
+</div>

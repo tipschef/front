@@ -1,63 +1,47 @@
-<div class="profile">
-  <div class="profile-banner"
-       style="background-image: url('https://i.ibb.co/PMYJLDC/12479430-1703832329880212-769062836-n.jpg')">
+<div *ngIf="user">
+  <div class="full-width">
+    <img class="full-width profile-header" src="{{user.background_url? user.background_url : '/assets/no-image-found.jpg'}}" alt="">
   </div>
-  <div class="profile-about">
-    <div class="profile-description">
-      <img src="https://i.ibb.co/WF845xr/Screenshot-2016-08-28-03-57-36.png" class="profile-picture">
-      <p>Bastien NISOLE</p>
-      <p>Patissier pro</p>
-      <div class="profile-description-count">
-        <div class="profile-description-count-subscriber">
-          <p style="display: block">50</p>
-          <p style="display: block">Abonnées</p>
-        </div>
-        <div class="profile-description-count-like">
-          <p style="display: block">50</p>
-          <p style="display: block">Likes</p>
-        </div>
+  <div class="display-flex border-top">
+    <div class="flex-grow-2 border center">
+      <div class="margin-top">
+        <img src="{{user.profile_url? user.profile_url : '/assets/no-image-found.jpg'}}" alt="" class="profile-picture">
       </div>
+      <h2>
+        {{user.username}}
+      </h2>
       <div>
-        <button class="profile-description-button mat-button mat-primary">S'abonner</button>
-        <button class="profile-description-button mat-button mat-primary">Suivre</button>
-        <button class="profile-description-button mat-button mat-primary">Plus</button>
+        {{user.description}}
+      </div>
+      <div class="display-flex margin-top">
+        <div class="flex-grow-6 "></div>
+        <div class="flex-grow-6 ">
+          <p>{{user.followers}}</p>
+          <p>Abonnées</p>
+        </div>
+        <div class="flex-grow-6">
+          <p>{{user.likes}}</p>
+          <p>Likes</p>
+        </div>
+        <div class="flex-grow-6 "></div>
+      </div>
+      <div class="display-flex margin-top">
+        <div class="flex-grow-6 "></div>
+        <div class="flex-grow-6 display-flex">
+          <div class="flex-grow-6 "><button class="mat-raised-button mat-primary">S'abonner</button></div>
+          <div class="flex-grow-6 "><button class="mat-raised-button mat-primary">Suivre</button></div>
+          <div class="flex-grow-6 "><button class="mat-raised-button mat-primary">Plus</button></div>
+        </div>
+        <div class="flex-grow-6 "></div>
       </div>
     </div>
-    <div class="profile-content">
+    <div class="flex-grow-6">
       <mat-tab-group>
-        <mat-tab label="Posts">
-          <mat-list role="list" class="inline-list">
-            <mat-list-item class="profile-content-recipe-list-item">
-              <app-recipe-card>1</app-recipe-card>
-            </mat-list-item>
-            <mat-list-item class="profile-content-recipe-list-item" >
-              <app-recipe-card>4</app-recipe-card>
-            </mat-list-item>
-            <mat-list-item class="profile-content-recipe-list-item">
-              <app-recipe-card>3</app-recipe-card>
-            </mat-list-item>
-            <mat-list-item class="profile-content-recipe-list-item">
-              <app-recipe-card>2</app-recipe-card>
-            </mat-list-item>
-          </mat-list>
+        <mat-tab label="Recettes">
+          <app-recipe-scroll (loadData)="loadData()" [pagination]="pagination">
+          </app-recipe-scroll>
         </mat-tab>
         <mat-tab label="Livres">
-          <div>
-            <mat-grid-list cols="1">
-              <mat-grid-tile>
-                <app-book-card></app-book-card>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <app-book-card></app-book-card>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <app-book-card></app-book-card>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <app-book-card></app-book-card>
-              </mat-grid-tile>
-            </mat-grid-list>
-          </div>
         </mat-tab>
       </mat-tab-group>
     </div>

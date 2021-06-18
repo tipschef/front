@@ -146,6 +146,14 @@ export class RecipeService {
     return this.http.delete<any>(url + recipe_id, {headers, observe: 'response'});
   }
 
+  getRecipesFromUsername(username: string, per_page: number, page: number): Observable<HttpResponse<Array<Recipe>>>{
+    const url = this.constantsService.getConstant('USER');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<Recipe>>(url + username+'/recipes/?per_page='+per_page+'&page='+page, {headers,observe: 'response'});
+  }
+
   getLikesRecipeById(recipe_id: number) : Observable<HttpResponse<any>>{
     const url = this.constantsService.getConstant('RECIPE');
 
@@ -164,9 +172,6 @@ export class RecipeService {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
 
-    console.log(headers)
-    console.log(url + recipe_id + '/like')
-
     return this.http.post<any>(url + recipe_id + '/like', {} ,{headers, observe: 'response'});
   }
 
@@ -176,9 +181,6 @@ export class RecipeService {
     const headers = {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
-
-    console.log(headers)
-    console.log(url + recipe_id + '/dislike')
 
     return this.http.post<any>(url + recipe_id + '/dislike', {},{headers, observe: 'response'});
   }

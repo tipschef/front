@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
-  get is_cook(): boolean {
+  /*get is_cook(): boolean {
     return this.authService.is_cook();
-  }
+  }*/
 }

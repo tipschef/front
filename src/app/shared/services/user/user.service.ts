@@ -4,7 +4,8 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {ConstantsService} from '../constants/constants.service';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user.model';
-import {Recipe} from "../../models/recipe";
+import {Recipe} from '../../models/recipe';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import {Recipe} from "../../models/recipe";
 export class UserService {
 
   constructor(private http: HttpClient,
-              private constantsService: ConstantsService) {
+              private constantsService: ConstantsService,
+              private authService: AuthService) {
   }
 
   createUser(email: string, username: string, password: string): Observable<HttpResponse<User>> {
@@ -35,4 +37,13 @@ export class UserService {
     return this.http.get<User>(url + user_id + '/', {observe: 'response'});
   }
 
+
+  getUserByUsername(username: string): Observable<HttpResponse<User>>{
+    const url = this.constantsService.getConstant('USER');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<User>(url + username + '/', {headers, observe: 'response'});
+  }
 }
