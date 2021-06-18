@@ -8,6 +8,9 @@
     <button mat-raised-button routerLink="/log-in"  *ngIf="!isLoggedIn">Connexion</button>
     <button mat-raised-button color="accent" routerLink="/sign-up"  *ngIf="!isLoggedIn">Inscription</button>
   </div>
+  <div *ngIf="isLoggedIn">
+    {{username}}
+  </div>
   <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn">
     <mat-icon>account_circle</mat-icon>
   </button>

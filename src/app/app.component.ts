@@ -25,6 +25,10 @@ export class AppComponent implements OnInit {
   /*get is_cook(): boolean {
     return this.authService.is_cook();
   }*/
+
+  get username(): string {
+    return this.authService.userRoles.username;
+  }
   disconnect(): void {
     this.authService.disconnect();
     this.router.navigate(['/log-in'], {queryParams: {returnUrl: '/home'}});
