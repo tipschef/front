@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="example-card" (click)="redirect()">
   <mat-card-header>
     <img src="{{recipe.creator_icon? recipe.creator_icon : '/assets/no-image-found.jpg'}}" alt=""  mat-card-avatar class="example-header-image">
     <mat-card-title>{{recipe.creator_username}}</mat-card-title>

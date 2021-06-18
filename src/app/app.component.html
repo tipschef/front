@@ -14,13 +14,17 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu" >
-  <button mat-menu-item routerLink="/cook/dashboard">
+  <!--<button mat-menu-item routerLink="/cook/dashboard">
     <mat-icon>account_circle</mat-icon>
     <span>Profile</span>
-  </button>
-  <button mat-menu-item routerLink="/cook/dashboard">
+  </button>-->
+  <button mat-menu-item routerLink="/cook/recipe">
     <mat-icon>dashboard</mat-icon>
-    <span>Cook space</span>
+    <span>Votre cuisine</span>
+  </button>
+  <button mat-menu-item routerLink="/liked-recipe">
+    <mat-icon>favorite</mat-icon>
+    <span>Votre recette aimées</span>
   </button>
   <button mat-menu-item *ngIf="isLoggedIn">
     <mat-icon>logout</mat-icon>

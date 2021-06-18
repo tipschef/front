@@ -1,0 +1,11 @@
+<div class="display-flex border-top">
+  <div class="flex-grow-2 border center">
+
+  </div>
+  <div class="flex-grow-6">
+    <h2>Recettes aimées</h2>
+    <app-recipe-scroll (loadData)="loadData()" [pagination]="pagination">
+    </app-recipe-scroll>
+  </div>
+</div>
+

@@ -9,6 +9,7 @@ import {CookComponent} from './cook/cook.component';
 import {DashboardComponent} from './cook/components/dashboard/dashboard.component';
 import {ProfileComponent} from "./common-tipschef/components/profile/profile.component";
 import {RecipeDetailComponent} from "./common-tipschef/components/recipe-detail/recipe-detail.component";
+import {LikedRecipeComponent} from './common-tipschef/components/liked-recipe/liked-recipe.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,12 @@ const routes: Routes = [
   {
     path: 'home',
     component: WallComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'liked-recipe',
+    component: LikedRecipeComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },

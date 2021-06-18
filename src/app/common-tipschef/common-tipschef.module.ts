@@ -11,6 +11,7 @@ import {MatListModule} from '@angular/material/list';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { RecipeScrollComponent } from './components/recipe-scroll/recipe-scroll.component';
 import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
+import { LikedRecipeComponent } from './components/liked-recipe/liked-recipe.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.
     RecipeCardComponent,
     BookCardComponent,
     RecipeScrollComponent,
-    RecipeDetailComponent
+    RecipeDetailComponent,
+    LikedRecipeComponent
   ],
   exports: [
     RecipeCardComponent
