@@ -12,6 +12,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { RecipeScrollComponent } from './components/recipe-scroll/recipe-scroll.component';
 import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
 import { LikedRecipeComponent } from './components/liked-recipe/liked-recipe.component';
+import {WallComponent} from './components/wall/wall.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LikedRecipeComponent } from './components/liked-recipe/liked-recipe.com
     BookCardComponent,
     RecipeScrollComponent,
     RecipeDetailComponent,
-    LikedRecipeComponent
+    LikedRecipeComponent,
+    WallComponent,
   ],
   exports: [
     RecipeCardComponent

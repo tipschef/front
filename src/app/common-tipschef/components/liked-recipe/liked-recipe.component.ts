@@ -17,8 +17,7 @@ export class LikedRecipeComponent implements OnInit {
   pagination: Pagination;
 
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService,
-              private userService: UserService) {
+              private recipeService: RecipeService) {
   }
 
 

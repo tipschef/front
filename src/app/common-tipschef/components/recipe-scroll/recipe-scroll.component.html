@@ -1,4 +1,4 @@
-<div *ngIf="pagination.items">
+<div *ngIf="pagination.items" class="minHeight">
   <div  *ngFor="let recipe of pagination.items; let i = index">
     <app-recipe-card [recipe]="recipe"></app-recipe-card>
   </div>

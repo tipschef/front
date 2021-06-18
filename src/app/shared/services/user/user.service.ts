@@ -32,9 +32,9 @@ export class UserService {
     return this.http.put<User>(url, user, {observe: 'response'});
   }
 
-  getUserById(user_id: number): Observable<HttpResponse<User>> {
+  getUserById(userId: number): Observable<HttpResponse<User>> {
     const url = this.constantsService.getConstant('USER_ID');
-    return this.http.get<User>(url + user_id + '/', {observe: 'response'});
+    return this.http.get<User>(url + userId + '/', {observe: 'response'});
   }
 
 

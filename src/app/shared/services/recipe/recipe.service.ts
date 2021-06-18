@@ -162,6 +162,14 @@ export class RecipeService {
     return this.http.get<Array<Recipe>>(url + '?per_page='+per_page+'&page='+page, {headers,observe: 'response'});
   }
 
+  getRecipesWall(per_page: number, page: number): Observable<HttpResponse<Array<Recipe>>>{
+    const url = this.constantsService.getConstant('RECIPE_WALL');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<Recipe>>(url + '?per_page='+per_page+'&page='+page, {headers,observe: 'response'});
+  }
+
   getLikesRecipeById(recipe_id: number) : Observable<HttpResponse<any>>{
     const url = this.constantsService.getConstant('RECIPE');
 

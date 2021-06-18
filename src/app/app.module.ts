@@ -9,17 +9,15 @@ import { SignUpComponent } from './common-tipschef/components/sign-up/sign-up.co
 import { LogInComponent } from './common-tipschef/components/log-in/log-in.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
-import { WallComponent } from './common-tipschef/components/wall/wall.component';
 import {MaterialModule} from './shared/material-module/material.module';
-import {CommonTipschefModule} from "./common-tipschef/common-tipschef.module";
+import {CommonTipschefModule} from './common-tipschef/common-tipschef.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SignUpComponent,
-    LogInComponent,
-    WallComponent
+    LogInComponent
   ],
   imports: [
     BrowserModule,

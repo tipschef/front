@@ -7,6 +7,7 @@ export const constants = {
   RECIPE: '/recipe/',
   RECIPE_MEDIA: '/recipe/media/',
   RECIPE_LIKED: '/recipe/liked_recipe/',
+  RECIPE_WALL: '/recipe/wall/',
   RECIPE_COOKING_TYPE: '/recipe_cooking_type/',
   RECIPE_CREATOR: '/recipe/creator/',
   RECIPE_THUMBNAIL: '/recipe/thumbnail_media/',
