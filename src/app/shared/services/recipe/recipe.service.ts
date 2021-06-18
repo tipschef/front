@@ -153,7 +153,7 @@ export class RecipeService {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
 
-    return this.http.get<any>(url + recipe_id + '/like/', {headers, observe: 'response'});
+    return this.http.get<any>(url + recipe_id + '/like', {headers, observe: 'response'});
   }
 
 
@@ -165,8 +165,9 @@ export class RecipeService {
     };
 
     console.log(headers)
+    console.log(url + recipe_id + '/like')
 
-    return this.http.post<any>(url + recipe_id + '/like/', {headers, observe: 'response'});
+    return this.http.post<any>(url + recipe_id + '/like', {} ,{headers, observe: 'response'});
   }
 
   dislikeARecipeById(recipe_id: number): Observable<HttpResponse<any>>{
@@ -176,7 +177,10 @@ export class RecipeService {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
 
-    return this.http.post<any>(url + recipe_id + '/dislike/', {headers, observe: 'response'});
+    console.log(headers)
+    console.log(url + recipe_id + '/dislike')
+
+    return this.http.post<any>(url + recipe_id + '/dislike', {},{headers, observe: 'response'});
   }
 
 
