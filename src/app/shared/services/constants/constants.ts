@@ -1,5 +1,6 @@
 export const constants = {
   USER: '/users/',
+  USER_ID: '/users/id/',
   AUTH: '/auth/',
   AUTH_TOKEN: '/auth/token/',
   RECIPE_CATEGORY: '/recipe_category/',

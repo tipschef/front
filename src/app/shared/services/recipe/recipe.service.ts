@@ -145,4 +145,43 @@ export class RecipeService {
     };
     return this.http.delete<any>(url + recipe_id, {headers, observe: 'response'});
   }
+
+  getLikesRecipeById(recipe_id: number) : Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('RECIPE');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+
+    return this.http.get<any>(url + recipe_id + '/like', {headers, observe: 'response'});
+  }
+
+
+  likeARecipeById(recipe_id: number): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('RECIPE');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+
+    console.log(headers)
+    console.log(url + recipe_id + '/like')
+
+    return this.http.post<any>(url + recipe_id + '/like', {} ,{headers, observe: 'response'});
+  }
+
+  dislikeARecipeById(recipe_id: number): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('RECIPE');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+
+    console.log(headers)
+    console.log(url + recipe_id + '/dislike')
+
+    return this.http.post<any>(url + recipe_id + '/dislike', {},{headers, observe: 'response'});
+  }
+
+
 }

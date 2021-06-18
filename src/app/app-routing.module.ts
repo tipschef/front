@@ -8,6 +8,7 @@ import {AuthGuard} from './common-tipschef/guard/auth.guard';
 import {CookComponent} from './cook/cook.component';
 import {DashboardComponent} from './cook/components/dashboard/dashboard.component';
 import {ProfileComponent} from "./common-tipschef/components/profile/profile.component";
+import {RecipeDetailComponent} from "./common-tipschef/components/recipe-detail/recipe-detail.component";
 
 const routes: Routes = [
   {
@@ -38,10 +39,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'recipe/:recipe_id',
+    component: RecipeDetailComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
     path: ':username',
     component: ProfileComponent,
     pathMatch: 'full',
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 ];
 

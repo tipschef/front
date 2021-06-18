@@ -1,0 +1,103 @@
+.recipe-card {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.book-card{
+  max-width: 75%;
+  margin: 5%;
+}
+
+.recipe{
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-picture{
+  margin-top: 1%;
+  border-radius: 50%;
+  max-width: 100px;
+  height: 100px;
+}
+
+.recipe-user-information{
+  height: 200px;
+  max-height: 200px;
+  padding-left: 20%;
+}
+
+.recipe-book-information{
+  height: calc(100vh - 265px);
+  max-width: 20%;
+  width: 20%;
+  position: sticky;
+}
+
+.recipe-content{
+  justify-content: center;
+  width: 100%;
+}
+
+.recipe-content-pictures-img{
+  width: 150px;
+  height: 150px;
+  padding: 1px;
+  display: inline-block;
+  border: 2px solid #BDB8BF;
+  border-radius: 8px;
+}
+
+.recipe-content-commentary{
+  display: inline;
+  overflow-y: scroll;
+  height:200px;
+  padding: 10px;
+}
+
+.recipe-content-information{
+  padding-top: 52px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe-title{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.recipe-content-preparation{
+  padding-top: 52px;
+}
+
+.recipe-content-steps >::ng-deep .mat-list-item-content{
+  display: block !important;
+}
+
+.recipe-content-steps{
+  border: 2px solid #BDB8BF;
+  border-radius: 8px;
+  margin: 20px;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.recipe-content-pictures{
+  display: flex;
+  justify-content: space-between;
+}
+
+.pomme{
+  width: 150px;
+  height: 150px;
+  padding: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #BDB8BF;
+  border-radius: 8px;
+}
+
+.recipe-content-pictures-img-more{
+  font-size: 50px;
+}
+
