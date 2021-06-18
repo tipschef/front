@@ -27,6 +27,7 @@ export interface Recipe {
   cost?: number;
   recipe_category_id?: number;
   recipe_cooking_type_id?: number;
+  can_be_seen?: boolean;
   medias?: Media[];
   ingredients?: Ingredient[];
 }
