@@ -27,7 +27,10 @@ export class AppComponent implements OnInit {
   }*/
 
   get username(): string {
-    return this.authService.userRoles.username;
+    if (this.authService.userRoles && this.authService.userRoles.username){
+      return this.authService.userRoles.username;
+    }
+    return '';
   }
   disconnect(): void {
     this.authService.disconnect();
