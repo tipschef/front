@@ -17,11 +17,11 @@
         <div class="flex-grow-6 "></div>
         <div class="flex-grow-6 ">
           <p>{{user.followers}}</p>
-          <p>Abonnées</p>
+          <p>Follower{{user.followers > 1?'s':''}}</p>
         </div>
         <div class="flex-grow-6">
           <p>{{user.likes}}</p>
-          <p>Likes</p>
+          <p>Like{{user.likes > 1?'s':''}}</p>
         </div>
         <div class="flex-grow-6 "></div>
       </div>
@@ -29,7 +29,7 @@
         <div class="flex-grow-6 "></div>
         <div class="flex-grow-6 display-flex">
           <div class="flex-grow-6 "><button class="mat-raised-button mat-primary">S'abonner</button></div>
-          <div class="flex-grow-6 "><button class="mat-raised-button mat-primary">Suivre</button></div>
+          <div class="flex-grow-6 "><button (click)="followUser()" class="mat-raised-button mat-primary">{{(user && user.following)?'Arrêter de suivre':'Suivre'}}</button></div>
           <div class="flex-grow-6 "><button class="mat-raised-button mat-primary">Plus</button></div>
         </div>
         <div class="flex-grow-6 "></div>

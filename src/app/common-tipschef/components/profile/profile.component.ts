@@ -26,13 +26,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.route.snapshot.paramMap.get('username');
-    this.userService.getUserByUsername(this.username).subscribe(httpReturn => {
-      if (httpReturn?.body) {
-        this.user = httpReturn.body;
-      }
-    }, error => {
-      console.log('User does not exist');
-    });
+    this.loadUser();
     this.pagination = {
       items: [],
       isLoading: false,
@@ -40,6 +34,16 @@ export class ProfileComponent implements OnInit {
       page: 0,
       perPage: 10
     };
+  }
+
+  loadUser(): void {
+    this.userService.getUserByUsername(this.username).subscribe(httpReturn => {
+      if (httpReturn?.body) {
+        this.user = httpReturn.body;
+      }
+    }, error => {
+      console.log('User does not exist');
+    });
   }
 
   loadData(): void {
@@ -55,4 +59,16 @@ export class ProfileComponent implements OnInit {
   }
 
 
+  followUser(): void {
+    // this.userService.followUser(this.username).subscribe()
+    if (!this.user.following){
+      this.userService.followUser(this.username).subscribe(httpReturn => {
+        this.loadUser();
+      });
+    }else{
+      this.userService.unfollowUser(this.username).subscribe(httpReturn => {
+        this.loadUser();
+      });
+    }
+  }
 }

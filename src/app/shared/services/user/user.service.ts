@@ -46,4 +46,22 @@ export class UserService {
     };
     return this.http.get<User>(url + username + '/', {headers, observe: 'response'});
   }
+
+  followUser(username: string): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('USER');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<any>(url + username + '/follow/', {headers, observe: 'response'});
+  }
+
+  unfollowUser(username: string): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('USER');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<any>(url + username + '/unfollow/', {headers, observe: 'response'});
+  }
 }
