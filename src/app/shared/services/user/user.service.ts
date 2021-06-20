@@ -37,6 +37,15 @@ export class UserService {
     return this.http.get<User>(url + userId + '/', {observe: 'response'});
   }
 
+  getMe(): Observable<HttpResponse<User>> {
+    const url = this.constantsService.getConstant('USER');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<User>(url + 'me', {headers, observe: 'response'});
+
+  }
+
 
   getUserByUsername(username: string): Observable<HttpResponse<User>>{
     const url = this.constantsService.getConstant('USER');

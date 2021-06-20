@@ -7,6 +7,7 @@ import { RecipeListComponent } from './components/recipe-list/recipe-list.compon
 import { RecipeCreateComponent } from './components/recipe-create/recipe-create.component';
 import {MaterialModule} from '../shared/material-module/material.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import { UserInformationComponent } from './components/user-information/user-information.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     CookComponent,
     DashboardComponent,
     RecipeListComponent,
-    RecipeCreateComponent],
+    RecipeCreateComponent,
+    UserInformationComponent],
   imports: [
     CookRoutingModule,
     CommonModule,
