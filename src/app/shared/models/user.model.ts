@@ -11,4 +11,5 @@ export interface User {
   profile_url?: string;
   background_url?: string;
   following?: boolean;
+  is_partner?: boolean;
 }

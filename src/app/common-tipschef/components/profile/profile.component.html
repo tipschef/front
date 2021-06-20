@@ -9,6 +9,7 @@
       </div>
       <h2>
         {{user.username}}
+        <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
       </h2>
       <div>
         {{user.description}}
