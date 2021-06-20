@@ -28,6 +28,7 @@ export interface Recipe {
   recipe_category_id?: number;
   recipe_cooking_type_id?: number;
   can_be_seen?: boolean;
+  creator_is_partner?: boolean;
   medias?: Media[];
   ingredients?: Ingredient[];
 }
