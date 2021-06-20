@@ -1,0 +1,48 @@
+.tipschef-panel{
+  background: #f1f1f1;
+  width: 60%;
+  margin: 50px auto auto;
+  padding: 25px;
+}
+
+.mat-icon {
+  cursor: pointer;
+}
+
+.filter-button{
+  margin-right: 15px;
+}
+
+.search-panel{
+  margin-bottom: 80px;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.icon-div{
+  flex-grow: 1;
+}
+
+.information-div{
+  flex-grow: 8;
+}
+
+.profile-picture{
+  border-radius: 50%;
+  max-width: 100px;
+  height: 100px;
+  border-top: 1px solid #ccc;
+}
+
+.data-div{
+  flex-grow: 1;
+}
+
+.username-div{
+  cursor: pointer;
+}
