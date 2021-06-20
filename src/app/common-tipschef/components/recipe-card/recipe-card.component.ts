@@ -13,7 +13,6 @@ export class RecipeCardComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.recipe);
   }
 
   redirect(): void {

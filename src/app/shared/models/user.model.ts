@@ -5,6 +5,8 @@ export interface User {
   password?: string;
   likes?: number;
   followers?: number;
+  subscribers?: number;
+  recipes?: number;
   description?: string;
   profile_url?: string;
   background_url?: string;

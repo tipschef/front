@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './shared/services/auth/auth.service';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,19 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'TipsChef';
+  firstFormGroup: FormGroup;
+  userSearch: string;
 
 
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.firstFormGroup = this.formBuilder.group({
+      search: [this.userSearch]
+    });
   }
 
   get isLoggedIn(): boolean {
@@ -35,5 +42,9 @@ export class AppComponent implements OnInit {
   disconnect(): void {
     this.authService.disconnect();
     this.router.navigate(['/log-in'], {queryParams: {returnUrl: '/home'}});
+  }
+
+  search(): void {
+    this.router.navigate(['/search'], {queryParams: {username: this.firstFormGroup.value.search}});
   }
 }

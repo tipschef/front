@@ -64,4 +64,12 @@ export class UserService {
     };
     return this.http.get<any>(url + username + '/unfollow/', {headers, observe: 'response'});
   }
+
+  getSearchUser(username: string): Observable<HttpResponse<Array<User>>>{
+    const url = this.constantsService.getConstant('USER_SEARCH');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<User>>(url + '?username=' + username, {headers, observe: 'response'});
+  }
 }

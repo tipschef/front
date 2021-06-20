@@ -8,6 +8,7 @@ import {AuthGuard} from './common-tipschef/guard/auth.guard';
 import {ProfileComponent} from './common-tipschef/components/profile/profile.component';
 import {RecipeDetailComponent} from './common-tipschef/components/recipe-detail/recipe-detail.component';
 import {LikedRecipeComponent} from './common-tipschef/components/liked-recipe/liked-recipe.component';
+import {SearchUserComponent} from './common-tipschef/components/search-user/search-user.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,12 @@ const routes: Routes = [
   {
     path: 'liked-recipe',
     component: LikedRecipeComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'search',
+    component: SearchUserComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },

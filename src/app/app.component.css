@@ -9,3 +9,11 @@
 .header-button-row .mat-button-base {
   margin: 8px 8px 8px 0;
 }
+.search-div{
+  margin-right: 50px;
+}
+
+.mat-icon {
+  vertical-align: middle;
+  cursor: pointer;
+}

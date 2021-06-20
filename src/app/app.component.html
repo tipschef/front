@@ -8,6 +8,15 @@
     <button mat-raised-button routerLink="/log-in"  *ngIf="!isLoggedIn">Connexion</button>
     <button mat-raised-button color="accent" routerLink="/sign-up"  *ngIf="!isLoggedIn">Inscription</button>
   </div>
+  <div *ngIf="isLoggedIn" class="search-div">
+    <form [formGroup]="firstFormGroup"  (ngSubmit)="search()">
+      <mat-form-field>
+        <input type="search" matInput  style="color: white"  formControlName="search">
+        <mat-placeholder>Cuisinier...</mat-placeholder>
+      </mat-form-field>
+      <mat-icon class="search-icon" (click)="search()">search</mat-icon>
+    </form>
+  </div>
   <div *ngIf="isLoggedIn">
     {{username}}
   </div>

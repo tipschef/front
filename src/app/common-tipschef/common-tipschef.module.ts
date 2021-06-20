@@ -14,6 +14,9 @@ import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.
 import { LikedRecipeComponent } from './components/liked-recipe/liked-recipe.component';
 import {WallComponent} from './components/wall/wall.component';
 import {RouterModule} from '@angular/router';
+import { SearchUserComponent } from './components/search-user/search-user.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MaterialModule} from '../shared/material-module/material.module';
 
 
 @NgModule({
@@ -25,19 +28,17 @@ import {RouterModule} from '@angular/router';
     RecipeDetailComponent,
     LikedRecipeComponent,
     WallComponent,
+    SearchUserComponent,
   ],
   exports: [
     RecipeCardComponent
   ],
   imports: [
     CommonModule,
-    MatGridListModule,
-    MatCardModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatListModule,
+    MaterialModule,
     ScrollingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class CommonTipschefModule { }
