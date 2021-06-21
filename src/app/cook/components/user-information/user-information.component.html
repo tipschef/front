@@ -1,66 +1,68 @@
 <section *ngIf="!!user">
   <h2>Votre profil</h2>
   <h3>Données publiques</h3>
+  <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="user_email">
+      </mat-form-field>
+      <br>
 
-  <div class="example-container">
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="pat@example.com" value="dantonpif@hotmail.fr">
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field>
-    <br>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Username</mat-label>
-      <input matInput value="{{user.username}}">
-    </mat-form-field>
-    <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="user_username">
+      </mat-form-field>
+      <br>
 
 
-    <mat-form-field appearance="fill">
-      <mat-label>Description</mat-label>
-      <textarea matInput value="{{user.description}}" maxlength="120"></textarea>
-    </mat-form-field>
-    <br>
-    <div style="display: flex">
-      <p>Profil picture</p>
-      <div style="display: grid">
-        <img src="{{user.profile_url}}" class="profile-images">
-        <input class="hidden" id="input-background-id" type="file"/>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput maxlength="120" formControlName="user_description"></textarea>
+      </mat-form-field>
+      <br>
+      <div style="display: flex">
+        <p>Profil picture</p>
+        <div style="display: grid">
+          <img src="{{user.profile_url}}" class="profile-images" >
+          <input class="hidden" id="input-profile-id" type="file" (change)="addProfilePicture($event)"
+                 accept="image/*"/>
+        </div>
+        <p>Background picture</p>
+        <div style="display: grid">
+          <img src="{{user.background_url}}" class="profile-images">
+          <input class="hidden" id="input-background-id" type="file" (change)="addBackgroundPicture($event)"
+                 accept="image/*"/>
+        </div>
       </div>
-      <p>Background picture</p>
-      <div style="display: grid">
-        <img src="{{user.background_url}}" class="profile-images">
-        <input class="hidden" id="input-profile-id" type="file"/>
-      </div>
+
+
+      <h3>Données privées</h3>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Prénom</mat-label>
+        <input matInput formControlName="user_firstname">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="user_lastname">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="user_password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <br>
+
+      <button mat-raised-button color="primary" (submit)="onSubmit()" type="submit">Sauvegarder</button>
     </div>
-
-
-    <h3>Données privées</h3>
-
-
-    <mat-form-field appearance="fill">
-      <mat-label>Prénom</mat-label>
-      <input matInput value="{{user.firstname}}">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Nom</mat-label>
-      <input matInput value="{{user.lastname}}">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <br>
-
-    <button mat-raised-button color="primary">Sauvegarder</button>
-  </div>
+  </form>
 </section>
