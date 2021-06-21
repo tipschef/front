@@ -42,6 +42,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let recipe">
+        <mat-icon (click)="redirect(recipe)" class="tipschef-button" >loupe</mat-icon>
         <mat-icon (click)="updateRecipe(recipe)" class="tipschef-button" >edit</mat-icon>
         <mat-icon class="tipschef-button"  (click)="deleteRecipe(recipe)" >delete</mat-icon>
       </td>
