@@ -1,5 +1,6 @@
 export const constants = {
   USER: '/users/',
+  USER_UPDATE: '/users/update/',
   USER_ID: '/users/id/',
   USER_SEARCH: '/users/search/',
   AUTH: '/auth/',

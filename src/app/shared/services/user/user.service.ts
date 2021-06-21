@@ -4,7 +4,6 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {ConstantsService} from '../constants/constants.service';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user.model';
-import {Recipe} from '../../models/recipe';
 import {AuthService} from '../auth/auth.service';
 
 @Injectable({
@@ -28,13 +27,25 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<HttpResponse<User>> {
-    const url = this.constantsService.getConstant('USER');
-    return this.http.put<User>(url, user, {observe: 'response'});
+    const url = this.constantsService.getConstant('USER_UPDATE');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.patch<User>(url + 'data', user, {headers, observe: 'response'});
   }
 
   getUserById(userId: number): Observable<HttpResponse<User>> {
     const url = this.constantsService.getConstant('USER_ID');
     return this.http.get<User>(url + userId + '/', {observe: 'response'});
+  }
+
+  getMe(): Observable<HttpResponse<User>> {
+    const url = this.constantsService.getConstant('USER');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<User>(url + 'me', {headers, observe: 'response'});
+
   }
 
 
@@ -72,4 +83,27 @@ export class UserService {
     };
     return this.http.get<Array<User>>(url + '?username=' + username, {headers, observe: 'response'});
   }
+
+  updateProfilePicture(file: File): Observable<HttpResponse<any>> {
+    const url = this.constantsService.getConstant('USER_UPDATE');
+    const headers = {
+      'Authorization': `Bearer ${this.authService.authData.access_token}`
+    };
+    let formData: FormData = new FormData();
+    formData.append('file', file);
+
+    return this.http.patch<any>(url +'profile', formData, {headers, observe: 'response'});
+  }
+
+  updateBackgroundPicture(file: File): Observable<HttpResponse<any>> {
+    const url = this.constantsService.getConstant('USER_UPDATE');
+    const headers = {
+      'Authorization': `Bearer ${this.authService.authData.access_token}`
+    };
+    let formData: FormData = new FormData();
+    formData.append('file', file);
+
+    return this.http.patch<any>(url +'background', formData, {headers, observe: 'response'});
+  }
+
 }

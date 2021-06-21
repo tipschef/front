@@ -5,6 +5,7 @@ import {CookComponent} from './cook.component';
 import {AuthGuard} from '../common-tipschef/guard/auth.guard';
 import {RecipeListComponent} from './components/recipe-list/recipe-list.component';
 import {RecipeCreateComponent} from './components/recipe-create/recipe-create.component';
+import {UserInformationComponent} from "./components/user-information/user-information.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
       {
         path: 'recipe-create',
         component : RecipeCreateComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'info',
+        component : UserInformationComponent,
         canActivate: [AuthGuard]
       },
       {
