@@ -7,10 +7,11 @@ import {AppRoutingModule} from './app-routing.module';
 import { HomeComponent } from './common-tipschef/components/home/home.component';
 import { SignUpComponent } from './common-tipschef/components/sign-up/sign-up.component';
 import { LogInComponent } from './common-tipschef/components/log-in/log-in.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './shared/material-module/material.module';
 import {CommonTipschefModule} from './common-tipschef/common-tipschef.module';
+import {TokenInterceptor} from './common-tipschef/interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import {CommonTipschefModule} from './common-tipschef/common-tipschef.module';
     ReactiveFormsModule,
     CommonTipschefModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
