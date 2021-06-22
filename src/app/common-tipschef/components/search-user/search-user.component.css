@@ -20,8 +20,10 @@
 .user-card {
   display: flex;
   flex-direction: row;
-  padding-top: 20px;
-  border-bottom: 1px solid #ccc;
+  padding: 30px;
+  border: 1px solid #ff9100;
+  margin: 25px;
+  background: #fff;
 }
 
 .icon-div{

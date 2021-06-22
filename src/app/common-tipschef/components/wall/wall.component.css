@@ -26,3 +26,12 @@
 .margin-top{
   margin-top: 20px;
 }
+
+
+.recipes-card{
+  width:  50%;
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px auto;
+}

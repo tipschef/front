@@ -14,7 +14,7 @@
       <mat-icon class="search-icon" (click)="search()">search</mat-icon>
     </form>
   </div>
-  <div *ngIf="isLoggedIn">
+  <div  style="cursor:pointer" [matMenuTriggerFor]="menu"  *ngIf="isLoggedIn">
     {{username}}
   </div>
   <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn">

@@ -20,3 +20,7 @@ input.example-right-align {
   width: 200px;
   height: auto;
 }
+
+.hidden {
+  display: none !important;
+}

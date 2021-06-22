@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {RecipeService} from "../../../shared/services/recipe/recipe.service";
-import {ActivatedRoute} from "@angular/router";
-import {Recipe} from "../../../shared/models/recipe";
-import {UserService} from "../../../shared/services/user/user.service";
-import {User} from "../../../shared/models/user.model";
-import {Like} from "../../../shared/models/like";
+import {RecipeService} from '../../../shared/services/recipe/recipe.service';
+import {ActivatedRoute} from '@angular/router';
+import {Recipe} from '../../../shared/models/recipe';
+import {UserService} from '../../../shared/services/user/user.service';
+import {User} from '../../../shared/models/user.model';
+import {Like} from '../../../shared/models/like';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -24,46 +24,46 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeService.getRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'))).subscribe(httpReturn => {
+    this.recipeService.getRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturn => {
         if (httpReturn && httpReturn.body) {
           this.recipe = httpReturn.body;
-          this.userService.getUserById(this.recipe.creator_id).subscribe(httpReturn => {
-            if (httpReturn && httpReturn.body) {
-              this.user = httpReturn.body;
+          this.userService.getUserById(this.recipe.creator_id).subscribe(httpReturnUser => {
+            if (httpReturnUser && httpReturnUser.body) {
+              this.user = httpReturnUser.body;
             }
           });
           this.update_like();
         }
       },
       error => {
-        this.error = error.error["detail"];
-      },)
+        this.error = error.error.detail;
+      }, );
   }
 
   update_like(): void {
-    this.recipeService.getLikesRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'))).subscribe(httpReturnLikes => {
+    this.recipeService.getLikesRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturnLikes => {
       if (httpReturnLikes && httpReturnLikes.body) {
-        this.likes = httpReturnLikes.body
-        console.log(this.likes.like_count)
+        this.likes = httpReturnLikes.body;
+        console.log(this.likes.like_count);
       }
-    })
+    });
   }
 
   like(): void {
-    this.recipeService.likeARecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'))).subscribe(httpReturnLikes => {
+    this.recipeService.likeARecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturnLikes => {
       if (httpReturnLikes && httpReturnLikes.body) {
-        this.update_like()
+        this.update_like();
       }
-    })
+    });
   }
 
 
   dislike(): void {
-    this.recipeService.dislikeARecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'))).subscribe(httpReturnLikes => {
+    this.recipeService.dislikeARecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturnLikes => {
       if (httpReturnLikes && httpReturnLikes.body) {
-        this.update_like()
+        this.update_like();
       }
-    })
+    });
   }
 
 

@@ -25,7 +25,7 @@
           {{user.username}}
         </h2>
         <p class="description-div">
-          {{user.description}}
+          {{!!user.description? user.description : 'Aucune description'}}
         </p>
         <mat-grid-list cols="4" rowHeight="25px">
           <mat-grid-tile

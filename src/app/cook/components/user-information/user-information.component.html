@@ -22,22 +22,22 @@
       </mat-form-field>
       <br>
       <div style="display: flex">
-        <p>Profil picture</p>
-        <div style="display: grid">
-          <img src="{{user.profile_url}}" class="profile-images" >
+        <div style="display: grid; margin-right: 20px">
+          <img src="{{!!profilePicture? profilePicture['path']:user.profile_url}}" class="profile-images" >
+          <label for="input-profile-id" class="mat-primary mat-raised-button">Ajouter une photo de profile</label>
           <input class="hidden" id="input-profile-id" type="file" (change)="addProfilePicture($event)"
                  accept="image/*"/>
         </div>
-        <p>Background picture</p>
         <div style="display: grid">
-          <img src="{{user.background_url}}" class="profile-images">
+          <img src="{{!!backgroundPicture? backgroundPicture['path']:user.background_url}}" class="profile-images" >
+          <label for="input-background-id" class="mat-primary mat-raised-button">Ajouter une photo de fond</label>
           <input class="hidden" id="input-background-id" type="file" (change)="addBackgroundPicture($event)"
                  accept="image/*"/>
         </div>
       </div>
 
 
-      <h3>Données privées</h3>
+      <h3 style="margin-top: 25px">Données privées</h3>
 
 
       <mat-form-field appearance="fill">
@@ -62,7 +62,7 @@
       </mat-form-field>
       <br>
 
-      <button mat-raised-button color="primary" (submit)="onSubmit()" type="submit">Sauvegarder</button>
+      <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit">Sauvegarder</button>
     </div>
   </form>
 </section>

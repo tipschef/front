@@ -1,121 +1,70 @@
 <section *ngIf="!!recipe && !!user">
-  <div class="recipe-user-information">
-    <img src="{{user.profile_url}}" class="profile-picture">
-    <h2>
-      {{user.username}}
-      <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
-    </h2>
-  </div>
-  <div class="recipe">
-<!--    <div class="recipe-book-information">-->
-<!--      <h2>Livre contenant cette recette</h2>-->
-<!--      <mat-card class="book-card">-->
-<!--        <mat-card-header>-->
-<!--          <mat-card-title>Un diner aux chandelles</mat-card-title>-->
-<!--        </mat-card-header>-->
-<!--        <mat-card-actions>-->
-<!--          <button class="mat-button mat-primary">Voir</button>-->
-<!--        </mat-card-actions>-->
-<!--      </mat-card>-->
-<!--      <mat-card class="book-card">-->
-<!--        <mat-card-header>-->
-<!--          <mat-card-title>Un repas rapide</mat-card-title>-->
-<!--        </mat-card-header>-->
-<!--        <mat-card-actions>-->
-<!--          <button class="mat-button mat-primary">Voir</button>-->
-<!--        </mat-card-actions>-->
-<!--      </mat-card>-->
-<!--    </div>-->
-    <div class="recipe-content">
-      <mat-card class="recipe-card">
-        <mat-card-header>
-          <mat-card-title>{{recipe.name}}</mat-card-title>
-          <mat-card-subtitle>{{likes.like_count}} ⭐</mat-card-subtitle>
-        </mat-card-header>
+  <div class="display-flex">
+    <div class="user-column center">
+      <img src="{{user.profile_url}}" class="profile-picture"  routerLink="/{{user.username}}" style="cursor:pointer">
+      <h2 routerLink="/{{user.username}}" style="cursor:pointer">
+        {{user.username}}
+        <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
+      </h2>
+      <p>{{user.description}}</p>
+    </div>
+    <div class="recipe-column display-flex">
+      <div class="recipe">
+        <mat-card class="recipe-card">
+          <mat-card-header>
+            <mat-card-title>
+              <span>{{recipe.name}}</span>
+              <span class="header-like mat-accent"  (click)="dislike()" *ngIf="likes.liked_by_me == true">
+                {{likes.like_count}}
+                <mat-icon class="mat-accent">favorite</mat-icon>
+              </span>
+              <span class="header-like mat-accent" (click)="like()" *ngIf="likes.liked_by_me == false"   >
+                {{likes.like_count}}
+                <mat-icon class="mat-accent">favorite_border</mat-icon>
+              </span>
+            </mat-card-title>
+          </mat-card-header>
 
-        <video width="100%" height="400" controls *ngIf="recipe.video != null" >
-          <source src="{{recipe.video.path}}" type="video/mp4">
-        </video>
-        <img *ngIf="recipe.video == null" src="{{recipe.thumbnail.path}}" width="100%" height="400">
+          <video width="100%" height="400" controls *ngIf="recipe.video != null" >
+            <source src="{{recipe.video.path}}" type="video/mp4">
+          </video>
+          <img *ngIf="recipe.video == null" src="{{recipe.thumbnail.path}}" width="100%" height="400">
 
-        <div class="recipe-content-pictures">
-          <img *ngIf="recipe.video != null && recipe.thumbnail != null" src="{{recipe.thumbnail.path}}" class="recipe-content-pictures-img">
-          <img src="{{recipe.medias[0].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[0] != null">
-          <img src="{{recipe.medias[1].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[1] != null">
-          <img src="{{recipe.medias[2].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[2] != null">
-          <img *ngIf="recipe.thumbnail == null" src="{{recipe.medias[3].path}}" class="recipe-content-pictures-img">
-          <div *ngIf="recipe.medias.length > 3" class="pomme" >
-            <p *ngIf="recipe.thumbnail != null" class="recipe-content-pictures-img-more">+{{recipe.medias.length - 3}}</p>
-            <p *ngIf="recipe.thumbnail == null" class="recipe-content-pictures-img-more">+{{recipe.medias.length - 4}}</p>
+          <div class="recipe-content-pictures">
+            <img *ngIf="recipe.video != null && recipe.thumbnail != null" src="{{recipe.thumbnail.path}}" class="recipe-content-pictures-img">
+            <img src="{{recipe.medias[0].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[0] != null">
+            <img src="{{recipe.medias[1].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[1] != null">
+            <img src="{{recipe.medias[2].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[2] != null">
+            <img *ngIf="recipe.thumbnail == null" src="{{recipe.medias[3].path}}" class="recipe-content-pictures-img">
+            <div *ngIf="recipe.medias.length > 3" class="pomme" >
+              <p *ngIf="recipe.thumbnail != null" class="recipe-content-pictures-img-more">+{{recipe.medias.length - 3}}</p>
+              <p *ngIf="recipe.thumbnail == null" class="recipe-content-pictures-img-more">+{{recipe.medias.length - 4}}</p>
+            </div>
           </div>
-        </div>
-        <div class="recipe-content-information">
-          <p>Cuisson: {{recipe.cooking_hours}}h{{recipe.cooking_minutes}}min</p>
-          <p>Préparation: {{recipe.preparation_hours}}h{{recipe.preparation_minutes}}min</p>
-          <p>Difficulté: {{recipe.difficulty}}</p>
-          <p>Prix: {{recipe.cost}}</p>
-        </div>
-        <mat-card-actions>
-          <button class="mat-button mat-primary" (click)="share()">Partager</button>
-          <button class="mat-button mat-primary" (click)="like()" *ngIf="likes.liked_by_me == false">J'aime ⭐</button>
-          <button class="mat-button mat-primary" (click)="dislike()" *ngIf="likes.liked_by_me == true">Je n'aime plus  ⭐</button>
-        </mat-card-actions>
-        <div class="recipe-content-ingredients">
-          <h3 class="recipe-title">Ingredients - {{recipe.portion_number}} {{recipe.portion_unit}}</h3>
-          <mat-grid-list cols="2" rowHeight="5:1">
-            <mat-grid-tile  *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.ingredient_unit}} {{ingredient.ingredient_name}}</mat-grid-tile>
-          </mat-grid-list>
-        </div>
-        <mat-card-content class="recipe-content-preparation">
-          <h3 class="recipe-title">Préparation</h3>
-          <mat-list>
-            <mat-list-item *ngFor="let step of recipe.steps; let index = index;" class="recipe-content-steps"  role="listitem">
-              <p>Etape {{index + 1}}</p>
+          <div class="recipe-content-information">
+            <p class="preparation-data">Cuisson: {{recipe.cooking_hours}}h{{recipe.cooking_minutes}}min</p>
+            <p class="preparation-data">Préparation: {{recipe.preparation_hours}}h{{recipe.preparation_minutes}}min</p>
+            <p class="preparation-data">Difficulté: {{recipe.difficulty}}</p>
+            <p class="preparation-data">Prix: {{recipe.cost}}</p>
+          </div>
+          <div class="recipe-content-ingredients">
+            <h3 class="recipe-title">Ingredients - {{recipe.portion_number}} {{recipe.portion_unit}}</h3>
+            <mat-grid-list cols="2" rowHeight="5:1">
+              <mat-grid-tile class="ingredients"  *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.ingredient_unit}} {{ingredient.ingredient_name}}</mat-grid-tile>
+            </mat-grid-list>
+          </div>
+          <mat-card-content class="recipe-content-preparation">
+            <h3 class="recipe-title">Préparation</h3>
+            <div *ngFor="let step of recipe.steps; let index = index;" class="recipe-content-steps"  role="listitem">
+              <h4 class="step-header">Etape {{index + 1}}</h4>
               <p>{{step.content}}</p>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
-<!--        <mat-card-content>-->
-<!--          <h3 class="recipe-title">Commentaires</h3>-->
-<!--          <mat-grid-list cols="3" >-->
-<!--            <mat-grid-tile>-->
-<!--              <div class="recipe-content-commentary">-->
-<!--                <p>PAul Besao</p>-->
-<!--                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
-<!--                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
-<!--                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
-<!--                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
-<!--                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>-->
-<!--              </div>-->
-<!--            </mat-grid-tile>-->
-<!--            <mat-grid-tile>-->
-<!--              <div class="recipe-content-commentary">-->
-<!--                <p>Zeub du bois</p>-->
-<!--                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
-<!--                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
-<!--                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
-<!--                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
-<!--                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>-->
-<!--              </div>-->
-<!--            </mat-grid-tile>-->
-<!--            <mat-grid-tile>-->
-<!--              <div class="recipe-content-commentary">-->
-<!--                <p>John mekir</p>-->
-<!--                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
-<!--                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
-<!--                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
-<!--                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
-<!--                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>-->
-<!--              </div>-->
-<!--            </mat-grid-tile>-->
-<!--          </mat-grid-list>-->
-<!--        </mat-card-content>-->
-      </mat-card>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
+
 
 </section>
 

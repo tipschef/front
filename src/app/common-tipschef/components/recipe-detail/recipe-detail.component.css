@@ -1,41 +1,61 @@
 .recipe-card {
-  max-width: 50%;
-  margin: 0 auto;
+  max-width: 70%;
+  margin: auto;
+  border: 1px solid #ccc;
+  padding: 25px;
 }
 
-.book-card{
-  max-width: 75%;
-  margin: 5%;
+.preparation-data{
+  font-size: 22px;
+}
+
+.tc-spacer {
+  flex: 1 1 auto;
+}
+
+.ingredients{
+  font-size: 18px;
 }
 
 .recipe{
-  display: flex;
-  flex-direction: row;
+  padding: 15px;
 }
 
 .profile-picture{
-  margin-top: 1%;
   border-radius: 50%;
   max-width: 100px;
   height: 100px;
 }
 
-.recipe-user-information{
-  height: 200px;
-  max-height: 200px;
-  padding-left: 20%;
+
+
+.display-flex {
+  display: flex;
+  flex-direction: row;
 }
 
-.recipe-book-information{
-  height: calc(100vh - 265px);
-  max-width: 20%;
-  width: 20%;
-  position: sticky;
+.user-column {
+  flex-grow: 3;
+  width: 400px;
+  padding: 15px;
+  border-right: 1px solid #ccc;
+}
+.header-like{
+  position: absolute;
+  right: 15px;
+  margin: auto;
+  cursor: pointer;
+}
+.recipe-column {
+  flex-grow: 6;
 }
 
-.recipe-content{
-  justify-content: center;
-  width: 100%;
+.center {
+  text-align: center;
+}
+
+.recipe-content-ingredients{
+  margin-top: 20px;
 }
 
 .recipe-content-pictures-img{
@@ -45,6 +65,7 @@
   display: inline-block;
   border: 2px solid #BDB8BF;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 .recipe-content-commentary{
@@ -77,8 +98,7 @@
   border: 2px solid #BDB8BF;
   border-radius: 8px;
   margin: 20px;
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+  padding: 10px;
 }
 
 .recipe-content-pictures{
@@ -101,3 +121,11 @@
   font-size: 50px;
 }
 
+mat-card-title{
+  font-size: 30px !important;
+}
+
+.step-header{
+  font-size: 16px;
+  font-weight: bold;
+}

@@ -1,3 +1,4 @@
+/* tslint:disable */
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth/auth.service";
@@ -13,8 +14,8 @@ import {User} from "../../../shared/models/user.model";
 export class UserInformationComponent implements OnInit {
   hide = true;
   user: User;
-  profile_picture: {};
-  background_picture: {};
+  profilePicture: {};
+  backgroundPicture: {};
   firstFormGroup: FormGroup;
 
 
@@ -24,7 +25,7 @@ export class UserInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserData()
+    this.getUserData();
   }
 
   initForm(): void {
@@ -34,7 +35,7 @@ export class UserInformationComponent implements OnInit {
       user_description: [this.user.description, [Validators.maxLength(120)]],
       user_firstname: [this.user.firstname, [Validators.maxLength(50)]],
       user_lastname: [this.user.lastname, [Validators.maxLength(50)]],
-      user_password: ["", [Validators.maxLength(50)]],
+      user_password: ['', [Validators.maxLength(50)]],
     });
   }
 
@@ -66,8 +67,8 @@ export class UserInformationComponent implements OnInit {
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => {
-        this.profile_picture = {'data': file, 'path': reader.result, 'is_created': false};
-        console.log(this.profile_picture)
+        this.profilePicture = {'data': file, 'path': reader.result, 'is_created': false};
+        console.log(this.profilePicture);
       };
     }
   }
@@ -90,7 +91,7 @@ export class UserInformationComponent implements OnInit {
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => {
-        this.background_picture = {'data': file, 'path': reader.result, 'is_created': false};
+        this.backgroundPicture = {'data': file, 'path': reader.result, 'is_created': false};
       };
     }
   }
@@ -106,18 +107,15 @@ export class UserInformationComponent implements OnInit {
 
     this.userService.updateUser(this.user).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
-        console.log("update data");
-        if(this.profile_picture !== undefined){
-          this.userService.updateProfilePicture(this.profile_picture['data']).subscribe(httpReturn => {
+        if(this.profilePicture !== undefined){
+          this.userService.updateProfilePicture(this.profilePicture['data']).subscribe(httpReturn => {
             if (httpReturn && httpReturn.body) {
-              console.log("profile picture");
             }
           })
         }
-        if(this.background_picture !== undefined){
-          this.userService.updateBackgroundPicture(this.background_picture['data']).subscribe(httpReturn => {
+        if(this.backgroundPicture !== undefined){
+          this.userService.updateBackgroundPicture(this.backgroundPicture['data']).subscribe(httpReturn => {
             if (httpReturn && httpReturn.body) {
-              console.log("background picture");
             }
           })
         }
