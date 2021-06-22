@@ -92,4 +92,8 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
       this.loadData();
     });
   }
+
+  redirect(recipe): void {
+    this.router.navigate(['/recipe/' + recipe.id]);
+  }
 }
