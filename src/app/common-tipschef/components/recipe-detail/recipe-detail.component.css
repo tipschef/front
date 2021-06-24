@@ -131,3 +131,28 @@ mat-card-title{
   font-size: 16px;
   font-weight: bold;
 }
+
+.recipe-content-comment-picture{
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.comment-header{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.recipe-content-comment-scroll{
+  height: 400px;
+  overflow: auto;
+}
+
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+.recipe-content-my-comment-area{
+  min-width: 100%;
+  min-height: 75px;
+}

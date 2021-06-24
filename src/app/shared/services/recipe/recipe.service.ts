@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 import {RecipeCookingType} from '../../models/recipe-cooking-type';
 import {AuthService} from '../auth/auth.service';
 import {Media} from '../../models/media';
+import {Comment} from "../../models/comment";
 
 @Injectable({
   providedIn: 'root'
@@ -199,6 +200,27 @@ export class RecipeService {
     };
 
     return this.http.post<any>(url + recipe_id + '/dislike', {},{headers, observe: 'response'});
+  }
+
+
+  getCommentsFromRecipeId(recipe_id: number): Observable<HttpResponse<Array<Comment>>>{
+    const url = this.constantsService.getConstant('RECIPE');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+
+    return this.http.get<Array<Comment>>(url + recipe_id + '/comment',{headers, observe: 'response'});
+  }
+
+  commentARecipeById(recipe_id: number, comment: string): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('RECIPE');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+
+    return this.http.post<any>(url + recipe_id + '/comment', {'content': comment},{headers, observe: 'response'});
   }
 
 

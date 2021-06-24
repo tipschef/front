@@ -1,7 +1,7 @@
 <section *ngIf="!!recipe && !!user">
   <div class="display-flex">
     <div class="user-column center">
-      <img src="{{user.profile_url}}" class="profile-picture"  routerLink="/{{user.username}}" style="cursor:pointer">
+      <img src="{{user.profile_url}}" class="profile-picture" routerLink="/{{user.username}}" style="cursor:pointer">
       <h2 routerLink="/{{user.username}}" style="cursor:pointer">
         {{user.username}}
         <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
@@ -14,31 +14,34 @@
           <mat-card-header>
             <mat-card-title>
               <span>{{recipe.name}}</span>
-              <span class="header-like mat-accent"  (click)="dislike()" *ngIf="likes.liked_by_me == true">
+              <span class="header-like mat-accent" (click)="dislike()" *ngIf="likes.liked_by_me == true">
                 {{likes.like_count}}
                 <mat-icon class="mat-accent">favorite</mat-icon>
               </span>
-              <span class="header-like mat-accent" (click)="like()" *ngIf="likes.liked_by_me == false"   >
+              <span class="header-like mat-accent" (click)="like()" *ngIf="likes.liked_by_me == false">
                 {{likes.like_count}}
                 <mat-icon class="mat-accent">favorite_border</mat-icon>
               </span>
             </mat-card-title>
           </mat-card-header>
 
-          <video width="100%" height="400" controls *ngIf="recipe.video != null" >
+          <video width="100%" height="400" controls *ngIf="recipe.video != null">
             <source src="{{recipe.video.path}}" type="video/mp4">
           </video>
           <img *ngIf="recipe.video == null" src="{{recipe.thumbnail.path}}" width="100%" height="400">
 
           <div class="recipe-content-pictures">
-            <img *ngIf="recipe.video != null && recipe.thumbnail != null" src="{{recipe.thumbnail.path}}" class="recipe-content-pictures-img">
+            <img *ngIf="recipe.video != null && recipe.thumbnail != null" src="{{recipe.thumbnail.path}}"
+                 class="recipe-content-pictures-img">
             <img src="{{recipe.medias[0].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[0] != null">
             <img src="{{recipe.medias[1].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[1] != null">
             <img src="{{recipe.medias[2].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[2] != null">
             <img *ngIf="recipe.thumbnail == null" src="{{recipe.medias[3].path}}" class="recipe-content-pictures-img">
-            <div *ngIf="recipe.medias.length > 3" class="pomme" >
-              <p *ngIf="recipe.thumbnail != null" class="recipe-content-pictures-img-more">+{{recipe.medias.length - 3}}</p>
-              <p *ngIf="recipe.thumbnail == null" class="recipe-content-pictures-img-more">+{{recipe.medias.length - 4}}</p>
+            <div *ngIf="recipe.medias.length > 3" class="pomme">
+              <p *ngIf="recipe.thumbnail != null" class="recipe-content-pictures-img-more">
+                +{{recipe.medias.length - 3}}</p>
+              <p *ngIf="recipe.thumbnail == null" class="recipe-content-pictures-img-more">
+                +{{recipe.medias.length - 4}}</p>
             </div>
           </div>
           <div class="recipe-content-information">
@@ -50,14 +53,36 @@
           <div class="recipe-content-ingredients">
             <h3 class="recipe-title">Ingredients - {{recipe.portion_number}} {{recipe.portion_unit}}</h3>
             <mat-grid-list cols="2" rowHeight="5:1">
-              <mat-grid-tile class="ingredients"  *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.ingredient_unit}} {{ingredient.ingredient_name}}</mat-grid-tile>
+              <mat-grid-tile class="ingredients"
+                             *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.ingredient_unit}} {{ingredient.ingredient_name}}</mat-grid-tile>
             </mat-grid-list>
           </div>
           <mat-card-content class="recipe-content-preparation">
             <h3 class="recipe-title">Préparation</h3>
-            <div *ngFor="let step of recipe.steps; let index = index;" class="recipe-content-steps"  role="listitem">
+            <div *ngFor="let step of recipe.steps; let index = index;" class="recipe-content-steps" role="listitem">
               <h4 class="step-header">Etape {{index + 1}}</h4>
               <p>{{step.content}}</p>
+            </div>
+          </mat-card-content>
+          <mat-card-content class="recipe-content-commentary">
+            <h3 class="recipe-title">Commentaires ({{comments.length}})</h3>
+            <div class="recipe-content-my-comment">
+              <img src="{{user.profile_url}}" class="recipe-content-comment-picture">
+              <h4 class="comment-header">{{user.username}}</h4>
+              <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
+                <textarea placeholder="Ton commentaire..." class="recipe-content-my-comment-area" formControlName="comment_content" minlength="2"></textarea>
+                <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit">Poster</button>
+              </form>
+            </div>
+            <hr class="solid">
+            <div class="recipe-content-comment-scroll">
+              <div class="recipe-content-comment" role="listitem" *ngFor="let comment of comments; let index = index;">
+                <img src="{{comment.user.profile_picture}}" class="recipe-content-comment-picture">
+                <h4 class="comment-header">{{comment.user.username}}</h4>
+                <p>{{comment.created_date}}</p>
+                <p>{{comment.content}}</p>
+                <hr class="solid">
+              </div>
             </div>
           </mat-card-content>
         </mat-card>
