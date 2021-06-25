@@ -156,3 +156,7 @@ hr.solid {
   min-width: 100%;
   min-height: 75px;
 }
+
+.recipe-content-my-comment{
+  padding-bottom: 50px;
+}

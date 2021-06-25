@@ -30,7 +30,7 @@ export class LogInComponent implements OnInit {
     });
 
     // tslint:disable-next-line:no-string-literal
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
   }
 
 

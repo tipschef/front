@@ -74,13 +74,15 @@
                 <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit">Poster</button>
               </form>
             </div>
-            <hr class="solid">
-            <div class="recipe-content-comment-scroll">
+
+            <div class="recipe-content-comment-scroll"  *ngIf="comments.length > 0">
               <div class="recipe-content-comment" role="listitem" *ngFor="let comment of comments; let index = index;">
                 <img src="{{comment.user.profile_picture}}" class="recipe-content-comment-picture">
                 <h4 class="comment-header">{{comment.user.username}}</h4>
                 <p>{{comment.created_date}}</p>
                 <p>{{comment.content}}</p>
+                <button  *ngIf="user.username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)"><mat-icon>delete</mat-icon></button>
+
                 <hr class="solid">
               </div>
             </div>

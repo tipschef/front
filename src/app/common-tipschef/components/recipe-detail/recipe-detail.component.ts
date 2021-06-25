@@ -106,4 +106,13 @@ export class RecipeDetailComponent implements OnInit {
     if(comment !== "")
       this.commentARecipeById(comment);
   }
+
+
+  deleteCommentFromRecipeId(comment_id: number): void{
+    this.recipeService.deleteCommentFromRecipeId(this.recipe.id, comment_id).subscribe(httpReturnComment => {
+      if (httpReturnComment && httpReturnComment.body) {
+        this.get_commentary();
+      }
+    });
+  }
 }

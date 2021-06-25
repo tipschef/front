@@ -224,4 +224,15 @@ export class RecipeService {
   }
 
 
+  deleteCommentFromRecipeId(recipe_id: number, comment_id: number): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('RECIPE');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+
+    return this.http.delete<any>(url + recipe_id + '/comment/' + comment_id,{headers, observe: 'response'});
+  }
+
+
 }
