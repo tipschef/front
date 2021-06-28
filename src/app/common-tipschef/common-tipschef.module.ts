@@ -17,6 +17,7 @@ import {RouterModule} from '@angular/router';
 import { SearchUserComponent } from './components/search-user/search-user.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../shared/material-module/material.module';
+import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
 
 @NgModule({
@@ -29,10 +30,12 @@ import {MaterialModule} from '../shared/material-module/material.module';
     LikedRecipeComponent,
     WallComponent,
     SearchUserComponent,
+    SafeHtmlPipe,
   ],
-  exports: [
-    RecipeCardComponent
-  ],
+    exports: [
+        RecipeCardComponent,
+        SafeHtmlPipe
+    ],
   imports: [
     CommonModule,
     MaterialModule,

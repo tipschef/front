@@ -8,6 +8,10 @@ import { RecipeCreateComponent } from './components/recipe-create/recipe-create.
 import {MaterialModule} from '../shared/material-module/material.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import { UserInformationComponent } from './components/user-information/user-information.component';
+import { BookListComponent } from './components/book-list/book-list.component';
+import { BookCreateComponent } from './components/book-create/book-create.component';
+import { BookPreviewComponent } from './components/book-preview/book-preview.component';
+import {CommonTipschefModule} from '../common-tipschef/common-tipschef.module';
 
 
 @NgModule({
@@ -16,13 +20,17 @@ import { UserInformationComponent } from './components/user-information/user-inf
     DashboardComponent,
     RecipeListComponent,
     RecipeCreateComponent,
-    UserInformationComponent],
-  imports: [
-    CookRoutingModule,
-    CommonModule,
-    MaterialModule,
-    ReactiveFormsModule
-  ]
+    UserInformationComponent,
+    BookListComponent,
+    BookCreateComponent,
+    BookPreviewComponent],
+    imports: [
+        CookRoutingModule,
+        CommonModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        CommonTipschefModule
+    ]
 })
 export class CookModule {
 }
