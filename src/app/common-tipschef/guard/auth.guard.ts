@@ -40,13 +40,17 @@ export class AuthGuard implements CanActivate {
 
     return new Promise((resolve, reject) => {
       this.authService.getUserRoles().subscribe(httpResponse => {
+
           if (roles !== undefined) {
             // tslint:disable-next-line:forin
-            for (const role in roles) {
+            for (const role of roles) {
               if (role === 'cook' && !httpResponse.body.is_cook) {
                 resolve(false);
               }
               if (role === 'admin' && !httpResponse.body.is_admin) {
+                resolve(false);
+              }
+              if (role === 'partner' && !httpResponse.body.is_partner) {
                 resolve(false);
               }
             }

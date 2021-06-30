@@ -12,13 +12,17 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './shared/material-module/material.module';
 import {CommonTipschefModule} from './common-tipschef/common-tipschef.module';
 import {TokenInterceptor} from './common-tipschef/interceptor/token.interceptor';
+import { BankAccountInformationComponent } from './cook/components/bank-account-information/bank-account-information.component';
+import { PaymentInformationComponent } from './cook/components/payment-information/payment-information.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SignUpComponent,
-    LogInComponent
+    LogInComponent,
+    BankAccountInformationComponent,
+    PaymentInformationComponent
   ],
   imports: [
     BrowserModule,

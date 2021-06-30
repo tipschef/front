@@ -1,0 +1,56 @@
+<div>
+
+  <h1>Vos informations de paiment</h1>
+
+  <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()" *ngIf="show == false">
+    <mat-grid-list cols="4" rowHeight="3:1">
+
+      <mat-grid-tile>
+        <p>Numero</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Numero</mat-label>
+          <input matInput placeholder="4242424242424242" type="number" formControlName="card_number">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Mois d'expiration</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Mois d'expiration</mat-label>
+          <input matInput placeholder="6" type="number" formControlName="card_month">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <p>Année d'expirationl</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Année d'expiration</mat-label>
+          <input matInput placeholder="2022" type="number" formControlName="card_year">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <p>CVC</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>CVC</mat-label>
+          <input matInput placeholder="525" type="number" formControlName="card_cvd">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <button mat-raised-button color="accent" type="submit" (submit)="onSubmit()">Sauvegarder</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+  <div  *ngIf="show == true">
+    <mat-card>
+      <mat-card-content>
+        <p>
+          Numéro de carte: XXXXXXXXXXXX{{card_number}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="delete()">Supprimer</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

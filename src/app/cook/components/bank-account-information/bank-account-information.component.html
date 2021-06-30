@@ -1,0 +1,122 @@
+<div *ngIf="!!accountPayment">
+  <h1>Vos informations bancaire</h1>
+
+  <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()" *ngIf="show == false">
+
+    <mat-grid-list cols="4" rowHeight="3:1">
+      <mat-grid-tile>
+        <p>Prenom</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Prenom</mat-label>
+          <input matInput placeholder="Jean" formControlName="bank_firstname">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Nom</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input matInput placeholder="De La Fontaine" formControlName="bank_lastname">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Email</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="mail@email.fr" formControlName="bank_email">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Ville</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Ville</mat-label>
+          <input matInput placeholder="Paris" formControlName="bank_city">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Pays</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Pays</mat-label>
+          <select matNativeControl required formControlName="bank_country">
+            <option value="FR" de>FR</option>
+          </select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Code postal</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Code postal</mat-label>
+          <input matInput placeholder="75001" type="number" formControlName="bank_postal_code">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Ville</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Ville</mat-label>
+          <input matInput placeholder="68 rue du champs" formControlName="bank_address">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Date de naissance</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="bank_birthdate" [max]="maxDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Genre</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Genre</mat-label>
+          <select matNativeControl required formControlName="bank_gender">
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
+          </select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Phone</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Phone</mat-label>
+          <input matInput placeholder="+33612358592" formControlName="bank_phone">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>IBAN</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>IBAN</mat-label>
+          <input matInput placeholder="FR1420041010050500013M02606" formControlName="bank_iban">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <img src="{{idRecto['path']}}" class="profile-images" *ngIf="!!idRecto">
+        <input class="hidden" id="input-file-id-recto" type="file" (change)="addIdRecto($event)"/>
+        <label for="input-file-id-recto" class="mat-primary mat-raised-button">Ajouter une photo de carte d'identité recto</label>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <img src="{{idVerso['path']}}" class="profile-images" *ngIf="!!idVerso">
+        <input class="hidden" id="input-file-id-verso" type="file" (change)="addIdVerso($event)"/>
+        <label for="input-file-id-verso" class="mat-primary mat-raised-button">Ajouter une photo de carte d'identité verso</label>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-raised-button color="accent" type="submit" (submit)="onSubmit()">Sauvegarder</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+
+  <div  *ngIf="show == true">
+    <mat-card>
+      <mat-card-content>
+        <p>
+          Prenom: {{accountPayment.first_name}}
+        </p>
+        <p>
+          Nom: {{accountPayment.last_name}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="delete()">Supprimer</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

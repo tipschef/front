@@ -1,0 +1,8 @@
+.hidden {
+  display: none !important;
+}
+
+.profile-images{
+  width: 200px;
+  height: auto;
+}
