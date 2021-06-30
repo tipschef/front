@@ -17,7 +17,7 @@ export const constants = {
   BOOK: '/book/',
   BOOK_TEMPLATE: '/book/template/',
   BOOK_PREVIEW: '/book/preview/',
-  BOOK_COVER: '/book/cover',
-  BOOK_BROKER: '/book/broker',
-  BOOK_CREATOR: '/book/creator',
+  BOOK_COVER: '/book/cover/',
+  BOOK_BROKER: '/book/broker/',
+  BOOK_CREATOR: '/book/creator/',
 };
