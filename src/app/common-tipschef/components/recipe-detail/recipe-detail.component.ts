@@ -5,6 +5,8 @@ import {Recipe} from '../../../shared/models/recipe';
 import {UserService} from '../../../shared/services/user/user.service';
 import {User} from '../../../shared/models/user.model';
 import {Like} from '../../../shared/models/like';
+import {Comment} from '../../../shared/models/comment';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-recipe-detail',
@@ -17,13 +19,22 @@ export class RecipeDetailComponent implements OnInit {
   user: User;
   likes: Like;
   error: any;
+  comments: Comment[];
+  firstFormGroup: FormGroup;
+
+
 
   constructor(private recipeService: RecipeService,
               private userService: UserService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.comments= []
+    this.firstFormGroup = this.formBuilder.group({
+      comment_content: ["", [Validators.required, Validators.maxLength(350), Validators.minLength(2)]],
+    });
     this.recipeService.getRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturn => {
         if (httpReturn && httpReturn.body) {
           this.recipe = httpReturn.body;
@@ -33,6 +44,8 @@ export class RecipeDetailComponent implements OnInit {
             }
           });
           this.update_like();
+          this.get_commentary();
+
         }
       },
       error => {
@@ -71,4 +84,35 @@ export class RecipeDetailComponent implements OnInit {
 
   }
 
+  get_commentary(): void{
+    this.recipeService.getCommentsFromRecipeId(this.recipe.id).subscribe(httpReturnComment => {
+      if (httpReturnComment && httpReturnComment.body) {
+        this.comments = httpReturnComment.body;
+        console.log(this.comments);
+      }
+    });
+  }
+
+  commentARecipeById(content: string): void{
+    this.recipeService.commentARecipeById(this.recipe.id, content).subscribe(httpReturnComment => {
+      if (httpReturnComment && httpReturnComment.body) {
+        this.get_commentary();
+      }
+    });
+  }
+
+  onSubmit(): void {
+    const comment = this.firstFormGroup.value.comment_content;
+    if(comment !== "")
+      this.commentARecipeById(comment);
+  }
+
+
+  deleteCommentFromRecipeId(comment_id: number): void{
+    this.recipeService.deleteCommentFromRecipeId(this.recipe.id, comment_id).subscribe(httpReturnComment => {
+      if (httpReturnComment && httpReturnComment.body) {
+        this.get_commentary();
+      }
+    });
+  }
 }
