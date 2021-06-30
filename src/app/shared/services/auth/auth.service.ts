@@ -57,6 +57,10 @@ export class AuthService {
     return this.userRoles !== undefined && this.userRoles?.is_cook;
   }
 
+  is_partner(): boolean {
+    return this.userRoles !== undefined && this.userRoles?.is_partner;
+  }
+
   getUserRoles(): Observable<HttpResponse<UserRoles>> {
     const url = this.constantsService.getConstant('AUTH');
     const headers = {

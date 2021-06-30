@@ -6,6 +6,14 @@
       <a mat-list-item routerLink="/cook/book">Livres</a>
       <a mat-list-item routerLink="/cook/info">Mes informations</a>
     </mat-nav-list>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/cook/payment-information">Mes informations de paiment</a>
+    </mat-nav-list>
+
+    <mat-nav-list  *ngIf="is_partner === true">
+      <a mat-list-item routerLink="/cook/bank-account-information">Mes informations de compte bancaire</a>
+    </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content class="cook-content">
