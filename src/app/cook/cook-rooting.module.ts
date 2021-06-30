@@ -6,6 +6,8 @@ import {AuthGuard} from '../common-tipschef/guard/auth.guard';
 import {RecipeListComponent} from './components/recipe-list/recipe-list.component';
 import {RecipeCreateComponent} from './components/recipe-create/recipe-create.component';
 import {UserInformationComponent} from "./components/user-information/user-information.component";
+import {BookListComponent} from './components/book-list/book-list.component';
+import {BookCreateComponent} from './components/book-create/book-create.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,16 @@ const routes: Routes = [
       {
         path: 'recipe',
         component : RecipeListComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'book',
+        component : BookListComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'book-create',
+        component : BookCreateComponent,
         canActivate: [AuthGuard]
       },
       {

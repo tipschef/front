@@ -2,6 +2,7 @@
   width: 600px;
   margin: 20px auto;
   height: 500px;
+  border-radius: 2%;
 }
 
 .clickable {

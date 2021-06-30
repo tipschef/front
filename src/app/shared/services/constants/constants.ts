@@ -14,4 +14,10 @@ export const constants = {
   RECIPE_CREATOR: '/recipe/creator/',
   RECIPE_THUMBNAIL: '/recipe/thumbnail_media/',
   RECIPE_VIDEO: '/recipe/video_media/',
+  BOOK: '/book/',
+  BOOK_TEMPLATE: '/book/template/',
+  BOOK_PREVIEW: '/book/preview/',
+  BOOK_COVER: '/book/cover/',
+  BOOK_BROKER: '/book/broker',
+  BOOK_CREATOR: '/book/creator',
 };
