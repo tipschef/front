@@ -1,1 +1,47 @@
 <button mat-raised-button routerLink="/cook/book-create">Créer un livre</button>
+<br>
+
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Livre">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="this.dataSource" class="mat-elevation-z8" matSort>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Titre </th>
+      <td mat-cell *matCellDef="let book"> {{book.title}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let book"> {{book.is_creating? 'En cours de création' : 'Créé'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="number_of_recipe">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de recette </th>
+      <td mat-cell *matCellDef="let book"> {{book.number_of_recipe}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="downloadPdf">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> PDF </th>
+      <td mat-cell *matCellDef="let book"> <a href="{{book.path}}"><button *ngIf="!book.is_creating"  mat-button  class="mat-accent mat-raised-button">Télécharger</button></a> </td>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+      <td mat-cell *matCellDef="let book">
+        <mat-icon class="tipschef-button"  (click)="deleteBook(book)" >delete</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

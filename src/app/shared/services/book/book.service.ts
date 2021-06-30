@@ -7,6 +7,7 @@ import {TemplateList} from '../../models/template-list';
 import {Recipe} from '../../models/recipe';
 import {Media} from '../../models/media';
 import {Book} from '../../models/book';
+import {CreatedBook} from '../../models/created-book';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,22 @@ export class BookService {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
     return this.http.get<TemplateList>(url, {headers, observe: 'response'});
+  }
+
+  getMyBooks(): Observable<HttpResponse<Array<CreatedBook>>> {
+    const url = this.constantsService.getConstant('BOOK_CREATOR');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<CreatedBook>>(url, {headers, observe: 'response'});
+  }
+
+  deleteBook(bookId: number): Observable<HttpResponse<any>>{
+    const url = this.constantsService.getConstant('BOOK');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.delete<any>(url + bookId, {headers, observe: 'response'});
   }
 
   initBook(): Book {

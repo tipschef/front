@@ -7,6 +7,7 @@ import {AuthService} from '../../../shared/services/auth/auth.service';
 import {Recipe} from '../../../shared/models/recipe';
 import {MatTableDataSource} from '@angular/material/table';
 import {RecipeService} from '../../../shared/services/recipe/recipe.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-book-create',
@@ -29,7 +30,8 @@ export class BookCreateComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private bookService: BookService,
               private authService: AuthService,
-              private recipeService: RecipeService) {
+              private recipeService: RecipeService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -111,12 +113,12 @@ export class BookCreateComponent implements OnInit {
 
   previewRecipe(index: number): void {
     let html = this.templates.recipes[this.recipeFormGroups[index].value.value].content;
-    html = html.replace('RECIPE_NAME', this.recipes[this.recipeFormGroups[index].value.recipe_id].name);
-    html = html.replace('THUMBNAIL_PATH', this.recipes[this.recipeFormGroups[index].value.recipe_id].thumbnail.path);
-    html = html.replace('PORTION_NUMBER', this.recipes[this.recipeFormGroups[index].value.recipe_id].portion_number.toString());
-    html = html.replace('PORTION_UNIT', this.recipes[this.recipeFormGroups[index].value.recipe_id].portion_unit);
-    html = html.replace('TEMPS_TOTALE', this.getTimeString(this.calcTotalTime(this.recipes[this.recipeFormGroups[index].value.recipe_id])));
-    html = html.replace('INGREDIENT_LIST', this.calcIngredientString(this.recipes[this.recipeFormGroups[index].value.recipe_id]));
+    html = html.replace('RECIPE_NAME',      this.recipes[this.recipeFormGroups[index].value.recipe_id].name);
+    html = html.replace('THUMBNAIL_PATH',   this.recipes[this.recipeFormGroups[index].value.recipe_id].thumbnail.path);
+    html = html.replace('PORTION_NUMBER',   this.recipes[this.recipeFormGroups[index].value.recipe_id].portion_number.toString());
+    html = html.replace('PORTION_UNIT',     this.recipes[this.recipeFormGroups[index].value.recipe_id].portion_unit);
+    html = html.replace('TEMPS_TOTALE',     this.getTimeString(this.calcTotalTime(this.recipes[this.recipeFormGroups[index].value.recipe_id])));
+    html = html.replace('INGREDIENT_LIST',  this.calcIngredientString(this.recipes[this.recipeFormGroups[index].value.recipe_id]));
     html = html.replace('INSTRUCTION_LIST', this.calcStepString(this.recipes[this.recipeFormGroups[index].value.recipe_id]));
 
     this.htmlToDisplay = html;
@@ -164,6 +166,7 @@ export class BookCreateComponent implements OnInit {
 
   createBook(): void {
     let book = this.bookService.initBook();
+    this.isLoading = true;
 
     this.bookService.postCover(this.coverPicture['data']).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body && httpReturn.body['url']) {
@@ -174,11 +177,21 @@ export class BookCreateComponent implements OnInit {
         book.description_path = this.templates.book_descriptions[this.secondFormGroup.value.value].filename;
 
         for ( let recipe of this.recipeFormGroups) {
-          book.recipe_template.push({'recipe_id' : this.recipes[recipe.value.recipe_id].id, 'template_path' : this.templates.recipes[recipe.value.value].filename})
+          book.recipe_template.push({
+            'recipe_id' : this.recipes[recipe.value.recipe_id].id,
+            'template_path' : this.templates.recipes[recipe.value.value].filename,
+            'recipe_name' : this.recipes[recipe.value.recipe_id].name,
+            'thumbnail_path' : this.recipes[recipe.value.recipe_id].thumbnail.path,
+            'portion_number' : this.recipes[recipe.value.recipe_id].portion_number.toString(),
+            'portion_unit' : this.recipes[recipe.value.recipe_id].portion_unit,
+            'total_time' : this.getTimeString(this.calcTotalTime(this.recipes[recipe.value.recipe_id])),
+            'ingredient_list' : this.calcIngredientString(this.recipes[recipe.value.recipe_id]),
+            'instruction_list' : this.calcStepString(this.recipes[recipe.value.recipe_id]),
+          });
         }
 
         this.bookService.postBook(book).subscribe( httpReturn => {
-          console.log(httpReturn);
+          this.router.navigate(['/cook/book']);
         });
       }
     });
