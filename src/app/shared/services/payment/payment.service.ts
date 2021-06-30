@@ -86,10 +86,10 @@ export class PaymentService {
     const headers = {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('file', file);
 
-    return this.http.post<any>(url +'id', formData, {headers, observe: 'response'});
+    return this.http.post<any>(url + 'id', formData, {headers, observe: 'response'});
   }
 
   deleteAccount(): Observable<HttpResponse<any>> {

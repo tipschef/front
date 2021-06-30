@@ -79,7 +79,7 @@ export class RecipeService {
       formData.append('files', file);
     }
 
-    return this.http.post<Array<Media>>(url + recipeId +'/', formData, {headers, observe: 'response'});
+    return this.http.post<Array<Media>>(url + recipeId , formData, {headers, observe: 'response'});
   }
 
   postThumbnail(recipeId: number, thumbnail: File): Observable<HttpResponse<Media>> {
@@ -90,7 +90,7 @@ export class RecipeService {
     let formData: FormData = new FormData();
     formData.append('thumbnail', thumbnail);
 
-    return this.http.post<Media>(url + recipeId +'/', formData, {headers, observe: 'response'});
+    return this.http.post<Media>(url + recipeId , formData, {headers, observe: 'response'});
   }
 
   postVideo(recipeId: number, video: File): Observable<HttpResponse<Media>> {
@@ -101,7 +101,7 @@ export class RecipeService {
     let formData: FormData = new FormData();
     formData.append('video', video);
 
-    return this.http.post<Media>(url + recipeId +'/', formData, {headers, observe: 'response'});
+    return this.http.post<Media>(url + recipeId , formData, {headers, observe: 'response'});
   }
 
 

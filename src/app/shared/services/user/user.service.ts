@@ -87,23 +87,23 @@ export class UserService {
   updateProfilePicture(file: File): Observable<HttpResponse<any>> {
     const url = this.constantsService.getConstant('USER_UPDATE');
     const headers = {
-      'Authorization': `Bearer ${this.authService.authData.access_token}`
+      Authorization: `Bearer ${this.authService.authData.access_token}`
     };
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('file', file);
 
-    return this.http.patch<any>(url +'profile', formData, {headers, observe: 'response'});
+    return this.http.patch<any>(url + 'profile', formData, {headers, observe: 'response'});
   }
 
   updateBackgroundPicture(file: File): Observable<HttpResponse<any>> {
     const url = this.constantsService.getConstant('USER_UPDATE');
     const headers = {
-      'Authorization': `Bearer ${this.authService.authData.access_token}`
+      Authorization: `Bearer ${this.authService.authData.access_token}`
     };
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('file', file);
 
-    return this.http.patch<any>(url +'background', formData, {headers, observe: 'response'});
+    return this.http.patch<any>(url + 'background', formData, {headers, observe: 'response'});
   }
 
 }
