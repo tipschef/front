@@ -89,7 +89,7 @@
                 <h4 class="comment-header">{{comment.user.username}}</h4>
                 <p>{{comment.created_date}}</p>
                 <p>{{comment.content}}</p>
-                <button *ngIf="user_creator.username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
+                <button *ngIf="username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
                   <mat-icon>delete</mat-icon>
                 </button>
 
