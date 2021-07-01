@@ -46,7 +46,6 @@ export class ProfileComponent implements OnInit {
     this.bookService.getBookByUser(this.username).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body){
         this.books = httpReturn.body;
-        console.log(this.books);
       }
     });
   }
@@ -85,5 +84,9 @@ export class ProfileComponent implements OnInit {
         this.loadUser();
       });
     }
+  }
+
+  subscribeUser(): void {
+    this.router.navigate(['/subscribe/' + this.username]);
   }
 }

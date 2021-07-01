@@ -29,9 +29,8 @@
       <div class="display-flex margin-top">
         <div class="flex-grow-6 "></div>
         <div class="flex-grow-6 display-flex">
-          <div class="flex-grow-6 "><button class="mat-raised-button mat-accent">S'abonner</button></div>
+          <div class="flex-grow-6 "><button (click)="subscribeUser()" class="mat-raised-button mat-accent">{{this.user.subscribed ? 'Offrir un abonnement' :'S\'abonner'}}</button></div>
           <div class="flex-grow-6 "><button (click)="followUser()" class="mat-raised-button mat-accent">{{(user && user.following)?'Arrêter de suivre':'Suivre'}}</button></div>
-          <div class="flex-grow-6 "><button class="mat-raised-button mat-accent">Plus</button></div>
         </div>
         <div class="flex-grow-6 "></div>
       </div>

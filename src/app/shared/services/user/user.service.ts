@@ -5,6 +5,8 @@ import {ConstantsService} from '../constants/constants.service';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user.model';
 import {AuthService} from '../auth/auth.service';
+import {CreateSubscription} from '../../models/create-subscription';
+import {Tier} from '../../models/tier';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,15 @@ export class UserService {
       password: password
     };
     return this.http.post<User>(url, user, {observe: 'response'});
+  }
+
+
+  createSubscription(createSubscription: CreateSubscription): Observable<HttpResponse<any>> {
+    const url = this.constantsService.getConstant('USER_SUBSCRIPTION');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.post<any>(url, createSubscription, {headers, observe: 'response'});
   }
 
   updateUser(user: User): Observable<HttpResponse<User>> {
@@ -82,6 +93,14 @@ export class UserService {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
     return this.http.get<Array<User>>(url + '?username=' + username, {headers, observe: 'response'});
+  }
+
+  getTiers(): Observable<HttpResponse<Array<Tier>>>{
+    const url = this.constantsService.getConstant('USER_SUBSCRIPTION_TIER');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<Tier>>(url, {headers, observe: 'response'});
   }
 
   updateProfilePicture(file: File): Observable<HttpResponse<any>> {

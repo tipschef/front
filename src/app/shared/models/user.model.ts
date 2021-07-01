@@ -14,5 +14,6 @@ export interface User {
   profile_picture?: string;
   background_url?: string;
   following?: boolean;
+  subscribed?: boolean;
   is_partner?: boolean;
 }

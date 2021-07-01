@@ -4,6 +4,8 @@ export const constants = {
   USER_ID: '/users/id/',
   USER_SEARCH: '/users/search/',
   USER_DASHBOARD: '/users/dashboard/',
+  USER_SUBSCRIPTION: '/users/subscribe',
+  USER_SUBSCRIPTION_TIER: '/users/subscribe/tier',
   AUTH: '/auth/',
   AUTH_TOKEN: '/auth/token/',
   RECIPE_CATEGORY: '/recipe_category/',
