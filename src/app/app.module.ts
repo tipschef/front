@@ -14,6 +14,18 @@ import {CommonTipschefModule} from './common-tipschef/common-tipschef.module';
 import {TokenInterceptor} from './common-tipschef/interceptor/token.interceptor';
 import { BankAccountInformationComponent } from './cook/components/bank-account-information/bank-account-information.component';
 import { PaymentInformationComponent } from './cook/components/payment-information/payment-information.component';
+import { DashComponent } from './cook/components/dash/dash.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
+import {ChartsModule} from "ng2-charts";
+import { LikeChartComponent } from './cook/components/charts/like-chart/like-chart.component';
+import { CardComponent } from './cook/components/card/card.component';
+import { SubChartComponent } from './cook/components/charts/sub-chart/sub-chart.component';
+import { FollowChartComponent } from './cook/components/charts/follow-chart/follow-chart.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +34,12 @@ import { PaymentInformationComponent } from './cook/components/payment-informati
     SignUpComponent,
     LogInComponent,
     BankAccountInformationComponent,
-    PaymentInformationComponent
+    PaymentInformationComponent,
+    DashComponent,
+    LikeChartComponent,
+    CardComponent,
+    SubChartComponent,
+    FollowChartComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +48,14 @@ import { PaymentInformationComponent } from './cook/components/payment-informati
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
-    CommonTipschefModule
+    CommonTipschefModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule,
+    ChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

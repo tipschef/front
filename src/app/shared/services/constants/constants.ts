@@ -3,6 +3,7 @@ export const constants = {
   USER_UPDATE: '/users/update/',
   USER_ID: '/users/id/',
   USER_SEARCH: '/users/search/',
+  USER_DASHBOARD: '/users/dashboard/',
   AUTH: '/auth/',
   AUTH_TOKEN: '/auth/token/',
   RECIPE_CATEGORY: '/recipe_category/',

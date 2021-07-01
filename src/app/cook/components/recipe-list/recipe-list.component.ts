@@ -31,6 +31,7 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.recipeService.getAllRecipeCategories().subscribe(httpResponse => {
+      console.log(httpResponse.body)
       this.recipeCategories = httpResponse.body;
     });
 
