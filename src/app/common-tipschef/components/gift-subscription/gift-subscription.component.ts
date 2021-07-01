@@ -1,21 +1,23 @@
 /* tslint:disable */
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import {User} from '../../../shared/models/user.model';
-import {UserService} from '../../../shared/services/user/user.service';
 import {Tier} from '../../../shared/models/tier';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CreateSubscription} from '../../../shared/models/create-subscription';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../../../shared/services/user/user.service';
+import {GiftSubscription} from '../../../shared/models/gift-subscription';
 
 @Component({
-  selector: 'app-tipschef-subscription',
-  templateUrl: './tipschef-subscription.component.html',
-  styleUrls: ['./tipschef-subscription.component.css']
+  selector: 'app-gift-subscription',
+  templateUrl: './gift-subscription.component.html',
+  styleUrls: ['./gift-subscription.component.css']
 })
-export class TipschefSubscriptionComponent implements OnInit {
+export class GiftSubscriptionComponent implements OnInit {
+
   username: string;
   user: User;
   tiers: Tier[];
+  availableFollowers: number;
 
   isLoading: boolean;
 
@@ -32,11 +34,11 @@ export class TipschefSubscriptionComponent implements OnInit {
     this.username = this.route.snapshot.paramMap.get('username');
 
     this.form = this.formBuilder.group({
-      number_month: ['1', [Validators.required]]
+      number_sub: ['1', [Validators.required]]
     });
     this.loadUser();
     this.loadTiers();
-
+    this.loadAvailableFollowers();
   }
 
   loadUser(): void {
@@ -56,18 +58,27 @@ export class TipschefSubscriptionComponent implements OnInit {
     });
   }
 
-  sub(tier: number): void {
+  loadAvailableFollowers(): void {
+    this.userService.getAvailableFollowers(this.username).subscribe(httpReturn => {
+      if (httpReturn?.body) {
+        this.availableFollowers = httpReturn.body.available_followers;
+      }
+    });
+  }
+
+  giftSub(tier: number): void {
     this.isLoading = true;
-    const createSubscription: CreateSubscription = {
+    const giftSubscription: GiftSubscription = {
       subscribed_username: this.username,
       tier: tier,
-      number_month: this.form.value.number_month
+      number: this.form.value.number_sub
     };
-    this.userService.createSubscription(createSubscription).subscribe(httpReturn => {
+    this.userService.giftSubscription(giftSubscription).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body){
         this.router.navigate(['/' + this.username]);
       }
     });
   }
+
 
 }

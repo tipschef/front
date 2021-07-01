@@ -15,7 +15,10 @@
         <mat-card class="book-card">
           <mat-card-header>
             <mat-card-title>
-              <h1>{{book.title}}</h1>
+              <h1 style="width: 100%;">
+                {{book.title}}
+                <button mat-button  class="mat-raised-button mat-accent" style="float: right; position: absolute; right: 25px" (click)="buyBook()">Acheter</button>
+              </h1>
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>

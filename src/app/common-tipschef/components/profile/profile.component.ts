@@ -44,11 +44,12 @@ export class ProfileComponent implements OnInit {
 
   loadBooks(): void {
     this.bookService.getBookByUser(this.username).subscribe(httpReturn => {
-      if (httpReturn && httpReturn.body){
+      if (httpReturn && httpReturn.body) {
         this.books = httpReturn.body;
       }
     });
   }
+
   loadUser(): void {
     this.userService.getUserByUsername(this.username).subscribe(httpReturn => {
       if (httpReturn?.body) {
@@ -75,11 +76,11 @@ export class ProfileComponent implements OnInit {
 
   followUser(): void {
     // this.userService.followUser(this.username).subscribe()
-    if (!this.user.following){
+    if (!this.user.following) {
       this.userService.followUser(this.username).subscribe(httpReturn => {
         this.loadUser();
       });
-    }else{
+    } else {
       this.userService.unfollowUser(this.username).subscribe(httpReturn => {
         this.loadUser();
       });
@@ -88,5 +89,9 @@ export class ProfileComponent implements OnInit {
 
   subscribeUser(): void {
     this.router.navigate(['/subscribe/' + this.username]);
+  }
+
+  giftSub(): void {
+    this.router.navigate(['/gift-subscription/' + this.username]);
   }
 }

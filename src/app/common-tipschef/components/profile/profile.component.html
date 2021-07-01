@@ -1,6 +1,7 @@
 <div *ngIf="user">
   <div class="full-width">
-    <img class="full-width profile-header" src="{{user.background_url? user.background_url : '/assets/no-image-found.jpg'}}" alt="">
+    <img class="full-width profile-header"
+         src="{{user.background_url? user.background_url : '/assets/no-image-found.jpg'}}" alt="">
   </div>
   <div class="display-flex border-top">
     <div class="flex-grow-2 border center">
@@ -18,19 +19,29 @@
         <div class="flex-grow-6 "></div>
         <div class="flex-grow-6 ">
           <p>{{user.followers}}</p>
-          <p>Follower{{user.followers > 1?'s':''}}</p>
+          <p>Follower{{user.followers > 1 ? 's' : ''}}</p>
         </div>
         <div class="flex-grow-6">
           <p>{{user.likes}}</p>
-          <p>Like{{user.likes > 1?'s':''}}</p>
+          <p>Like{{user.likes > 1 ? 's' : ''}}</p>
         </div>
         <div class="flex-grow-6 "></div>
       </div>
       <div class="display-flex margin-top">
         <div class="flex-grow-6 "></div>
         <div class="flex-grow-6 display-flex">
-          <div class="flex-grow-6 "><button (click)="subscribeUser()" class="mat-raised-button mat-accent">{{this.user.subscribed ? 'Offrir un abonnement' :'S\'abonner'}}</button></div>
-          <div class="flex-grow-6 "><button (click)="followUser()" class="mat-raised-button mat-accent">{{(user && user.following)?'Arrêter de suivre':'Suivre'}}</button></div>
+          <div class="flex-grow-6 ">
+            <button (click)="giftSub()"
+                    class="mat-raised-button mat-accent" *ngIf="this.user.subscribed">Offrir un abonnement</button>
+          </div>
+          <div class="flex-grow-6 ">
+            <button (click)="subscribeUser()"
+                    class="mat-raised-button mat-accent" *ngIf="!this.user.subscribed">S'abonner</button>
+          </div>
+          <div class="flex-grow-6 ">
+            <button (click)="followUser()"
+                    class="mat-raised-button mat-accent">{{(user && user.following) ? 'Arrêter de suivre' : 'Suivre'}}</button>
+          </div>
         </div>
         <div class="flex-grow-6 "></div>
       </div>

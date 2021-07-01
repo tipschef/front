@@ -7,6 +7,7 @@ import {User} from '../../models/user.model';
 import {AuthService} from '../auth/auth.service';
 import {CreateSubscription} from '../../models/create-subscription';
 import {Tier} from '../../models/tier';
+import {GiftSubscription} from '../../models/gift-subscription';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,13 @@ export class UserService {
     };
     return this.http.post<any>(url, createSubscription, {headers, observe: 'response'});
   }
+  giftSubscription(createSubscription: GiftSubscription): Observable<HttpResponse<any>> {
+    const url = this.constantsService.getConstant('USER_SUBSCRIPTION_GIFT');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.post<any>(url, createSubscription, {headers, observe: 'response'});
+  }
 
   updateUser(user: User): Observable<HttpResponse<User>> {
     const url = this.constantsService.getConstant('USER_UPDATE');
@@ -47,7 +55,15 @@ export class UserService {
 
   getUserById(userId: number): Observable<HttpResponse<User>> {
     const url = this.constantsService.getConstant('USER_ID');
-    return this.http.get<User>(url + userId + '/', {observe: 'response'});
+    return this.http.get<User>(url + userId, {observe: 'response'});
+  }
+
+  getAvailableFollowers(username: string): Observable<HttpResponse<any>> {
+    const url = this.constantsService.getConstant('USER_AVAILABLE_FOLLOWERS');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<any>(url + '/' + username, {headers, observe: 'response'});
   }
 
   getMe(): Observable<HttpResponse<User>> {
@@ -60,7 +76,7 @@ export class UserService {
   }
 
 
-  getUserByUsername(username: string): Observable<HttpResponse<User>>{
+  getUserByUsername(username: string): Observable<HttpResponse<User>> {
     const url = this.constantsService.getConstant('USER');
 
     const headers = {
@@ -69,7 +85,7 @@ export class UserService {
     return this.http.get<User>(url + username + '/', {headers, observe: 'response'});
   }
 
-  followUser(username: string): Observable<HttpResponse<any>>{
+  followUser(username: string): Observable<HttpResponse<any>> {
     const url = this.constantsService.getConstant('USER');
 
     const headers = {
@@ -78,7 +94,7 @@ export class UserService {
     return this.http.get<any>(url + username + '/follow/', {headers, observe: 'response'});
   }
 
-  unfollowUser(username: string): Observable<HttpResponse<any>>{
+  unfollowUser(username: string): Observable<HttpResponse<any>> {
     const url = this.constantsService.getConstant('USER');
 
     const headers = {
@@ -87,7 +103,7 @@ export class UserService {
     return this.http.get<any>(url + username + '/unfollow/', {headers, observe: 'response'});
   }
 
-  getSearchUser(username: string): Observable<HttpResponse<Array<User>>>{
+  getSearchUser(username: string): Observable<HttpResponse<Array<User>>> {
     const url = this.constantsService.getConstant('USER_SEARCH');
     const headers = {
       Authorization: `Bearer ${this.authService.authData.access_token}`
@@ -95,7 +111,7 @@ export class UserService {
     return this.http.get<Array<User>>(url + '?username=' + username, {headers, observe: 'response'});
   }
 
-  getTiers(): Observable<HttpResponse<Array<Tier>>>{
+  getTiers(): Observable<HttpResponse<Array<Tier>>> {
     const url = this.constantsService.getConstant('USER_SUBSCRIPTION_TIER');
     const headers = {
       Authorization: `Bearer ${this.authService.authData.access_token}`

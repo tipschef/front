@@ -20,6 +20,7 @@ import {MaterialModule} from '../shared/material-module/material.module';
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { TipschefSubscriptionComponent } from './components/tipschef-subscription/tipschef-subscription.component';
+import { GiftSubscriptionComponent } from './components/gift-subscription/gift-subscription.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { TipschefSubscriptionComponent } from './components/tipschef-subscriptio
     SearchUserComponent,
     SafeHtmlPipe,
     BookDetailComponent,
-    TipschefSubscriptionComponent
+    TipschefSubscriptionComponent,
+    GiftSubscriptionComponent
   ],
     exports: [
         RecipeCardComponent,
