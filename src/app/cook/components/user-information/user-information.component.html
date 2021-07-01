@@ -16,7 +16,7 @@
       <br>
 
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="example-container-text">
         <mat-label>Description</mat-label>
         <textarea matInput maxlength="120" formControlName="user_description"></textarea>
       </mat-form-field>
@@ -24,7 +24,7 @@
       <div style="display: flex">
         <div style="display: grid; margin-right: 20px">
           <img src="{{!!profilePicture? profilePicture['path']:user.profile_url}}" class="profile-images" >
-          <label for="input-profile-id" class="mat-primary mat-raised-button">Ajouter une photo de profile</label>
+          <label for="input-profile-id" class="mat-primary mat-raised-button">Ajouter une photo de profil</label>
           <input class="hidden" id="input-profile-id" type="file" (change)="addProfilePicture($event)"
                  accept="image/*"/>
         </div>

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CookComponent} from './cook.component';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {CookRoutingModule} from './cook-rooting.module';
 import {RecipeListComponent} from './components/recipe-list/recipe-list.component';
 import {RecipeCreateComponent} from './components/recipe-create/recipe-create.component';
@@ -17,7 +16,6 @@ import {CommonTipschefModule} from '../common-tipschef/common-tipschef.module';
 @NgModule({
   declarations: [
     CookComponent,
-    DashboardComponent,
     RecipeListComponent,
     RecipeCreateComponent,
     UserInformationComponent,

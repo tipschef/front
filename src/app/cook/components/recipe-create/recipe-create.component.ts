@@ -89,8 +89,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
   fill_form(): void{
     this.firstFormGroup = this.formBuilder.group({
       min_tier: [this.recipe.min_tier, [Validators.required, Validators.min(0), Validators.max(3)]],
-      name: [this.recipe.name, Validators.required],
-      description: [this.recipe.description, Validators.required],
+      name: [this.recipe.name, [Validators.required, Validators.maxLength(155)]],
+      description: [this.recipe.description, [Validators.required, Validators.maxLength(155)]],
     });
 
     this.secondFormGroup = this.formBuilder.group({

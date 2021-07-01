@@ -13,11 +13,16 @@ export class PaymentInformationComponent implements OnInit {
   payment_method: PaymentMethod;
   show: boolean = false
   card_number: string
+  min_exp: number
+
+
   constructor(private formBuilder: FormBuilder,
               private paymentService: PaymentService) {
   }
 
   ngOnInit(): void {
+    this.min_exp = new Date().getFullYear()
+
     this.paymentService.getPaymentMethod().subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
           this.show = true;
@@ -27,23 +32,26 @@ export class PaymentInformationComponent implements OnInit {
 
     this.payment_method = {} as PaymentMethod
     this.firstFormGroup = this.formBuilder.group({
-      card_number: ['', [Validators.required]],
+      card_number: ['', [Validators.required, Validators.pattern("^\d+$")]],
       card_month: ['', [Validators.required]],
       card_year: ['', [Validators.required]],
-      card_cvd: ['', [Validators.required]],
+      card_cvd: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern("^\d+$")]],
     });
   }
 
   onSubmit() {
-    this.payment_method.number = this.firstFormGroup.value.card_number.toString();
-    this.payment_method.exp_month = this.firstFormGroup.value.card_month;
-    this.payment_method.exp_year = this.firstFormGroup.value.card_year;
-    this.payment_method.cvc = this.firstFormGroup.value.card_cvd.toString();
-    this.paymentService.createPaymentMethod(this.payment_method).subscribe(httpReturn => {
-      if (httpReturn && httpReturn.body) {
-        console.log('Account created');
-      }
-    });
+    if ( this.firstFormGroup.valid){
+      this.payment_method.number = this.firstFormGroup.value.card_number.toString();
+      this.payment_method.exp_month = this.firstFormGroup.value.card_month;
+      this.payment_method.exp_year = this.firstFormGroup.value.card_year;
+      this.payment_method.cvc = this.firstFormGroup.value.card_cvd;
+      this.paymentService.createPaymentMethod(this.payment_method).subscribe(httpReturn => {
+        if (httpReturn && httpReturn.body) {
+          console.log('Account created');
+        }
+      });
+    }
+
   }
 
   delete(){
