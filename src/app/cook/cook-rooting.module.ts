@@ -10,6 +10,7 @@ import {PaymentInformationComponent} from "./components/payment-information/paym
 import {BankAccountInformationComponent} from "./components/bank-account-information/bank-account-information.component";
 import {BookListComponent} from './components/book-list/book-list.component';
 import {BookCreateComponent} from './components/book-create/book-create.component';
+import {DashComponent} from "./components/dash/dash.component";
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
     children : [
       {
         path: 'dashboard',
-        component : DashboardComponent,
+        component : DashComponent,
         canActivate: [AuthGuard]
       },
       {

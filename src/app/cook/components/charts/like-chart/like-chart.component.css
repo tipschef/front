@@ -1,0 +1,17 @@
+.chartContainer canvas {
+  align-items: center;
+  justify-content: center;
+}
+
+
+.chartContainer {
+  height: 100%;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chartContainerWrapper{
+  max-width: 500px;
+}
