@@ -10,6 +10,8 @@ import {RecipeDetailComponent} from './common-tipschef/components/recipe-detail/
 import {LikedRecipeComponent} from './common-tipschef/components/liked-recipe/liked-recipe.component';
 import {SearchUserComponent} from './common-tipschef/components/search-user/search-user.component';
 import {BookDetailComponent} from './common-tipschef/components/book-detail/book-detail.component';
+import {TipschefSubscriptionComponent} from './common-tipschef/components/tipschef-subscription/tipschef-subscription.component';
+import {GiftSubscriptionComponent} from './common-tipschef/components/gift-subscription/gift-subscription.component';
 
 const routes: Routes = [
   {
@@ -42,7 +44,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent,
+    component: WallComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },
@@ -54,6 +56,18 @@ const routes: Routes = [
   {
     path: 'recipe/:recipe_id',
     component: RecipeDetailComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'subscribe/:username',
+    component: TipschefSubscriptionComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'gift-subscription/:username',
+    component: GiftSubscriptionComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },

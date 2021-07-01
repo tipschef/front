@@ -19,6 +19,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../shared/material-module/material.module';
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { TipschefSubscriptionComponent } from './components/tipschef-subscription/tipschef-subscription.component';
+import { GiftSubscriptionComponent } from './components/gift-subscription/gift-subscription.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { BookDetailComponent } from './components/book-detail/book-detail.compon
     WallComponent,
     SearchUserComponent,
     SafeHtmlPipe,
-    BookDetailComponent
+    BookDetailComponent,
+    TipschefSubscriptionComponent,
+    GiftSubscriptionComponent
   ],
     exports: [
         RecipeCardComponent,

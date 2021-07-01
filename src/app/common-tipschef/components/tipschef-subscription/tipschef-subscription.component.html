@@ -1,0 +1,54 @@
+<div class="center" *ngIf="isLoading">
+  <img src="/assets/loader-2_food.gif" alt="loading-gif">
+</div>
+
+<section *ngIf="!isLoading">
+  <div class="display-flex" style="min-height: 100vh">
+    <div class="user-column center">
+      <img src="{{user.profile_url}}" class="profile-picture" routerLink="/{{user.username}}" style="cursor:pointer">
+      <h2 routerLink="/{{user.username}}" style="cursor:pointer">
+        {{user.username}}
+        <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
+      </h2>
+      <p>{{user.description}}</p>
+
+
+    </div>
+    <div class="subscription-column display-flex">
+      <div class="subscription">
+        <h1>S'abonner</h1>
+        <section>
+          Durée :
+          <form [formGroup]="form">
+            <mat-radio-group formControlName="number_month">
+              <mat-radio-button value="1">1 mois</mat-radio-button>
+              <mat-radio-button value="3">3 mois</mat-radio-button>
+              <mat-radio-button value="6">6 mois</mat-radio-button>
+              <mat-radio-button value="12">12 mois</mat-radio-button>
+            </mat-radio-group>
+          </form>
+        </section>
+        <div class="tier-pannel" *ngFor="let tier of tiers">
+          <h2>Abonnement tier {{tier.tier}}</h2>
+          <p>
+            Les abonnements sont un bon moyen de soutenir directement les cuisiniers de que vous adorez et aussi de
+            obtenez des avantages.
+          </p>
+          <h3>
+            Avantages
+          </h3>
+          <ul>
+            <li>Accéder au poste accessible à partir de ce tier</li>
+            <li *ngIf="tier.tier === 1">Poster des commentaires sur les recettes du cuisinier</li>
+          </ul>
+
+          <div style="width: 100%; text-align: right">
+            <button mat-button class="mat-raised-button mat-accent" (click)="sub(tier.tier)">
+              S'abonner {{form.value['number_month']}} mois pour {{form.value['number_month'] * tier.price}} €
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
