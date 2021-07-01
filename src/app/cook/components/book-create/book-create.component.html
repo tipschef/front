@@ -28,6 +28,11 @@
             <input matInput placeholder="Saisissez un nom de livre" formControlName="name" required>
           </mat-form-field>
 
+          <mat-form-field>
+            <mat-label>Prix :</mat-label>
+            <input matInput placeholder="Saisissez un nom de livre"  formControlName="price_euro" required type="number" min="5" step="0.01">
+          </mat-form-field>
+
           <div>Image de couverture :</div>
           <img *ngIf="!!coverPicture" class="margin-right" style="height:100px; width:100px"
                src="{{coverPicture['path']}}">

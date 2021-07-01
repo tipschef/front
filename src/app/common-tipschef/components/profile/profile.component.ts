@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RecipeService} from '../../../shared/services/recipe/recipe.service';
 import {Pagination} from '../../../shared/models/pagination';
 import {User} from '../../../shared/models/user.model';
 import {UserService} from '../../../shared/services/user/user.service';
+import {BookService} from '../../../shared/services/book/book.service';
+import {Book} from '../../../shared/models/book';
 
 
 @Component({
@@ -14,19 +16,23 @@ import {UserService} from '../../../shared/services/user/user.service';
 export class ProfileComponent implements OnInit {
   username: string;
   user: User;
+  books: Book[];
 
   pagination: Pagination;
 
 
   constructor(private route: ActivatedRoute,
               private recipeService: RecipeService,
-              private userService: UserService) {
+              private userService: UserService,
+              private bookService: BookService,
+              private router: Router) {
 
   }
 
   ngOnInit(): void {
     this.username = this.route.snapshot.paramMap.get('username');
     this.loadUser();
+    this.loadBooks();
     this.pagination = {
       items: [],
       isLoading: false,
@@ -36,10 +42,19 @@ export class ProfileComponent implements OnInit {
     };
   }
 
+  loadBooks(): void {
+    this.bookService.getBookByUser(this.username).subscribe(httpReturn => {
+      if (httpReturn && httpReturn.body){
+        this.books = httpReturn.body;
+        console.log(this.books);
+      }
+    });
+  }
   loadUser(): void {
     this.userService.getUserByUsername(this.username).subscribe(httpReturn => {
       if (httpReturn?.body) {
         this.user = httpReturn.body;
+
       }
     }, error => {
       console.log('User does not exist');

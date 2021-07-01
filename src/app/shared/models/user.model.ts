@@ -11,6 +11,7 @@ export interface User {
   recipes?: number;
   description?: string;
   profile_url?: string;
+  profile_picture?: string;
   background_url?: string;
   following?: boolean;
   is_partner?: boolean;

@@ -9,6 +9,7 @@ import {ProfileComponent} from './common-tipschef/components/profile/profile.com
 import {RecipeDetailComponent} from './common-tipschef/components/recipe-detail/recipe-detail.component';
 import {LikedRecipeComponent} from './common-tipschef/components/liked-recipe/liked-recipe.component';
 import {SearchUserComponent} from './common-tipschef/components/search-user/search-user.component';
+import {BookDetailComponent} from './common-tipschef/components/book-detail/book-detail.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,12 @@ const routes: Routes = [
   {
     path: 'recipe/:recipe_id',
     component: RecipeDetailComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'book/:book_id',
+    component: BookDetailComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },

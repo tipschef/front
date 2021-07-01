@@ -50,7 +50,8 @@ export class BookCreateComponent implements OnInit {
 
     this.firstFormGroup = this.formBuilder.group({
       value: [0, Validators.required],
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      price_euro: [0, [Validators.required, Validators.min(5)]]
     });
 
     this.secondFormGroup = this.formBuilder.group({
@@ -171,6 +172,7 @@ export class BookCreateComponent implements OnInit {
     this.bookService.postCover(this.coverPicture['data']).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body && httpReturn.body['url']) {
         book.name = this.firstFormGroup.value.name;
+        book.price_euro = this.firstFormGroup.value.price_euro;
         book.description = this.secondFormGroup.value.description;
         book.cover_picture_path = httpReturn.body['url'];
         book.cover_path = this.templates.cover_pages[this.firstFormGroup.value.value].filename;
@@ -189,7 +191,6 @@ export class BookCreateComponent implements OnInit {
             'instruction_list' : this.calcStepString(this.recipes[recipe.value.recipe_id]),
           });
         }
-
         this.bookService.postBook(book).subscribe( httpReturn => {
           this.router.navigate(['/cook/book']);
         });
