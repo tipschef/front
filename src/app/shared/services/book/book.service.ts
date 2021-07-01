@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ConstantsService} from '../constants/constants.service';
 import {AuthService} from '../auth/auth.service';
@@ -16,7 +16,8 @@ export class BookService {
 
   constructor(private http: HttpClient,
               private constantsService: ConstantsService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+  }
 
 
   getBookTemplate(): Observable<HttpResponse<TemplateList>> {
@@ -35,7 +36,31 @@ export class BookService {
     return this.http.get<Array<CreatedBook>>(url, {headers, observe: 'response'});
   }
 
-  deleteBook(bookId: number): Observable<HttpResponse<any>>{
+  getBookByRecipe(recipeId: number): Observable<HttpResponse<Array<CreatedBook>>> {
+    const url = this.constantsService.getConstant('BOOK_RECIPE');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<CreatedBook>>(url + '/' + recipeId, {headers, observe: 'response'});
+  }
+
+  getBookByUser(username: string): Observable<HttpResponse<Array<CreatedBook>>> {
+    const url = this.constantsService.getConstant('BOOK_USER');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<CreatedBook>>(url + '/' + username, {headers, observe: 'response'});
+  }
+
+  getBookById(bookId: number): Observable<HttpResponse<CreatedBook>> {
+    const url = this.constantsService.getConstant('BOOK');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<CreatedBook>(url + bookId, {headers, observe: 'response'});
+  }
+
+  deleteBook(bookId: number): Observable<HttpResponse<any>> {
     const url = this.constantsService.getConstant('BOOK');
     const headers = {
       Authorization: `Bearer ${this.authService.authData.access_token}`

@@ -18,6 +18,7 @@ import { SearchUserComponent } from './components/search-user/search-user.compon
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../shared/material-module/material.module';
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { SafeHtmlPipe } from './pipe/safe-html.pipe';
     WallComponent,
     SearchUserComponent,
     SafeHtmlPipe,
+    BookDetailComponent
   ],
     exports: [
         RecipeCardComponent,

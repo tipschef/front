@@ -7,6 +7,13 @@
         <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
       </h2>
       <p>{{user.description}}</p>
+
+      <div class="book-pannel" *ngFor="let book of books">
+        <p class="book-name">
+          {{book.title}}
+        </p>
+        <button  mat-button class="right mat-raised-button mat-accent" (click)="redirectBook(book.id)">Voir</button>
+      </div>
     </div>
     <div class="recipe-column display-flex">
       <div class="recipe">

@@ -43,6 +43,9 @@
           </app-recipe-scroll>
         </mat-tab>
         <mat-tab label="Livres">
+          <app-book-card *ngFor="let book of books" [book]="book">
+
+          </app-book-card>
         </mat-tab>
       </mat-tab-group>
     </div>

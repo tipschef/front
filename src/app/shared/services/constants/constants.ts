@@ -25,4 +25,6 @@ export const constants = {
   BOOK_COVER: '/book/cover',
   BOOK_BROKER: '/book/broker/',
   BOOK_CREATOR: '/book/creator/',
+  BOOK_RECIPE: '/book/recipe',
+  BOOK_USER: '/book/user',
 };

@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeService} from '../../../shared/services/recipe/recipe.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Recipe} from '../../../shared/models/recipe';
 import {UserService} from '../../../shared/services/user/user.service';
 import {User} from '../../../shared/models/user.model';
 import {Like} from '../../../shared/models/like';
 import {Comment} from '../../../shared/models/comment';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BookService} from '../../../shared/services/book/book.service';
+import {CreatedBook} from '../../../shared/models/created-book';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -21,21 +23,26 @@ export class RecipeDetailComponent implements OnInit {
   error: any;
   comments: Comment[];
   firstFormGroup: FormGroup;
-
+  recipeId: number;
+  books: CreatedBook[];
 
 
   constructor(private recipeService: RecipeService,
               private userService: UserService,
               private route: ActivatedRoute,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private bookService: BookService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.comments= []
+    this.comments = [];
+    this.recipeId = parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10);
+    this.loadBooks();
     this.firstFormGroup = this.formBuilder.group({
-      comment_content: ["", [Validators.required, Validators.maxLength(350), Validators.minLength(2)]],
+      comment_content: ['', [Validators.required, Validators.maxLength(350), Validators.minLength(2)]],
     });
-    this.recipeService.getRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturn => {
+    this.recipeService.getRecipeById(this.recipeId).subscribe(httpReturn => {
         if (httpReturn && httpReturn.body) {
           this.recipe = httpReturn.body;
           this.userService.getUserById(this.recipe.creator_id).subscribe(httpReturnUser => {
@@ -50,20 +57,27 @@ export class RecipeDetailComponent implements OnInit {
       },
       error => {
         this.error = error.error.detail;
-      }, );
+      }) ;
+  }
+
+  loadBooks(): void {
+    this.bookService.getBookByRecipe(this.recipeId).subscribe(httpReturn => {
+      if (httpReturn && httpReturn.body){
+        this.books = httpReturn.body;
+      }
+    });
   }
 
   update_like(): void {
-    this.recipeService.getLikesRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturnLikes => {
+    this.recipeService.getLikesRecipeById(this.recipeId).subscribe(httpReturnLikes => {
       if (httpReturnLikes && httpReturnLikes.body) {
         this.likes = httpReturnLikes.body;
-        console.log(this.likes.like_count);
       }
     });
   }
 
   like(): void {
-    this.recipeService.likeARecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturnLikes => {
+    this.recipeService.likeARecipeById(this.recipeId).subscribe(httpReturnLikes => {
       if (httpReturnLikes && httpReturnLikes.body) {
         this.update_like();
       }
@@ -72,7 +86,7 @@ export class RecipeDetailComponent implements OnInit {
 
 
   dislike(): void {
-    this.recipeService.dislikeARecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10)).subscribe(httpReturnLikes => {
+    this.recipeService.dislikeARecipeById(this.recipeId).subscribe(httpReturnLikes => {
       if (httpReturnLikes && httpReturnLikes.body) {
         this.update_like();
       }
@@ -84,16 +98,15 @@ export class RecipeDetailComponent implements OnInit {
 
   }
 
-  get_commentary(): void{
+  get_commentary(): void {
     this.recipeService.getCommentsFromRecipeId(this.recipe.id).subscribe(httpReturnComment => {
       if (httpReturnComment && httpReturnComment.body) {
         this.comments = httpReturnComment.body;
-        console.log(this.comments);
       }
     });
   }
 
-  commentARecipeById(content: string): void{
+  commentARecipeById(content: string): void {
     this.recipeService.commentARecipeById(this.recipe.id, content).subscribe(httpReturnComment => {
       if (httpReturnComment && httpReturnComment.body) {
         this.get_commentary();
@@ -103,16 +116,21 @@ export class RecipeDetailComponent implements OnInit {
 
   onSubmit(): void {
     const comment = this.firstFormGroup.value.comment_content;
-    if(comment !== "")
+    if (comment !== '') {
       this.commentARecipeById(comment);
+    }
   }
 
 
-  deleteCommentFromRecipeId(comment_id: number): void{
-    this.recipeService.deleteCommentFromRecipeId(this.recipe.id, comment_id).subscribe(httpReturnComment => {
+  deleteCommentFromRecipeId(commentId: number): void {
+    this.recipeService.deleteCommentFromRecipeId(this.recipe.id, commentId).subscribe(httpReturnComment => {
       if (httpReturnComment && httpReturnComment.body) {
         this.get_commentary();
       }
     });
+  }
+
+  redirectBook(id: number): void {
+    this.router.navigate(['/book/' + id]);
   }
 }
