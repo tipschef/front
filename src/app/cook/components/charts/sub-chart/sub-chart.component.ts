@@ -38,8 +38,9 @@ export class SubChartComponent implements OnInit {
       if (httpReturn && httpReturn.body) {
         this.dashboard = httpReturn.body;
         for( let m of this.dashboard){
-          this.lineChartLabels.push(m.date.toString())
-          this.lineChartData[0].data.push(m.sub)
+          const date = new Date(m.date);
+          this.lineChartLabels.push(('0' + date.getDay()).slice(-2) +"/"+ ('0' + date.getMonth()).slice(-2) + " " + ('0' + date.getHours()).slice(-2) + ":" +('0' + date.getMinutes()).slice(-2));
+          this.lineChartData[0].data.push(m.sub);
         }
 
       }

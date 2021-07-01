@@ -77,7 +77,7 @@
               <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="fill" class="recipe-content-my-comment-text">
                   <textarea matInput placeholder="Ton commentaire..." class="recipe-content-my-comment-area"
-                            formControlName="comment_content" minlength="2"></textarea>*
+                            formControlName="comment_content" minlength="2"></textarea>
                 </mat-form-field>
                 <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit" class="recipe-content-my-comment-button">Poster</button>
               </form>
@@ -87,7 +87,7 @@
               <div class="recipe-content-comment" role="listitem" *ngFor="let comment of comments; let index = index;">
                 <img src="{{comment.user.profile_picture ? comment.user.profile_picture: '/assets/no-image-found.jpg'}}" class="recipe-content-comment-picture">
                 <h4 class="comment-header">{{comment.user.username}}</h4>
-                <p>{{comment.created_date}}</p>
+                <p>{{comment.created_date | date:'dd/mm/yyyy mm:ss'}}</p>
                 <p>{{comment.content}}</p>
                 <button *ngIf="username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
                   <mat-icon>delete</mat-icon>

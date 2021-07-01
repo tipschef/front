@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import {Component, OnInit} from '@angular/core';
+import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
+import {Color, Label} from 'ng2-charts';
 import {Dashboard} from "../../../../shared/models/dashboard";
 import {DashboardService} from "../../../../shared/services/dashboard/dashboard.service";
 
@@ -14,7 +14,7 @@ export class FollowChartComponent implements OnInit {
   public dashboard: Dashboard[]
 
   public lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Follows' },
+    {data: [], label: 'Follows'},
   ]
   public lineChartLabels: Label[] = [];
   public lineChartOptions: ChartOptions = {
@@ -37,10 +37,10 @@ export class FollowChartComponent implements OnInit {
     this.dashboardService.getDashboardData().subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
         this.dashboard = httpReturn.body;
-        console.log(this.dashboard)
-        for( let m of this.dashboard){
-          this.lineChartLabels.push(m.date.toString())
-          this.lineChartData[0].data.push(m.follower)
+        for (let m of this.dashboard) {
+          const date = new Date(m.date);
+          this.lineChartLabels.push(('0' + date.getDay()).slice(-2) +"/"+ ('0' + date.getMonth()).slice(-2) + " " + ('0' + date.getHours()).slice(-2) + ":" +('0' + date.getMinutes()).slice(-2));
+          this.lineChartData[0].data.push(m.follower);
         }
 
       }
