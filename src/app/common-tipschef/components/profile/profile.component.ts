@@ -26,7 +26,8 @@ export class ProfileComponent implements OnInit {
               private route: Router,
               private bookService: BookService,
               private userService: UserService) {
-    this.route.routeReuseStrategy.shouldReuseRoute = function () {
+    // tslint:disable-next-line:only-arrow-functions typedef
+    this.route.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
     };
   }
@@ -90,10 +91,10 @@ export class ProfileComponent implements OnInit {
   }
 
   subscribeUser(): void {
-    this.router.navigate(['/subscribe/' + this.username]);
+    this.route.navigate(['/subscribe/' + this.username]);
   }
 
   giftSub(): void {
-    this.router.navigate(['/gift-subscription/' + this.username]);
+    this.route.navigate(['/gift-subscription/' + this.username]);
   }
 }
