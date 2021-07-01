@@ -23,15 +23,12 @@
       <div class="information-div">
         <h2 class="username-div" (click)="redirectUser(user.username)">
           {{user.username}}
+          <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
         </h2>
         <p class="description-div">
           {{!!user.description? user.description : 'Aucune description'}}
         </p>
         <mat-grid-list cols="4" rowHeight="25px">
-          <mat-grid-tile
-            [colspan]="1">
-            {{user.subscribers}} Abonné{{user.subscribers>1 ? 's':''}}
-          </mat-grid-tile>
           <mat-grid-tile
             [colspan]="1">
             {{user.followers}} Follower{{user.followers>1 ? 's':''}}

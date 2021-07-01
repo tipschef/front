@@ -24,3 +24,7 @@ input.example-right-align {
 .hidden {
   display: none !important;
 }
+
+.example-container-text{
+  min-width: 340px;
+}

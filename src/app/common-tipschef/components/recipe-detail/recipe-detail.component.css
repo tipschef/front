@@ -174,3 +174,11 @@ hr.solid {
 .book-name {
   font-size: 15px;
 }
+
+
+.recipe-content-my-comment-text{
+  min-width: 90%;
+}
+.recipe-content-my-comment-button{
+  min-width: 10%;
+}

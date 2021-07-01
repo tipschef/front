@@ -6,7 +6,8 @@ import {UserService} from '../../../shared/services/user/user.service';
 import {User} from '../../../shared/models/user.model';
 import {Like} from '../../../shared/models/like';
 import {Comment} from '../../../shared/models/comment';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../../shared/services/auth/auth.service";
 import {BookService} from '../../../shared/services/book/book.service';
 import {CreatedBook} from '../../../shared/models/created-book';
 
@@ -18,7 +19,7 @@ import {CreatedBook} from '../../../shared/models/created-book';
 export class RecipeDetailComponent implements OnInit {
 
   recipe: Recipe;
-  user: User;
+  user_creator: User;
   likes: Like;
   error: any;
   comments: Comment[];
@@ -31,6 +32,7 @@ export class RecipeDetailComponent implements OnInit {
               private userService: UserService,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
+              private authService: AuthService,
               private bookService: BookService,
               private router: Router) {
   }
@@ -47,7 +49,7 @@ export class RecipeDetailComponent implements OnInit {
           this.recipe = httpReturn.body;
           this.userService.getUserById(this.recipe.creator_id).subscribe(httpReturnUser => {
             if (httpReturnUser && httpReturnUser.body) {
-              this.user = httpReturnUser.body;
+              this.user_creator = httpReturnUser.body;
             }
           });
           this.update_like();
@@ -132,5 +134,12 @@ export class RecipeDetailComponent implements OnInit {
 
   redirectBook(id: number): void {
     this.router.navigate(['/book/' + id]);
+  }
+
+  get username(): string {
+    if (this.authService.userRoles && this.authService.userRoles.username){
+      return this.authService.userRoles.username;
+    }
+    return '';
   }
 }

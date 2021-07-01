@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {CookComponent} from './cook.component';
 import {AuthGuard} from '../common-tipschef/guard/auth.guard';
 import {RecipeListComponent} from './components/recipe-list/recipe-list.component';
@@ -57,12 +56,7 @@ const routes: Routes = [
         component : BankAccountInformationComponent,
         canActivate: [AuthGuard],
         data: {roles: ['partner']}
-      },
-      {
-        path: '**',
-        component : DashboardComponent,
-        canActivate: [AuthGuard]
-      },
+      }
     ]
   }
 ];

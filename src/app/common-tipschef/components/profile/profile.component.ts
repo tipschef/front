@@ -21,16 +21,18 @@ export class ProfileComponent implements OnInit {
   pagination: Pagination;
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private recipeService: RecipeService,
-              private userService: UserService,
+              private route: Router,
               private bookService: BookService,
-              private router: Router) {
-
+              private userService: UserService) {
+    this.route.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
   }
 
   ngOnInit(): void {
-    this.username = this.route.snapshot.paramMap.get('username');
+    this.username = this.activatedRoute.snapshot.paramMap.get('username');
     this.loadUser();
     this.loadBooks();
     this.pagination = {

@@ -39,7 +39,7 @@ export class BankAccountInformationComponent implements OnInit {
         bank_email: ['', [Validators.required, Validators.email]],
         bank_city: ['', [Validators.required]],
         bank_country: ['', [Validators.required]],
-        bank_postal_code: ['', [Validators.required]],
+        bank_postal_code: ['', [Validators.required, Validators.pattern("^\d+$")]],
         bank_address: ['', [Validators.required]],
         bank_birthdate: ['', [Validators.required]],
         bank_gender: ['', [Validators.required]],
@@ -53,41 +53,43 @@ export class BankAccountInformationComponent implements OnInit {
 
 
   onSubmit() {
-    console.log()
-    const birthdate = this.firstFormGroup.value.bank_birthdate.getFullYear() + "-" + this.firstFormGroup.value.bank_birthdate.getMonth() + "-" + this.firstFormGroup.value.bank_birthdate.getDate();
-    const phone = this.firstFormGroup.value.bank_phone[0] == "0" ? "+33" + this.firstFormGroup.value.bank_phone : this.firstFormGroup.value.bank_phone;
-    this.accountPayment.first_name = this.firstFormGroup.value.bank_firstname;
-    this.accountPayment.last_name = this.firstFormGroup.value.bank_lastname;
-    this.accountPayment.email = this.firstFormGroup.value.bank_email;
-    this.accountPayment.address_city = this.firstFormGroup.value.bank_city;
-    this.accountPayment.address_country = this.firstFormGroup.value.bank_country;
-    this.accountPayment.address_postal_code = this.firstFormGroup.value.bank_postal_code;
-    this.accountPayment.address_line1 = this.firstFormGroup.value.bank_address;
-    this.accountPayment.birthdate = birthdate;
-    this.accountPayment.gender = this.firstFormGroup.value.bank_gender;
-    this.accountPayment.phone = phone;
+    if ( this.firstFormGroup.valid){
+      const birthdate = this.firstFormGroup.value.bank_birthdate.getFullYear() + "-" + this.firstFormGroup.value.bank_birthdate.getMonth() + "-" + this.firstFormGroup.value.bank_birthdate.getDate();
+      const phone = this.firstFormGroup.value.bank_phone[0] == "0" ? "+33" + this.firstFormGroup.value.bank_phone : this.firstFormGroup.value.bank_phone;
+      this.accountPayment.first_name = this.firstFormGroup.value.bank_firstname;
+      this.accountPayment.last_name = this.firstFormGroup.value.bank_lastname;
+      this.accountPayment.email = this.firstFormGroup.value.bank_email;
+      this.accountPayment.address_city = this.firstFormGroup.value.bank_city;
+      this.accountPayment.address_country = this.firstFormGroup.value.bank_country;
+      this.accountPayment.address_postal_code = this.firstFormGroup.value.bank_postal_code;
+      this.accountPayment.address_line1 = this.firstFormGroup.value.bank_address;
+      this.accountPayment.birthdate = birthdate;
+      this.accountPayment.gender = this.firstFormGroup.value.bank_gender;
+      this.accountPayment.phone = phone;
 
-    this.paymentService.uploadId(this.idRecto['data']).subscribe(httpReturnRecto => {
-      if (httpReturnRecto && httpReturnRecto.body) {
-        this.accountPayment.id_recto = httpReturnRecto.body.id;
-        this.paymentService.uploadId(this.idVerso['data']).subscribe(httpReturnVerso => {
-          if (httpReturnVerso && httpReturnVerso.body) {
-            this.accountPayment.id_verso = httpReturnVerso.body.id;
-            this.paymentService.createAccount(this.accountPayment).subscribe(httpReturnAccount => {
-              if (httpReturnAccount && httpReturnAccount.body) {
-                console.log('Account created');
-                this.paymentService.createBankAccount(this.firstFormGroup.value.bank_iban).subscribe(httpReturnBankAccount => {
-                  if (httpReturnBankAccount && httpReturnBankAccount.body) {
-                    console.log('creating bank account');
+      this.paymentService.uploadId(this.idRecto['data']).subscribe(httpReturnRecto => {
+        if (httpReturnRecto && httpReturnRecto.body) {
+          this.accountPayment.id_recto = httpReturnRecto.body.id;
+          this.paymentService.uploadId(this.idVerso['data']).subscribe(httpReturnVerso => {
+            if (httpReturnVerso && httpReturnVerso.body) {
+              this.accountPayment.id_verso = httpReturnVerso.body.id;
+              this.paymentService.createAccount(this.accountPayment).subscribe(httpReturnAccount => {
+                if (httpReturnAccount && httpReturnAccount.body) {
+                  console.log('Account created');
+                  this.paymentService.createBankAccount(this.firstFormGroup.value.bank_iban).subscribe(httpReturnBankAccount => {
+                    if (httpReturnBankAccount && httpReturnBankAccount.body) {
+                      console.log('creating bank account');
 
-                  }
-                })
-              }
-            });
-          }
-        })
-      }
-    })
+                    }
+                  })
+                }
+              });
+            }
+          })
+        }
+      })
+
+    }
 
   }
 

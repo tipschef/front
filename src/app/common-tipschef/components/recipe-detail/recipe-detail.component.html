@@ -1,13 +1,12 @@
-<section *ngIf="!!recipe && !!user">
+<section *ngIf="!!recipe && !!user_creator">
   <div class="display-flex">
     <div class="user-column center">
-      <img src="{{user.profile_url}}" class="profile-picture" routerLink="/{{user.username}}" style="cursor:pointer">
-      <h2 routerLink="/{{user.username}}" style="cursor:pointer">
-        {{user.username}}
-        <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
+      <img src="{{user_creator.profile_url}}" class="profile-picture" routerLink="/{{user_creator.username}}" style="cursor:pointer">
+      <h2 routerLink="/{{user_creator.username}}" style="cursor:pointer">
+        {{user_creator.username}}
+        <mat-icon *ngIf="user_creator.is_partner">verified_user</mat-icon>
       </h2>
-      <p>{{user.description}}</p>
-
+      <p>{{user_creator.description}}</p>
       <div class="book-pannel" *ngFor="let book of books">
         <p class="book-name">
           {{book.title}}
@@ -74,21 +73,25 @@
           <mat-card-content class="recipe-content-commentary">
             <h3 class="recipe-title">Commentaires ({{comments.length}})</h3>
             <div class="recipe-content-my-comment">
-              <img src="{{user.profile_url}}" class="recipe-content-comment-picture">
-              <h4 class="comment-header">{{user.username}}</h4>
+              <h4 class="comment-header">Poste ton commentaire !</h4>
               <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
-                <textarea placeholder="Ton commentaire..." class="recipe-content-my-comment-area" formControlName="comment_content" minlength="2"></textarea>
-                <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit">Poster</button>
+                <mat-form-field appearance="fill" class="recipe-content-my-comment-text">
+                  <textarea matInput placeholder="Ton commentaire..." class="recipe-content-my-comment-area"
+                            formControlName="comment_content" minlength="2"></textarea>*
+                </mat-form-field>
+                <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit" class="recipe-content-my-comment-button">Poster</button>
               </form>
             </div>
 
-            <div class="recipe-content-comment-scroll"  *ngIf="comments.length > 0">
+            <div class="recipe-content-comment-scroll" *ngIf="comments.length > 0">
               <div class="recipe-content-comment" role="listitem" *ngFor="let comment of comments; let index = index;">
-                <img src="{{comment.user.profile_picture}}" class="recipe-content-comment-picture">
+                <img src="{{comment.user.profile_picture ? comment.user.profile_picture: '/assets/no-image-found.jpg'}}" class="recipe-content-comment-picture">
                 <h4 class="comment-header">{{comment.user.username}}</h4>
                 <p>{{comment.created_date}}</p>
                 <p>{{comment.content}}</p>
-                <button  *ngIf="user.username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)"><mat-icon>delete</mat-icon></button>
+                <button *ngIf="user_creator.username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
 
                 <hr class="solid">
               </div>
