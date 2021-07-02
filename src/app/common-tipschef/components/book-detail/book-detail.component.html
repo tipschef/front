@@ -1,4 +1,4 @@
-<section *ngIf="!!book && !!user" >
+<section *ngIf="!!book && !!user">
   <div class="display-flex" style="min-height: 100vh">
     <div class="user-column center">
       <img src="{{user.profile_url}}" class="profile-picture" routerLink="/{{user.username}}" style="cursor:pointer">
@@ -17,7 +17,17 @@
             <mat-card-title>
               <h1 style="width: 100%;">
                 {{book.title}}
-                <button mat-button  class="mat-raised-button mat-accent" style="float: right; position: absolute; right: 25px" (click)="buyBook()">Acheter</button>
+                <button mat-button *ngIf="!isLoading && !bought" class="mat-raised-button mat-accent"
+                        style="float: right; position: absolute; right: 25px" (click)="buyBook()">Acheter
+                </button>
+                <button mat-button *ngIf="isLoading  && !bought" class="mat-raised-button mat-accent mat-button-disabled"
+                        style="float: right; position: absolute; right: 25px">
+                Achat en cours...
+                </button>
+                <button mat-button *ngIf="bought" class="mat-raised-button mat-accent button-bought"
+                        style="float: right; position: absolute; right: 25px" (click)="redirect()">
+                  Déja acheté
+                </button>
               </h1>
             </mat-card-title>
           </mat-card-header>

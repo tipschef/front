@@ -12,6 +12,7 @@ import {SearchUserComponent} from './common-tipschef/components/search-user/sear
 import {BookDetailComponent} from './common-tipschef/components/book-detail/book-detail.component';
 import {TipschefSubscriptionComponent} from './common-tipschef/components/tipschef-subscription/tipschef-subscription.component';
 import {GiftSubscriptionComponent} from './common-tipschef/components/gift-subscription/gift-subscription.component';
+import {BookPurchaseComponent} from "./common-tipschef/components/book-purchase/book-purchase.component";
 
 const routes: Routes = [
   {
@@ -33,6 +34,12 @@ const routes: Routes = [
   {
     path: 'liked-recipe',
     component: LikedRecipeComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'book-purchase',
+    component: BookPurchaseComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },
