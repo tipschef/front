@@ -13,6 +13,7 @@ import {BookDetailComponent} from './common-tipschef/components/book-detail/book
 import {TipschefSubscriptionComponent} from './common-tipschef/components/tipschef-subscription/tipschef-subscription.component';
 import {GiftSubscriptionComponent} from './common-tipschef/components/gift-subscription/gift-subscription.component';
 import {BookPurchaseComponent} from "./common-tipschef/components/book-purchase/book-purchase.component";
+import {SubscriptionListComponent} from './common-tipschef/components/subscription-list/subscription-list.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,12 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchUserComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'subscriptions',
+    component: SubscriptionListComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },

@@ -21,6 +21,7 @@ import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { TipschefSubscriptionComponent } from './components/tipschef-subscription/tipschef-subscription.component';
 import { GiftSubscriptionComponent } from './components/gift-subscription/gift-subscription.component';
+import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { GiftSubscriptionComponent } from './components/gift-subscription/gift-s
     SafeHtmlPipe,
     BookDetailComponent,
     TipschefSubscriptionComponent,
-    GiftSubscriptionComponent
+    GiftSubscriptionComponent,
+    SubscriptionListComponent
   ],
     exports: [
         RecipeCardComponent,
