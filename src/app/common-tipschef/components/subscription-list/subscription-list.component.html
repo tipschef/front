@@ -4,7 +4,7 @@
       <div class="content-pannel">
         <div class="subscription-card" *ngFor="let subscription of ongoingSubscription">
           <div class="subscription-card-header">
-            <p style="font-size: 24px; margin: 0; padding: 10px"><img src="{{subscription.subscribed_icon? subscription.subscribed_icon : '/assets/no-image-found.jpg'}}" alt=""
+            <p style="font-size: 24px; margin: 0; padding: 10px; cursor:pointer"   routerLink="/{{subscription.subscribed_username}}"><img src="{{subscription.subscribed_icon? subscription.subscribed_icon : '/assets/no-image-found.jpg'}}" alt=""
                      class="profile-picture"> {{subscription.subscribed_username}}<mat-icon >verified_user</mat-icon></p>
           </div>
           <div style="margin-top: 10px">
@@ -25,7 +25,7 @@
     <mat-tab label="Abonnements offerts">
       <div class="subscription-card" *ngFor="let subscription of giftedSubscription">
         <div class="subscription-card-header">
-          <p style="font-size: 24px; margin: 0; padding: 10px"><img src="{{subscription.subscribed_icon? subscription.subscribed_icon : '/assets/no-image-found.jpg'}}" alt=""
+          <p style="font-size: 24px; margin: 0; padding: 10px; cursor:pointer"   routerLink="/{{subscription.subscribed_username}}"><img src="{{subscription.subscribed_icon? subscription.subscribed_icon : '/assets/no-image-found.jpg'}}" alt=""
                                                                     class="profile-picture"> {{subscription.subscribed_username}}<mat-icon >verified_user</mat-icon></p>
         </div>
         <div style="margin-top: 10px">
@@ -48,7 +48,7 @@
     <mat-tab label="Abonnements expirés">
       <div class="subscription-card" *ngFor="let subscription of expiredSubscription">
         <div class="subscription-card-header">
-          <p style="font-size: 24px; margin: 0; padding: 10px"><img src="{{subscription.subscribed_icon? subscription.subscribed_icon : '/assets/no-image-found.jpg'}}" alt=""
+          <p style="font-size: 24px; margin: 0; padding: 10px; cursor:pointer"  routerLink="/{{subscription.subscribed_username}}"><img src="{{subscription.subscribed_icon? subscription.subscribed_icon : '/assets/no-image-found.jpg'}}" alt=""
                                                                     class="profile-picture"> {{subscription.subscribed_username}}<mat-icon >verified_user</mat-icon></p>
         </div>
         <div style="margin-top: 10px">

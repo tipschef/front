@@ -36,7 +36,7 @@
 
     <ng-container matColumnDef="created_date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de création </th>
-      <td mat-cell *matCellDef="let recipe"> {{recipe.created_date.split('T')[0]}} </td>
+      <td mat-cell *matCellDef="let recipe"> {{recipe.created_date| date:'dd/MM/YYYY'}} </td>
     </ng-container>created_date
 
     <ng-container matColumnDef="actions">

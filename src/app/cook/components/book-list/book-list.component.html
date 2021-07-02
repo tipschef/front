@@ -1,11 +1,13 @@
-<button mat-raised-button routerLink="/cook/book-create">Créer un livre</button>
+<button mat-raised-button routerLink="/cook/book-create" *ngIf="books.length < 30">Créer un livre</button>
 <br>
 
 <mat-form-field>
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Livre">
 </mat-form-field>
-
+<div>
+  Vous ne pouvez que posséder 30 livres de recette en simultanée.
+</div>
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="this.dataSource" class="mat-elevation-z8" matSort>
 

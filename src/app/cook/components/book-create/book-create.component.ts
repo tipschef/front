@@ -159,7 +159,7 @@ export class BookCreateComponent implements OnInit {
     let min = totalMin % 60;
     let hour = (totalMin - min ) / 60;
     if (hour !== 0){
-      return hour + ' H '+ min + 'MIN';
+      return hour + ' H '+ ("0" + min).slice(-2) + 'MIN';
     }else{
       return min + 'MIN';
     }

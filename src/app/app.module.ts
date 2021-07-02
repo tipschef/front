@@ -21,12 +21,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
-import {ChartsModule} from "ng2-charts";
+import {ChartsModule} from 'ng2-charts';
 import { LikeChartComponent } from './cook/components/charts/like-chart/like-chart.component';
 import { CardComponent } from './cook/components/card/card.component';
 import { SubChartComponent } from './cook/components/charts/sub-chart/sub-chart.component';
 import { FollowChartComponent } from './cook/components/charts/follow-chart/follow-chart.component';
 import { BookPurchaseComponent } from './common-tipschef/components/book-purchase/book-purchase.component';
+
 
 @NgModule({
   declarations: [
