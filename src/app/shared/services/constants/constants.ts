@@ -31,4 +31,6 @@ export const constants = {
   BOOK_CREATOR: '/book/creator/',
   BOOK_RECIPE: '/book/recipe',
   BOOK_USER: '/book/user',
+  BOOK_PURCHASE: '/book/buy',
+  BOOK_PURCHASE_CHECK: '/book/check',
 };

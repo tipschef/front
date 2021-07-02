@@ -32,7 +32,11 @@
   </button>
   <button mat-menu-item routerLink="/liked-recipe">
     <mat-icon>favorite</mat-icon>
-    <span>Votre recette aimées</span>
+    <span>Vos recettes favorites</span>
+  </button>
+  <button mat-menu-item routerLink="/book-purchase">
+    <mat-icon>library_books</mat-icon>
+    <span>Vos livres achetés</span>
   </button>
   <button mat-menu-item (click)="disconnect()" *ngIf="isLoggedIn">
     <mat-icon>logout</mat-icon>

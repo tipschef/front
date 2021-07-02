@@ -32,10 +32,10 @@ export class PaymentInformationComponent implements OnInit {
 
     this.payment_method = {} as PaymentMethod
     this.firstFormGroup = this.formBuilder.group({
-      card_number: ['', [Validators.required, Validators.pattern("^\d+$")]],
+      card_number: ['', [Validators.required, Validators.pattern('^\\d+$')]],
       card_month: ['', [Validators.required]],
       card_year: ['', [Validators.required]],
-      card_cvd: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern("^\d+$")]],
+      card_cvd: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern("^\\d+$")]],
     });
   }
 

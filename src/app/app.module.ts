@@ -26,6 +26,7 @@ import { LikeChartComponent } from './cook/components/charts/like-chart/like-cha
 import { CardComponent } from './cook/components/card/card.component';
 import { SubChartComponent } from './cook/components/charts/sub-chart/sub-chart.component';
 import { FollowChartComponent } from './cook/components/charts/follow-chart/follow-chart.component';
+import { BookPurchaseComponent } from './common-tipschef/components/book-purchase/book-purchase.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FollowChartComponent } from './cook/components/charts/follow-chart/foll
     LikeChartComponent,
     CardComponent,
     SubChartComponent,
-    FollowChartComponent
+    FollowChartComponent,
+    BookPurchaseComponent
   ],
   imports: [
     BrowserModule,
