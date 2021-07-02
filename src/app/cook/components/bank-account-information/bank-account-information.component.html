@@ -1,4 +1,8 @@
-<div *ngIf="!!accountPayment">
+<div class="center" *ngIf="isLoading">
+  <img src="/assets/loader-2_food.gif" alt="loading-gif">
+</div>
+
+<div *ngIf="!isLoading">
   <h1>Vos informations bancaire</h1>
 
   <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()" *ngIf="show == false">
