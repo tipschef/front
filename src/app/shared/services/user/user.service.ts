@@ -8,6 +8,7 @@ import {AuthService} from '../auth/auth.service';
 import {CreateSubscription} from '../../models/create-subscription';
 import {Tier} from '../../models/tier';
 import {GiftSubscription} from '../../models/gift-subscription';
+import {CreatedSubscription} from '../../models/created-subscription';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,30 @@ export class UserService {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
     return this.http.post<any>(url, createSubscription, {headers, observe: 'response'});
+  }
+
+  getOngoingSubscription(): Observable<HttpResponse<Array<CreatedSubscription>>> {
+    const url = this.constantsService.getConstant('USER_SUBSCRIPTION_ONGOING');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<CreatedSubscription>>(url, {headers, observe: 'response'});
+  }
+
+  getGiftedSubscription(): Observable<HttpResponse<Array<CreatedSubscription>>> {
+    const url = this.constantsService.getConstant('USER_SUBSCRIPTION_GIFTED');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<CreatedSubscription>>(url, {headers, observe: 'response'});
+  }
+
+  getExpiredSubscription(): Observable<HttpResponse<Array<CreatedSubscription>>> {
+    const url = this.constantsService.getConstant('USER_SUBSCRIPTION_EXPIRED');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<CreatedSubscription>>(url, {headers, observe: 'response'});
   }
 
   updateUser(user: User): Observable<HttpResponse<User>> {
