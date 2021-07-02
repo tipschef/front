@@ -1,5 +1,25 @@
-<div class="recipes-card">
-  <h1>Accueil</h1>
-  <app-recipe-scroll (loadData)="loadData()" [pagination]="pagination">
-  </app-recipe-scroll>
+<div class="display-flex">
+  <div style="border-right: 1px solid #ccc;" *ngIf="highlighted.length != 0">
+    <div class="highlight-title"><h1>Cuisiniers du moment</h1></div>
+
+    <div class="user-column center">
+      <div class="highlight-pannel" *ngFor="let hightlighted_user of highlighted"
+           (click)="redirect(hightlighted_user.username)">
+        <img
+          src="{{hightlighted_user.profile_picture? hightlighted_user.profile_picture : '/assets/no-image-found.jpg'}}"
+          class="profile-picture"
+          routerLink="">
+
+        <p class="highlight-name">
+          {{hightlighted_user.username}}
+          <mat-icon *ngIf="hightlighted_user.is_partner">verified_user</mat-icon>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="recipes-card">
+    <h1>Accueil</h1>
+    <app-recipe-scroll (loadData)="loadData()" [pagination]="pagination">
+    </app-recipe-scroll>
+  </div>
 </div>

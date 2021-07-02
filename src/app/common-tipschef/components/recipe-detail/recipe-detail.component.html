@@ -86,7 +86,10 @@
             <div class="recipe-content-comment-scroll" *ngIf="comments.length > 0">
               <div class="recipe-content-comment" role="listitem" *ngFor="let comment of comments; let index = index;">
                 <img src="{{comment.user.profile_picture ? comment.user.profile_picture: '/assets/no-image-found.jpg'}}" class="recipe-content-comment-picture">
-                <h4 class="comment-header">{{comment.user.username}}</h4>
+                <h4 class="comment-header">
+                  {{comment.user.username}}
+                  <mat-icon *ngIf="comment.user.is_partner">verified_user</mat-icon>
+                </h4>
                 <p>{{comment.created_date | date:'dd/mm/yyyy mm:ss'}}</p>
                 <p>{{comment.content}}</p>
                 <button *ngIf="username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
