@@ -26,10 +26,6 @@ export class ProfileComponent implements OnInit {
               private route: Router,
               private bookService: BookService,
               private userService: UserService) {
-    // tslint:disable-next-line:only-arrow-functions typedef
-    this.route.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
   }
 
   ngOnInit(): void {

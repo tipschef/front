@@ -19,8 +19,7 @@ export class RecipeCardComponent implements OnInit {
     if (this.recipe.can_be_seen){
       this.router.navigate(['/recipe/' + this.recipe.id]);
     }else {
-      // TODO : Redirection vers la page de subscription
-      this.router.navigate(['/home/' ]);
+      this.router.navigate(['/subscribe/' + this.recipe.creator_username ]);
     }
   }
 
