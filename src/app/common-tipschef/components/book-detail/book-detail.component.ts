@@ -73,6 +73,9 @@ export class BookDetailComponent implements OnInit {
     }, error =>
     {
       this.isLoading = false;
+      if(error.status == 400){
+        this.router.navigate(['/cook/payment-information']);
+      }
     });
   }
 
