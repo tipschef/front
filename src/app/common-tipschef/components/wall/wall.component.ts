@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../shared/models/user.model';
 import {Pagination} from '../../../shared/models/pagination';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RecipeService} from '../../../shared/services/recipe/recipe.service';
 import {UserService} from '../../../shared/services/user/user.service';
+import {HighlightService} from "../../../shared/services/highlight/highlight.service";
 
 @Component({
   selector: 'app-wall',
@@ -13,15 +14,19 @@ import {UserService} from '../../../shared/services/user/user.service';
 export class WallComponent implements OnInit {
 
   user: User;
+  highlighted: User[]
 
   pagination: Pagination;
 
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService) {
+              private recipeService: RecipeService,
+              private highlightService: HighlightService,
+              private router: Router) {
   }
 
 
   ngOnInit(): void {
+    this.highlighted = []
     this.pagination = {
       items: [],
       isLoading: false,
@@ -41,5 +46,18 @@ export class WallComponent implements OnInit {
       this.pagination.items = [...this.pagination.items, ...httpReturn.body];
       this.pagination.isLoading = false;
     });
+
+    this.highlightService.getHighlighted().subscribe(httpReturn => {
+      if (httpReturn && httpReturn.body) {
+        this.highlighted = httpReturn.body;
+      }
+    });
   }
+
+  redirect(username: string): void {
+      this.router.navigate(['/'+ username]);
+  }
+
+
+
 }
