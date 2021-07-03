@@ -22,6 +22,7 @@ import { BookDetailComponent } from './components/book-detail/book-detail.compon
 import { TipschefSubscriptionComponent } from './components/tipschef-subscription/tipschef-subscription.component';
 import { GiftSubscriptionComponent } from './components/gift-subscription/gift-subscription.component';
 import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
+import { FollowComponent } from './components/follow/follow.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SubscriptionListComponent } from './components/subscription-list/subscr
     BookDetailComponent,
     TipschefSubscriptionComponent,
     GiftSubscriptionComponent,
-    SubscriptionListComponent
+    SubscriptionListComponent,
+    FollowComponent
   ],
     exports: [
         RecipeCardComponent,
