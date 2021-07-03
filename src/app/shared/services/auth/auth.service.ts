@@ -7,6 +7,7 @@ import {AuthData} from '../../models/auth-data.model';
 import {UserRoles} from '../../models/user-roles';
 import {map} from 'rxjs/operators';
 import {LocalStorageService} from '../local-storage/local-storage.service';
+import {rejects} from 'assert';
 
 @Injectable({
   providedIn: 'root'
@@ -43,13 +44,16 @@ export class AuthService {
     }).pipe(map(user => {
       this.authData = user.body;
       this.localStorageService.set('currentUser', user.body);
-      this.updateUserRoles();
+      this.updateUserRoles().then();
     }));
   }
 
-  updateUserRoles(): void {
-    this.getUserRoles().subscribe(httpResponse => {
-      this.userRoles = httpResponse.body;
+  updateUserRoles(): Promise<unknown> {
+    return new Promise((resolve, reject) => {
+      this.getUserRoles().subscribe(httpResponse => {
+        this.userRoles = httpResponse.body;
+        resolve(true);
+      });
     });
   }
 

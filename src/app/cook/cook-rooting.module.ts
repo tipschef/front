@@ -31,12 +31,14 @@ const routes: Routes = [
       {
         path: 'book',
         component : BookListComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: {roles: ['partner']}
       },
       {
         path: 'book-create',
         component : BookCreateComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: {roles: ['partner']}
       },
       {
         path: 'recipe-create',

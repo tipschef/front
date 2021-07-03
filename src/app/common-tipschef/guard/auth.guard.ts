@@ -27,42 +27,41 @@ export class AuthGuard implements CanActivate {
       if (!authData) {
         if (localStorageUser != null) {
           this.authService.authData = localStorageUser;
-          this.authService.updateUserRoles();
         } else {
           this.router.navigate(['/log-in'], {queryParams: {returnUrl: state.url}});
           resolve(false);
         }
       }
 
-      if (roles === undefined) {
-        resolve(true);
-      }
+      this.authService.updateUserRoles().then(() => {
+        if (roles === undefined) {
+          resolve(true);
+        }
 
-      this.authService.getUserRoles().subscribe(httpResponse => {
+        this.authService.getUserRoles().subscribe(httpResponse => {
 
-          if (roles !== undefined) {
-            // tslint:disable-next-line:forin
-            for (const role of roles) {
-              if (role === 'cook' && !httpResponse.body.is_cook) {
-                resolve(false);
+            if (roles !== undefined) {
+              // tslint:disable-next-line:forin
+              for (const role of roles) {
+                if (role === 'cook' && !httpResponse.body.is_cook) {
+                  resolve(false);
+                }
+                if (role === 'admin' && !httpResponse.body.is_admin) {
+                  resolve(false);
+                }
+                if (role === 'partner' && !httpResponse.body.is_partner) {
+                  resolve(false);
+                }
               }
-              if (role === 'admin' && !httpResponse.body.is_admin) {
-                resolve(false);
-              }
-              if (role === 'partner' && !httpResponse.body.is_partner) {
-                resolve(false);
-              }
+              resolve(true);
             }
-            resolve(true);
-          }
-          resolve(false);
-        },
-        error => {
-          reject(false);
-        });
+            resolve(false);
+          },
+          error => {
+            reject(false);
+          });
+      });
     });
-
-
   }
 
 }
