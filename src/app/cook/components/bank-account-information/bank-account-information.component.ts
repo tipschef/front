@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../shared/services/auth/auth.service';
 import {PaymentService} from '../../../shared/services/payment/payment.service';
 import {AccountPayment} from '../../../shared/models/account_payment';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bank-account-information',
@@ -21,7 +23,8 @@ export class BankAccountInformationComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private paymentService: PaymentService) {
+              private paymentService: PaymentService,
+              private snackBar: MatSnackBar) {
     this.maxDate = new Date(new Date().getFullYear() - 13, 0, 1);
   }
 
@@ -109,7 +112,12 @@ export class BankAccountInformationComponent implements OnInit {
         continue;
       }
 
+
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
@@ -133,6 +141,10 @@ export class BankAccountInformationComponent implements OnInit {
       }
 
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable

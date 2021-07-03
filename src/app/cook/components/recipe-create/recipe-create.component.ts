@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Step} from '../../../shared/models/step';
 import {Media} from '../../../shared/models/media';
 import {AuthService} from '../../../shared/services/auth/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-recipe-create',
@@ -25,7 +26,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
   ingredients: FormGroup[];
   steps: FormGroup[];
   is_update: boolean;
-  isDataAvailable: boolean= false;
+  isDataAvailable: boolean = false;
   mediaToDelete: Media[];
 
   is_loading: boolean;
@@ -39,7 +40,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
               private router: Router,
               private recipeService: RecipeService,
               private authService: AuthService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private snackBar: MatSnackBar) {
 
   }
 
@@ -63,9 +65,9 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
       this.recipeCookingTypes = httpResponse.body;
     });
 
-    if (this.is_update){
+    if (this.is_update) {
       this.init_update();
-    }else{
+    } else {
       this.init_create();
     }
   }
@@ -78,7 +80,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     this.recipeService.getRecipeById(parseInt(this.route.snapshot.paramMap.get('recipe_id'))).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
         this.recipe = httpReturn.body;
-        if (this.recipe.creator_id != this.authService.userRoles.id){
+        if (this.recipe.creator_id != this.authService.userRoles.id) {
           this.router.navigate(['/cook/recipe']);
         }
         this.fill_form();
@@ -86,7 +88,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     });
   }
 
-  fill_form(): void{
+  fill_form(): void {
     this.firstFormGroup = this.formBuilder.group({
       min_tier: [this.recipe.min_tier, [Validators.required, Validators.min(0), Validators.max(3)]],
       name: [this.recipe.name, [Validators.required, Validators.maxLength(155)]],
@@ -108,7 +110,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
       cost: [this.recipe.cost, [Validators.required]],
     });
 
-    for (let ingredient of this.recipe.ingredients){
+    for (let ingredient of this.recipe.ingredients) {
       this.ingredients.push(this.formBuilder.group({
         quantity: [ingredient.quantity],
         ingredient_unit: [ingredient.ingredient_unit, Validators.required],
@@ -118,37 +120,37 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
     this.recipe.steps.sort(this.compare);
 
-    for (let step of this.recipe.steps){
+    for (let step of this.recipe.steps) {
       this.steps.push(this.formBuilder.group({
         content: [step.content, Validators.required],
       }));
     }
 
-    for (let media of this.recipe.medias){
+    for (let media of this.recipe.medias) {
       this.medias.push({'data': media, 'path': media.path, 'is_created': true});
     }
 
-    if (!!this.recipe.thumbnail){
-      this.thumbnail= {'data': this.recipe.thumbnail, 'path': this.recipe.thumbnail.path, 'is_created': true};
+    if (!!this.recipe.thumbnail) {
+      this.thumbnail = {'data': this.recipe.thumbnail, 'path': this.recipe.thumbnail.path, 'is_created': true};
     }
 
-    if (!!this.recipe.video){
-      this.video= {'data': this.recipe.video, 'path': this.recipe.video.path, 'is_created': true};
+    if (!!this.recipe.video) {
+      this.video = {'data': this.recipe.video, 'path': this.recipe.video.path, 'is_created': true};
     }
     this.isDataAvailable = true;
   }
 
-  compare(a: Step, b: Step){
-    if( a.order < b.order){
+  compare(a: Step, b: Step) {
+    if (a.order < b.order) {
       return -1;
     }
-    if( a.order > b.order){
+    if (a.order > b.order) {
       return 1;
     }
     return 0;
   }
 
-  init_create(): void{
+  init_create(): void {
     this.recipe = this.recipeService.init_recipe();
 
     this.firstFormGroup = this.formBuilder.group({
@@ -201,18 +203,30 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     }
 
     let reader;
-
     for (const key in files) {
       if (!files.hasOwnProperty(key)) {
         continue;
       }
 
       const file = files[key];
+
+      let sum = 0;
+
+      for (let media of this.medias){
+        if (!media.is_created) {
+          sum += (media['data'].size / 1024) / 1024;
+        }
+      }
+
+      if ( ( sum +  (file.size / 1024) / 1024 )> 30) {
+        this.snackBar.open('Le total des fichiers est trop volumineux, volume maximum maximal accepté 30Mo.', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => {
-        this.medias.push({'data': file, 'path': reader.result, 'is_created':false});
+        this.medias.push({'data': file, 'path': reader.result, 'is_created': false});
       };
     }
   }
@@ -232,14 +246,19 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
       }
 
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => {
-        this.thumbnail = {'data': file, 'path': reader.result, 'is_created':false};
+        this.thumbnail = {'data': file, 'path': reader.result, 'is_created': false};
       };
     }
   }
+
   addVideo(event: any): void {
     const files = event.target.files;
     if (files.length === 0) {
@@ -254,18 +273,23 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
       }
 
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
+
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => {
-        this.video = {'data': file, 'path': reader.result, 'is_created':false};
+        this.video = {'data': file, 'path': reader.result, 'is_created': false};
       };
     }
   }
 
   removeMedias(i: number): void {
     if (this.medias[i]) {
-      if(this.medias[i]['is_created'] == true){
+      if (this.medias[i]['is_created'] == true) {
         this.mediaToDelete.push(this.medias[i].data);
       }
       this.medias.splice(i, 1);
@@ -299,7 +323,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
   }
 
   createRecipe(): void {
-    this.currentStep=0;
+    this.currentStep = 0;
     this.is_loading = true;
 
     this.recipe.min_tier = this.firstFormGroup.value.min_tier;
@@ -333,128 +357,128 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
         order: order,
         content: step.value.content
       });
-      order+=1;
+      order += 1;
     }
 
-    this.currentStep+=1;
-    if (this.is_update){
+    this.currentStep += 1;
+    if (this.is_update) {
       this.recipeService.updateRecipe(this.recipe).subscribe(httpReturn => {
-        this.currentStep+=1;
-        if (httpReturn.body['status']){
+        this.currentStep += 1;
+        if (httpReturn.body['status']) {
 
           if (this.mediaToDelete.length != 0) {
             this.recipeService.deleteMedias(this.recipe.id, this.mediaToDelete).subscribe(httpReturn => {
-              this.currentStep+=1;
-              if(this.currentStep == this.maxStep){
+              this.currentStep += 1;
+              if (this.currentStep == this.maxStep) {
                 this.router.navigate(['/cook/recipe']);
               }
             });
-          }else{
-            this.currentStep+=1;
-            if(this.currentStep == this.maxStep){
+          } else {
+            this.currentStep += 1;
+            if (this.currentStep == this.maxStep) {
               this.router.navigate(['/cook/recipe']);
             }
           }
 
-          if (this.thumbnail && this.thumbnail['is_created'] == false){
+          if (this.thumbnail && this.thumbnail['is_created'] == false) {
             this.recipeService.postThumbnail(this.recipe.id, this.thumbnail['data']).subscribe(httpReturn => {
-              this.currentStep+=1;
-              if(this.currentStep == this.maxStep){
+              this.currentStep += 1;
+              if (this.currentStep == this.maxStep) {
                 this.router.navigate(['/cook/recipe']);
               }
             });
-          }else{
-            this.currentStep+=1;
-            if(this.currentStep == this.maxStep){
+          } else {
+            this.currentStep += 1;
+            if (this.currentStep == this.maxStep) {
               this.router.navigate(['/cook/recipe']);
             }
           }
 
-          if (this.video && this.video['is_created'] == false){
+          if (this.video && this.video['is_created'] == false) {
             this.recipeService.postVideo(this.recipe.id, this.video['data']).subscribe(httpReturn => {
-              this.currentStep+=1;
-              if(this.currentStep == this.maxStep){
+              this.currentStep += 1;
+              if (this.currentStep == this.maxStep) {
                 this.router.navigate(['/cook/recipe']);
               }
             });
-          }else{
-            this.currentStep+=1;
-            if(this.currentStep == this.maxStep){
+          } else {
+            this.currentStep += 1;
+            if (this.currentStep == this.maxStep) {
               this.router.navigate(['/cook/recipe']);
             }
           }
 
           let mediaToAdd = [];
-          for(let media of this.medias){
-            if (media['is_created'] == false){
+          for (let media of this.medias) {
+            if (media['is_created'] == false) {
               mediaToAdd.push(media.data);
             }
           }
 
-          if (mediaToAdd.length != 0){
+          if (mediaToAdd.length != 0) {
             this.recipeService.postMedias(this.recipe.id, mediaToAdd).subscribe(httpReturn => {
-              this.currentStep+=1;
-              if(this.currentStep == this.maxStep){
+              this.currentStep += 1;
+              if (this.currentStep == this.maxStep) {
                 this.router.navigate(['/cook/recipe']);
               }
             });
-          }else{
-            this.currentStep+=1;
-            if(this.currentStep == this.maxStep){
+          } else {
+            this.currentStep += 1;
+            if (this.currentStep == this.maxStep) {
               this.router.navigate(['/cook/recipe']);
             }
           }
         }
       });
-    }else{
+    } else {
       this.recipeService.postRecipe(this.recipe).subscribe(httpReturn => {
-        this.currentStep+=1;
-        if (httpReturn.body.recipe_id){
+        this.currentStep += 1;
+        if (httpReturn.body.recipe_id) {
           let mediaToAdd = [];
-          for(let media of this.medias){
-            if (media['is_created'] == false){
+          for (let media of this.medias) {
+            if (media['is_created'] == false) {
               mediaToAdd.push(media.data);
             }
           }
 
-          if (this.thumbnail && this.thumbnail['is_created'] == false){
+          if (this.thumbnail && this.thumbnail['is_created'] == false) {
             this.recipeService.postThumbnail(httpReturn.body.recipe_id, this.thumbnail['data']).subscribe(httpReturn => {
-              this.currentStep+=1;
-              if(this.currentStep == this.maxStep){
+              this.currentStep += 1;
+              if (this.currentStep == this.maxStep) {
                 this.router.navigate(['/cook/recipe']);
               }
             });
-          }else{
-            this.currentStep+=1;
-            if(this.currentStep == this.maxStep){
+          } else {
+            this.currentStep += 1;
+            if (this.currentStep == this.maxStep) {
               this.router.navigate(['/cook/recipe']);
             }
           }
 
-          if (this.video && this.video['is_created'] == false){
+          if (this.video && this.video['is_created'] == false) {
             this.recipeService.postVideo(httpReturn.body.recipe_id, this.video['data']).subscribe(httpReturn => {
-              this.currentStep+=1;
-              if(this.currentStep == this.maxStep){
+              this.currentStep += 1;
+              if (this.currentStep == this.maxStep) {
                 this.router.navigate(['/cook/recipe']);
               }
             });
-          }else{
-            this.currentStep+=1;
-            if(this.currentStep == this.maxStep){
+          } else {
+            this.currentStep += 1;
+            if (this.currentStep == this.maxStep) {
               this.router.navigate(['/cook/recipe']);
             }
           }
 
-          if (mediaToAdd.length != 0){
+          if (mediaToAdd.length != 0) {
             this.recipeService.postMedias(httpReturn.body.recipe_id, mediaToAdd).subscribe(httpReturn => {
-              this.currentStep+=1;
-              if(this.currentStep == this.maxStep){
+              this.currentStep += 1;
+              if (this.currentStep == this.maxStep) {
                 this.router.navigate(['/cook/recipe']);
               }
             });
-          }else{
-            this.currentStep+=1;
-            if(this.currentStep == this.maxStep){
+          } else {
+            this.currentStep += 1;
+            if (this.currentStep == this.maxStep) {
               this.router.navigate(['/cook/recipe']);
             }
           }

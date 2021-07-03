@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth/auth.service";
 import {UserService} from "../../../shared/services/user/user.service";
 import {User} from "../../../shared/models/user.model";
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-information',
@@ -21,7 +23,8 @@ export class UserInformationComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private userService: UserService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -63,6 +66,10 @@ export class UserInformationComponent implements OnInit {
       }
 
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
@@ -87,6 +94,10 @@ export class UserInformationComponent implements OnInit {
       }
 
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
