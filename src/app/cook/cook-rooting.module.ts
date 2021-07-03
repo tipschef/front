@@ -10,6 +10,7 @@ import {BankAccountInformationComponent} from "./components/bank-account-informa
 import {BookListComponent} from './components/book-list/book-list.component';
 import {BookCreateComponent} from './components/book-create/book-create.component';
 import {DashComponent} from "./components/dash/dash.component";
+import {PayslipComponent} from "./components/payslip/payslip.component";
 
 const routes: Routes = [
   {
@@ -55,9 +56,14 @@ const routes: Routes = [
       {
         path: 'bank-account-information',
         component : BankAccountInformationComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'payslip',
+        component : PayslipComponent,
         canActivate: [AuthGuard],
         data: {roles: ['partner']}
-      }
+      },
     ]
   }
 ];

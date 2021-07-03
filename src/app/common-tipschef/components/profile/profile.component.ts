@@ -6,6 +6,7 @@ import {User} from '../../../shared/models/user.model';
 import {UserService} from '../../../shared/services/user/user.service';
 import {BookService} from '../../../shared/services/book/book.service';
 import {Book} from '../../../shared/models/book';
+import {AuthService} from "../../../shared/services/auth/auth.service";
 
 
 @Component({
@@ -21,11 +22,13 @@ export class ProfileComponent implements OnInit {
   pagination: Pagination;
 
 
+
   constructor(private activatedRoute: ActivatedRoute,
               private recipeService: RecipeService,
               private route: Router,
               private bookService: BookService,
-              private userService: UserService) {
+              private userService: UserService,
+              private authService: AuthService) {
     // tslint:disable-next-line:only-arrow-functions typedef
     this.route.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
@@ -96,5 +99,12 @@ export class ProfileComponent implements OnInit {
 
   giftSub(): void {
     this.route.navigate(['/gift-subscription/' + this.username]);
+  }
+
+  get current_username(): string {
+    if (this.authService.userRoles && this.authService.userRoles.username){
+      return this.authService.userRoles.username;
+    }
+    return '';
   }
 }

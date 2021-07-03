@@ -39,7 +39,7 @@ export class BankAccountInformationComponent implements OnInit {
         bank_email: ['', [Validators.required, Validators.email]],
         bank_city: ['', [Validators.required]],
         bank_country: ['', [Validators.required]],
-        bank_postal_code: ['', [Validators.required, Validators.pattern("^\d+$")]],
+        bank_postal_code: ['', [Validators.required, Validators.pattern("^\\d+$")]],
         bank_address: ['', [Validators.required]],
         bank_birthdate: ['', [Validators.required]],
         bank_gender: ['', [Validators.required]],
@@ -79,7 +79,7 @@ export class BankAccountInformationComponent implements OnInit {
                   this.paymentService.createBankAccount(this.firstFormGroup.value.bank_iban).subscribe(httpReturnBankAccount => {
                     if (httpReturnBankAccount && httpReturnBankAccount.body) {
                       console.log('creating bank account');
-
+                        this.show = true;
                     }
                   })
                 }

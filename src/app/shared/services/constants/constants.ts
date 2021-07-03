@@ -24,6 +24,7 @@ export const constants = {
   RECIPE_THUMBNAIL: '/recipe/thumbnail_media/',
   RECIPE_VIDEO: '/recipe/video_media/',
   PAYMENT: '/payment/',
+  PAYMENT_PAYSLIP: '/payment/payslip',
   PAYMENT_ACCOUNT: '/payment/account/',
   PAYMENT_BANK_ACCOUNT: '/payment/bank_account/',
   PAYMENT_PAYMENT_METHOD: '/payment/payment_method/',

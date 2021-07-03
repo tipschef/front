@@ -1,0 +1,29 @@
+<div class="content">
+  <h1>Historique de vos revenus</h1>
+  <mat-form-field>
+    <mat-label>Filtre</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Livre">
+  </mat-form-field>
+  <div class="mat-elevation-z8 ">
+    <table mat-table [dataSource]="this.dataSource" class="mat-elevation-z8" matSort>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Montant</th>
+        <td mat-cell *matCellDef="let payslips" class="content-amount"> + {{payslips.amount / 100}} € </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date</th>
+        <td mat-cell *matCellDef="let payslips"> {{payslips.created_date| date:'dd/MM/YYYY hh:mm' }}  </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row ; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+

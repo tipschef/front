@@ -66,7 +66,6 @@ export class BookDetailComponent implements OnInit {
 
     this.bookPurchaseService.buy_book(this.bookId).subscribe(httpResponse => {
       if (httpResponse.body != null && httpResponse.body) {
-        console.log('bought')
         this.isLoading = false;
         this.bought = true;
       }
