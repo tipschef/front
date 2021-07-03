@@ -17,7 +17,7 @@
             <mat-card-title>
               <h1 style="width: 100%;">
                 {{book.title}}
-                <button mat-button *ngIf="!isLoading && !bought" class="mat-raised-button mat-accent"
+                <button mat-button *ngIf="!isLoading && !bought && !isCreator" class="mat-raised-button mat-accent"
                         style="float: right; position: absolute; right: 25px" (click)="buyBook()">Acheter
                 </button>
                 <button mat-button *ngIf="isLoading  && !bought" class="mat-raised-button mat-accent mat-button-disabled"

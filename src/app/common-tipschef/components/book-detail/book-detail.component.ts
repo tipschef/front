@@ -4,8 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../shared/models/user.model';
 import {UserService} from '../../../shared/services/user/user.service';
 import {CreatedBook} from '../../../shared/models/created-book';
-import {BookPurchaseService} from "../../../shared/services/book-purchase/book-purchase.service";
-import {MatTableDataSource} from "@angular/material/table";
+import {BookPurchaseService} from '../../../shared/services/book-purchase/book-purchase.service';
+import {AuthService} from '../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -17,20 +17,19 @@ export class BookDetailComponent implements OnInit {
   book: CreatedBook;
   bookId: number;
   user: User;
-  isLoading: boolean= false;
-  bought: boolean = false;
+  isLoading = false;
+  bought = false;
 
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
               private userService: UserService,
               private router: Router,
-              private bookPurchaseService: BookPurchaseService) {
+              private bookPurchaseService: BookPurchaseService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.loadBook();
-
-
   }
 
   loadBook(): void {
@@ -48,12 +47,12 @@ export class BookDetailComponent implements OnInit {
     this.userService.getUserById(this.book.creator_id).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
         this.user = httpReturn.body;
-        this.show_button()
+        this.show_button();
       }
     });
   }
 
-  show_button(): void{
+  show_button(): void {
     this.bookPurchaseService.isAlreadyBought(this.book.id).subscribe(httpResponse => {
       if (httpResponse.body != null && httpResponse.body) {
         this.bought = httpResponse.body.is_bought;
@@ -66,14 +65,12 @@ export class BookDetailComponent implements OnInit {
 
     this.bookPurchaseService.buy_book(this.bookId).subscribe(httpResponse => {
       if (httpResponse.body != null && httpResponse.body) {
-        console.log('bought')
         this.isLoading = false;
         this.bought = true;
       }
-    }, error =>
-    {
+    }, error => {
       this.isLoading = false;
-      if(error.status == 400){
+      if (error.status === 400) {
         this.router.navigate(['/cook/payment-information']);
       }
     });
@@ -81,5 +78,9 @@ export class BookDetailComponent implements OnInit {
 
   redirect(): void {
     this.router.navigate(['/book-purchase']);
+  }
+
+  get isCreator(): boolean {
+    return this.authService.userRoles.id === this.book.creator_id;
   }
 }
