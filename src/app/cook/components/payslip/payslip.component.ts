@@ -1,28 +1,27 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {BookPurchase} from "../../../shared/models/book-purchase";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {BookPurchaseService} from "../../../shared/services/book-purchase/book-purchase.service";
-import {BookPurchase} from "../../../shared/models/book-purchase";
-import {Router} from "@angular/router";
+import {PayslipService} from "../../../shared/services/payslip/payslip.service";
+import {Payslip} from "../../../shared/models/payslip";
 
 @Component({
-  selector: 'app-book-purchase',
-  templateUrl: './book-purchase.component.html',
-  styleUrls: ['./book-purchase.component.css']
+  selector: 'app-payslip',
+  templateUrl: './payslip.component.html',
+  styleUrls: ['./payslip.component.css']
 })
-export class BookPurchaseComponent implements OnInit, AfterViewInit {
+export class PayslipComponent implements OnInit, AfterViewInit {
 
-  books: Array<BookPurchase> | null = [];
+  payslips: Array<Payslip> | null = [];
 
-  displayedColumns: Array<string> | null = ['title', 'creator', 'price', 'date', 'download'];
+  displayedColumns: Array<string> | null = ['amount', 'date'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private bookPurchaseService: BookPurchaseService,private router: Router) { }
+  constructor(private payslipService: PayslipService) { }
 
   ngOnInit(): void {
-
   }
 
   ngAfterViewInit(): void {
@@ -30,18 +29,14 @@ export class BookPurchaseComponent implements OnInit, AfterViewInit {
   }
 
   loadData(): void {
-    this.bookPurchaseService.getPurchaseHistory().subscribe(httpResponse => {
+    this.payslipService.getPayslipsHistory().subscribe(httpResponse => {
       if (httpResponse.body != null && httpResponse.body) {
-        this.books = httpResponse.body;
-        this.dataSource = new MatTableDataSource(this.books);
+        this.payslips = httpResponse.body;
+        this.dataSource = new MatTableDataSource(this.payslips);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
     });
-  }
-
-  redirect(book): void {
-    this.router.navigate([book.creator]);
   }
 
   applyFilter(event: Event): void {

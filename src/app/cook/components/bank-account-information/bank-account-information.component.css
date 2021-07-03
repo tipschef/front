@@ -6,3 +6,12 @@
   width: 200px;
   height: auto;
 }
+
+.contact-us{
+  background-color: #ff9100;
+  box-sizing: border-box;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+}

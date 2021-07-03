@@ -27,6 +27,7 @@ import { CardComponent } from './cook/components/card/card.component';
 import { SubChartComponent } from './cook/components/charts/sub-chart/sub-chart.component';
 import { FollowChartComponent } from './cook/components/charts/follow-chart/follow-chart.component';
 import { BookPurchaseComponent } from './common-tipschef/components/book-purchase/book-purchase.component';
+import { PayslipComponent } from './cook/components/payslip/payslip.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { BookPurchaseComponent } from './common-tipschef/components/book-purchas
     CardComponent,
     SubChartComponent,
     FollowChartComponent,
-    BookPurchaseComponent
+    BookPurchaseComponent,
+    PayslipComponent
   ],
   imports: [
     BrowserModule,
