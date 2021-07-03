@@ -100,7 +100,7 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill" style="display: inline-block; margin-left: 20px ">
+            <mat-form-field appearance="fill" style="display: inline-block; margin-left: 20px; ">
               <mat-label>Template</mat-label>
               <mat-select formControlName="value">
                 <mat-option *ngFor="let recipeTemplate of templates.recipes;let index=index;" [value]="index">
@@ -108,12 +108,16 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <span class="tc-spacer"></span>
-            <button type="button" mat-button class="right-recipe mat-raised-button mat-accent"
-                    (click)="previewRecipe(index)">Prévisualiser
-            </button>
-          </form>
+            <div style="width: 100%">
+              <button type="button" style="margin: 10px" mat-button class="mat-raised-button mat-warn" [disabled]="recipeFormGroups.length <= 1"
+                      (click)="deleteRecipe(index)">Supprimer
+              </button>
+              <button type="button" style="float : right;" mat-button class=" mat-raised-button mat-accent"
+                      (click)="previewRecipe(index)">Prévisualiser
+              </button>
+            </div>
 
+          </form>
         </div>
 
 

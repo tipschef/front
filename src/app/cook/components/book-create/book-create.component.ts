@@ -50,6 +50,7 @@ export class BookCreateComponent implements OnInit {
 
     this.firstFormGroup = this.formBuilder.group({
       value: [0, Validators.required],
+      price_euro: [0, Validators.required],
       name: ['', [Validators.required, Validators.maxLength(155), Validators.min(5)]]
 
     });
@@ -196,5 +197,11 @@ export class BookCreateComponent implements OnInit {
         });
       }
     });
+  }
+
+  deleteRecipe(index: number): void  {
+    if (this.recipeFormGroups[index]) {
+      this.recipeFormGroups.splice(index, 1);
+    }
   }
 }
