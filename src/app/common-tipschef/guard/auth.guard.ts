@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from '../../shared/services/auth/auth.service';
-import {rejects} from 'assert';
 import {LocalStorageService} from '../../shared/services/local-storage/local-storage.service';
 
 @Injectable({
@@ -21,24 +20,24 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const roles = route.data.roles as Array<string>;
 
-    const localStorageUser = this.localStorageService.get('currentUser');
-
-    const authData = this.authService.authData;
-    if (!authData) {
-      if (localStorageUser != null){
-        this.authService.authData = localStorageUser;
-        this.authService.updateUserRoles();
-      }else{
-        this.router.navigate(['/log-in'], {queryParams: {returnUrl: state.url}});
-        return false;
-      }
-    }
-
-    if (roles === undefined) {
-      return true;
-    }
-
     return new Promise((resolve, reject) => {
+      const localStorageUser = this.localStorageService.get('currentUser');
+
+      const authData = this.authService.authData;
+      if (!authData) {
+        if (localStorageUser != null) {
+          this.authService.authData = localStorageUser;
+          this.authService.updateUserRoles();
+        } else {
+          this.router.navigate(['/log-in'], {queryParams: {returnUrl: state.url}});
+          resolve(false);
+        }
+      }
+
+      if (roles === undefined) {
+        resolve(true);
+      }
+
       this.authService.getUserRoles().subscribe(httpResponse => {
 
           if (roles !== undefined) {

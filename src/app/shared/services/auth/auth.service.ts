@@ -44,9 +44,9 @@ export class AuthService {
       this.authData = user.body;
       this.localStorageService.set('currentUser', user.body);
       this.updateUserRoles();
-    })) ;
+    }));
   }
-// localStorage.setItem('currentUser', JSON.stringify(user));
+
   updateUserRoles(): void {
     this.getUserRoles().subscribe(httpResponse => {
       this.userRoles = httpResponse.body;
