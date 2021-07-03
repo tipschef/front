@@ -6,7 +6,7 @@ import {User} from '../../../shared/models/user.model';
 import {UserService} from '../../../shared/services/user/user.service';
 import {BookService} from '../../../shared/services/book/book.service';
 import {Book} from '../../../shared/models/book';
-import {AuthService} from "../../../shared/services/auth/auth.service";
+import {AuthService} from '../../../shared/services/auth/auth.service';
 
 
 @Component({
@@ -28,11 +28,8 @@ export class ProfileComponent implements OnInit {
               private route: Router,
               private bookService: BookService,
               private userService: UserService,
-              private authService: AuthService) {
-    // tslint:disable-next-line:only-arrow-functions typedef
-    this.route.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
+              private authService: AuthService
+              ) {
   }
 
   ngOnInit(): void {

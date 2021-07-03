@@ -6,6 +6,7 @@ export const constants = {
   USER_DASHBOARD: '/users/dashboard/',
   USER_HIGHLIGHT: '/users/highlight/',
   USER_SUBSCRIPTION: '/users/subscribe',
+  SUBSCRIPTION_TIER: '/users/subscription_tier',
   USER_SUBSCRIPTION_GIFT: '/users/subscribe/gift',
   USER_SUBSCRIPTION_TIER: '/users/subscribe/tier',
   USER_SUBSCRIPTION_ONGOING: '/users/subscribe/on_going',

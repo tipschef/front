@@ -38,6 +38,7 @@ export class UserService {
     };
     return this.http.post<any>(url, createSubscription, {headers, observe: 'response'});
   }
+
   giftSubscription(createSubscription: GiftSubscription): Observable<HttpResponse<any>> {
     const url = this.constantsService.getConstant('USER_SUBSCRIPTION_GIFT');
     const headers = {
@@ -108,6 +109,15 @@ export class UserService {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
     return this.http.get<User>(url + username + '/', {headers, observe: 'response'});
+  }
+
+  getUserSubscriptionTier(username: string): Observable<HttpResponse<any>> {
+    const url = this.constantsService.getConstant('SUBSCRIPTION_TIER');
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<any>(url + '/' + username , {headers, observe: 'response'});
   }
 
   followUser(username: string): Observable<HttpResponse<any>> {

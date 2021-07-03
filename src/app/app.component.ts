@@ -34,11 +34,12 @@ export class AppComponent implements OnInit {
   }*/
 
   get username(): string {
-    if (this.authService.userRoles && this.authService.userRoles.username){
+    if (this.authService.userRoles && this.authService.userRoles.username) {
       return this.authService.userRoles.username;
     }
     return '';
   }
+
   disconnect(): void {
     this.authService.disconnect();
     this.router.navigate(['/log-in'], {queryParams: {returnUrl: '/home'}});
@@ -46,5 +47,10 @@ export class AppComponent implements OnInit {
 
   search(): void {
     this.router.navigate(['/search'], {queryParams: {username: this.firstFormGroup.value.search}});
+  }
+
+  redirectToUser(): void {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['/' + this.username]));
   }
 }

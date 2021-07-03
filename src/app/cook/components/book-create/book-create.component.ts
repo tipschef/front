@@ -7,7 +7,8 @@ import {AuthService} from '../../../shared/services/auth/auth.service';
 import {Recipe} from '../../../shared/models/recipe';
 import {MatTableDataSource} from '@angular/material/table';
 import {RecipeService} from '../../../shared/services/recipe/recipe.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-book-create',
@@ -31,7 +32,8 @@ export class BookCreateComponent implements OnInit {
               private bookService: BookService,
               private authService: AuthService,
               private recipeService: RecipeService,
-              private router: Router) {
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -50,6 +52,7 @@ export class BookCreateComponent implements OnInit {
 
     this.firstFormGroup = this.formBuilder.group({
       value: [0, Validators.required],
+      price_euro: [0, Validators.required],
       name: ['', [Validators.required, Validators.maxLength(155), Validators.min(5)]]
 
     });
@@ -88,6 +91,10 @@ export class BookCreateComponent implements OnInit {
       }
 
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
@@ -196,5 +203,11 @@ export class BookCreateComponent implements OnInit {
         });
       }
     });
+  }
+
+  deleteRecipe(index: number): void  {
+    if (this.recipeFormGroups[index]) {
+      this.recipeFormGroups.splice(index, 1);
+    }
   }
 }

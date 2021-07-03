@@ -72,8 +72,6 @@
 
 .recipe-content-commentary{
   display: inline;
-  overflow-y: scroll;
-  height:200px;
   padding: 10px;
 }
 
@@ -134,8 +132,10 @@ mat-card-title{
 
 .recipe-content-comment-picture{
   width: 50px;
-  height: auto;
+  height: 50px;
   border-radius: 50%;
+  vertical-align: middle;
+
 }
 
 .comment-header{
@@ -144,9 +144,10 @@ mat-card-title{
 }
 
 .recipe-content-comment-scroll{
-  height: 400px;
-  overflow: auto;
+  height: 600px;
+  overflow-y: scroll;
 }
+
 
 hr.solid {
   border-top: 3px solid #bbb;
@@ -177,8 +178,16 @@ hr.solid {
 
 
 .recipe-content-my-comment-text{
-  min-width: 90%;
+  min-width: 100%;
+  display: block;
 }
 .recipe-content-my-comment-button{
-  min-width: 10%;
+  float: right;
+  right: 0;
+}
+
+.recipe-content-comment {
+  border: 1px solid #ccc;
+  margin: 25px;
+  padding: 15px;
 }

@@ -1,4 +1,8 @@
-<div *ngIf="!!accountPayment">
+<div class="center" *ngIf="isLoading">
+  <img src="/assets/loader-2_food.gif" alt="loading-gif">
+</div>
+
+<div *ngIf="!isLoading">
   <h1>Vos informations bancaire</h1>
 
   <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()" *ngIf="show == false">
@@ -90,12 +94,12 @@
       </mat-grid-tile>
       <mat-grid-tile>
         <img src="{{idRecto['path']}}" class="profile-images" *ngIf="!!idRecto">
-        <input class="hidden" id="input-file-id-recto" type="file" (change)="addIdRecto($event)"/>
+        <input class="hidden" id="input-file-id-recto" type="file" accept="image/*" (change)="addIdRecto($event)"/>
         <label for="input-file-id-recto" class="mat-primary mat-raised-button">Ajouter une photo de carte d'identité recto</label>
       </mat-grid-tile>
       <mat-grid-tile>
         <img src="{{idVerso['path']}}" class="profile-images" *ngIf="!!idVerso">
-        <input class="hidden" id="input-file-id-verso" type="file" (change)="addIdVerso($event)"/>
+        <input class="hidden" id="input-file-id-verso" type="file" accept="image/*" (change)="addIdVerso($event)"/>
         <label for="input-file-id-verso" class="mat-primary mat-raised-button">Ajouter une photo de carte d'identité verso</label>
       </mat-grid-tile>
       <mat-grid-tile>

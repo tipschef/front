@@ -1,9 +1,11 @@
+/* tslint:disable */
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../shared/services/auth/auth.service";
-import {UserService} from "../../../shared/services/user/user.service";
-import {PaymentService} from "../../../shared/services/payment/payment.service";
-import {AccountPayment} from "../../../shared/models/account_payment";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../../shared/services/auth/auth.service';
+import {PaymentService} from '../../../shared/services/payment/payment.service';
+import {AccountPayment} from '../../../shared/models/account_payment';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bank-account-information',
@@ -13,26 +15,31 @@ import {AccountPayment} from "../../../shared/models/account_payment";
 export class BankAccountInformationComponent implements OnInit {
   firstFormGroup: FormGroup;
   accountPayment: AccountPayment;
-  maxDate: Date
+  maxDate: Date;
   idRecto: {};
   idVerso: {};
-  show: boolean = false
+  show = false;
+  isLoading: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private paymentService: PaymentService) {
+              private paymentService: PaymentService,
+              private snackBar: MatSnackBar) {
     this.maxDate = new Date(new Date().getFullYear() - 13, 0, 1);
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.paymentService.getAccount().subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
+        this.isLoading = false;
         this.accountPayment = httpReturn.body;
         this.show = true;
 
       }
     }, error => {
-      this.accountPayment = {} as AccountPayment
+      this.isLoading = false;
+      this.accountPayment = {} as AccountPayment;
       this.firstFormGroup = this.formBuilder.group({
         bank_firstname: ['', [Validators.required]],
         bank_lastname: ['', [Validators.required]],
@@ -46,16 +53,17 @@ export class BankAccountInformationComponent implements OnInit {
         bank_phone: ['', [Validators.required]],
         bank_iban: ['', [Validators.required]],
       });
-    })
+    });
 
 
   }
 
 
-  onSubmit() {
+  onSubmit(): void {
     if ( this.firstFormGroup.valid){
-      const birthdate = this.firstFormGroup.value.bank_birthdate.getFullYear() + "-" + this.firstFormGroup.value.bank_birthdate.getMonth() + "-" + this.firstFormGroup.value.bank_birthdate.getDate();
-      const phone = this.firstFormGroup.value.bank_phone[0] == "0" ? "+33" + this.firstFormGroup.value.bank_phone : this.firstFormGroup.value.bank_phone;
+      const birthdate = this.firstFormGroup.value.bank_birthdate.getFullYear() + '-' + this.firstFormGroup.value.bank_birthdate.getMonth() + '-' + this.firstFormGroup.value.bank_birthdate.getDate();
+      const phone = this.firstFormGroup.value.bank_phone[0] === '0' ? '+33' +
+        this.firstFormGroup.value.bank_phone : this.firstFormGroup.value.bank_phone;
       this.accountPayment.first_name = this.firstFormGroup.value.bank_firstname;
       this.accountPayment.last_name = this.firstFormGroup.value.bank_lastname;
       this.accountPayment.email = this.firstFormGroup.value.bank_email;
@@ -75,19 +83,17 @@ export class BankAccountInformationComponent implements OnInit {
               this.accountPayment.id_verso = httpReturnVerso.body.id;
               this.paymentService.createAccount(this.accountPayment).subscribe(httpReturnAccount => {
                 if (httpReturnAccount && httpReturnAccount.body) {
-                  console.log('Account created');
                   this.paymentService.createBankAccount(this.firstFormGroup.value.bank_iban).subscribe(httpReturnBankAccount => {
                     if (httpReturnBankAccount && httpReturnBankAccount.body) {
-                      console.log('creating bank account');
                         this.show = true;
                     }
-                  })
+                  });
                 }
               });
             }
-          })
+          });
         }
-      })
+      });
 
     }
 
@@ -106,12 +112,17 @@ export class BankAccountInformationComponent implements OnInit {
         continue;
       }
 
+
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => {
-        this.idRecto = {'data': file, 'path': reader.result, 'is_created': false};
+        this.idRecto = {data: file, path: reader.result, is_created: false};
       };
     }
   }
@@ -130,11 +141,15 @@ export class BankAccountInformationComponent implements OnInit {
       }
 
       const file = files[key];
+      if ( (file.size / 1024) / 1024 > 30) {
+        this.snackBar.open('Fichier trop volumineux, taille maximum acceptée 30Mo', 'Fermer');
+        return ;
+      }
       reader = new FileReader();
       reader.readAsDataURL(file);
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => {
-        this.idVerso = {'data': file, 'path': reader.result, 'is_created': false};
+        this.idVerso = {data: file, path: reader.result, is_created: false};
       };
     }
   }
@@ -143,9 +158,8 @@ export class BankAccountInformationComponent implements OnInit {
   delete(){
     this.paymentService.deleteAccount().subscribe(httpReturnBankAccount => {
       if (httpReturnBankAccount && httpReturnBankAccount.body) {
-        console.log('deleted account');
         this.show = false;
       }
-    })
+    });
   }
 }
