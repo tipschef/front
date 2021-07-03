@@ -1,0 +1,72 @@
+.form-column{
+  width: 50%;
+  display: inline-block;
+  border: 1px solid #ccc;
+}
+
+.preview-column{
+  width: 50%;
+  display: inline-block;
+  border: 1px solid #ccc;
+}
+
+.tc-spacer {
+  flex: 1 1 auto;
+}
+
+.panel {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  min-height: 85vh;
+}
+mat-form-field {
+  display: flex;
+}
+
+.bottom-button {
+  margin-top: 35px
+}
+
+
+.top-button {
+  margin-bottom: 25px
+}
+
+.center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.margin-right {
+  margin-right: 8px;
+}
+
+
+.right {
+  right: 0;
+  position: relative;
+  float:right;
+}
+
+.right-recipe {
+  right: 0;
+  float:right;
+}
+
+.textarea {
+  display: block;
+}
+
+.addedRecipe {
+  border: 1px solid #ccc;
+  padding: 15px 15px 0px;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,52 @@
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.center {
+  text-align: center;
+}
+
+mat-form-field {
+  display: flex;
+}
+
+
+.inline-block {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.margin-right {
+  margin-right: 8px;
+}
+
+
+.right {
+  right: 0;
+  position: relative;
+  float:right;
+}
+
+.left {
+  left: 0;
+}
+
+.tc-spacer {
+  flex: 1 1 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.bottom-button {
+  margin-top: 10px
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}

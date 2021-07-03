@@ -1,0 +1,23 @@
+<mat-card class="example-card" >
+  <mat-card-header class="card-header">
+    <img (click)="redirectCook()" src="{{recipe.creator_icon? recipe.creator_icon : '/assets/no-image-found.jpg'}}" alt=""  mat-card-avatar class="example-header-image clickable">
+    <mat-card-title  (click)="redirectCook()"  class="clickable" style="vertical-align: middle; font-size: 25px">
+      {{recipe.creator_username}}
+      <mat-icon *ngIf="recipe.creator_is_partner" class="verified">verified_user</mat-icon>
+    </mat-card-title>
+
+  </mat-card-header>
+  <img class="card-image clickable" mat-card-image src="{{recipe.thumbnail?.path ? recipe.thumbnail.path:'/assets/no-image-found.jpg'}}" alt="Photo of a Shiba Inu" (click)="redirect()">
+  <mat-card-content (click)="redirect()" class="clickable" *ngIf="recipe.can_be_seen">
+    <h2>{{recipe.name}}</h2>
+    <p>
+      {{recipe.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-content  class="clickable" *ngIf="!recipe.can_be_seen" style="width: 100%">
+    <h2>{{recipe.name}}</h2>
+    <div class="center">
+      <button  mat-button class="right mat-raised-button mat-accent" (click)="redirect()">S'abonner au tier {{recipe.min_tier}} pour accéder à la recette</button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+.tipschef-button{
+  cursor: pointer;
+}
+
+
+.content{
+  margin: 5%;
+}
+
+
+.button-clickable{
+  text-decoration: underline;
+}
+.button-clickable:hover{
+  color: rgb(255,143,0);
+}

@@ -1,0 +1,47 @@
+
+.profile-picture{
+  border-radius: 50%;
+  max-width: 100px;
+  height: 100px;
+  border-top: 1px solid #ccc;
+}
+
+.full-width {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-header {
+  height: 25vh;
+  object-fit: cover;
+}
+
+.display-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-grow-2 {
+  flex-grow: 2;
+}
+
+.flex-grow-6 {
+  flex-grow: 6;
+}
+
+.border {
+  border-right: 1px solid #ccc;
+}
+
+.border-top{
+  border-top: 1px solid #ccc;
+}
+
+.center {
+  text-align: center;
+}
+
+.margin-top{
+  margin-top: 20px;
+}

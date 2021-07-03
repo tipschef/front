@@ -1,0 +1,20 @@
+<mat-card class="example-card">
+  <mat-card-header class="card-header">
+    <mat-card-title class="clickable" style="vertical-align: middle; font-size: 25px"  (click)="redirectBook(book.id)">
+      {{book.title}}
+      <button mat-button class="mat-raised-button mat-accent"
+              style="float: right; position: absolute; right: 25px" (click)="redirectBook(book.id)">Voir
+      </button>
+    </mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content class="clickable"  (click)="redirectBook(book.id)">
+    <p>
+      {{book.description}}
+    </p>
+    <p>
+      Nombre de recette : {{book.recipes.length}}
+    </p>
+  </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,193 @@
+.recipe-card {
+  margin: auto;
+  border: 1px solid #ccc;
+  padding: 25px;
+  max-width: 70%;
+  width: 70%;
+  min-width: 1100px;
+}
+
+.preparation-data{
+  font-size: 22px;
+}
+
+.tc-spacer {
+  flex: 1 1 auto;
+}
+
+.ingredients{
+  font-size: 18px;
+}
+
+.recipe{
+  padding: 15px;
+  margin: auto;
+}
+
+.profile-picture{
+  border-radius: 50%;
+  max-width: 100px;
+  height: 100px;
+}
+
+
+
+.display-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-column {
+  width: 400px;
+  padding: 15px;
+  border-right: 1px solid #ccc;
+}
+.header-like{
+  position: absolute;
+  right: 15px;
+  margin: auto;
+  cursor: pointer;
+}
+.recipe-column {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+
+.recipe-content-ingredients{
+  margin-top: 20px;
+}
+
+.recipe-content-pictures-img{
+  width: 150px;
+  height: 150px;
+  padding: 1px;
+  display: inline-block;
+  border: 2px solid #BDB8BF;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.recipe-content-commentary{
+  display: inline;
+  padding: 10px;
+}
+
+.recipe-content-information{
+  padding-top: 52px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe-title{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.recipe-content-preparation{
+  padding-top: 52px;
+}
+
+.recipe-content-steps >::ng-deep .mat-list-item-content{
+  display: block !important;
+}
+
+.recipe-content-steps{
+  border: 2px solid #BDB8BF;
+  border-radius: 8px;
+  margin: 20px;
+  padding: 10px;
+}
+
+.recipe-content-pictures{
+  display: flex;
+  justify-content: space-between;
+}
+
+.pomme{
+  width: 150px;
+  height: 150px;
+  padding: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #BDB8BF;
+  border-radius: 8px;
+}
+
+.recipe-content-pictures-img-more{
+  font-size: 50px;
+}
+
+mat-card-title{
+  font-size: 30px !important;
+}
+
+.step-header{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.recipe-content-comment-picture{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  vertical-align: middle;
+
+}
+
+.comment-header{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.recipe-content-comment-scroll{
+  height: 600px;
+  overflow-y: scroll;
+}
+
+
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+.recipe-content-my-comment-area{
+  min-width: 100%;
+  min-height: 75px;
+}
+
+.recipe-content-my-comment{
+  padding-bottom: 50px;
+}
+
+
+.book-pannel {
+  width: 80%;
+  border-right: 1px solid #ccc;
+  box-shadow: 1px 1px 1px 1px;
+  margin: 25px auto auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.book-name {
+  font-size: 15px;
+}
+
+
+.recipe-content-my-comment-text{
+  min-width: 100%;
+  display: block;
+}
+.recipe-content-my-comment-button{
+  float: right;
+  right: 0;
+}
+
+.recipe-content-comment {
+  border: 1px solid #ccc;
+  margin: 25px;
+  padding: 15px;
+}

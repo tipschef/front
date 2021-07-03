@@ -1,0 +1,25 @@
+.tc-spacer {
+  flex: 1 1 auto;
+}
+
+.header-button-row {
+  display: table-cell;
+}
+
+.header-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+.search-div{
+  margin-right: 50px;
+}
+
+.mat-icon {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+
+.tipschef-logo{
+  height: 100%;
+  cursor: pointer;
+}

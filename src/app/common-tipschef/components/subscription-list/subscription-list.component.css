@@ -1,0 +1,31 @@
+.subscription-pannel {
+  padding: 15px;
+}
+
+
+.subscription-card {
+  width: 350px;
+  border: 1px solid #ff9100;
+  display: inline-block;
+  margin: 25px;
+  padding: 25px;
+}
+
+
+.content-pannel {
+  padding: 35px;
+}
+
+.profile-picture{
+  border-radius: 50%;
+  max-width: 50px;
+  height: 50px;
+  border-top: 1px solid #ccc;
+  vertical-align: middle;
+  margin-right: 25px;
+}
+
+.subscription-card-header {
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}

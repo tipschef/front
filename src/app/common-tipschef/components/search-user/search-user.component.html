@@ -1,0 +1,48 @@
+<div class="tipschef-panel">
+  <div class="search-panel">
+    <h2>Recherche cuisinier</h2>
+    <form [formGroup]="firstFormGroup"  (ngSubmit)="search()">
+      <mat-form-field appearance="fill">
+        <input type="search" matInput placeholder="Cuisinier..."  formControlName="search">
+      </mat-form-field>
+      <mat-icon class="search-icon" (click)="search()">search</mat-icon>
+    </form>
+
+    <div>
+      <button mat-raised-button class="filter-button" (click)="filter('subscribers')">Trier par abonnement</button>
+      <button mat-raised-button class="filter-button" (click)="filter('followers')">Trier par follower</button>
+      <button mat-raised-button class="filter-button" (click)="filter('likes')">Trier par like</button>
+      <button mat-raised-button class="filter-button" (click)="filter('recipes')">Trier par nombre de recette</button>
+    </div>
+  </div>
+  <div *ngIf="!!users">
+    <div *ngFor="let user of users" class="user-card">
+      <div class="icon-div">
+        <img src="{{user.profile_url? user.profile_url : '/assets/no-image-found.jpg'}}" alt="" class="profile-picture">
+      </div>
+      <div class="information-div">
+        <h2 class="username-div" (click)="redirectUser(user.username)">
+          {{user.username}}
+          <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
+        </h2>
+        <p class="description-div">
+          {{!!user.description? user.description : 'Aucune description'}}
+        </p>
+        <mat-grid-list cols="4" rowHeight="25px">
+          <mat-grid-tile
+            [colspan]="1">
+            {{user.followers}} Follower{{user.followers>1 ? 's':''}}
+          </mat-grid-tile>
+          <mat-grid-tile
+            [colspan]="1">
+            {{user.likes}} Like{{user.likes>1 ? 's':''}}
+          </mat-grid-tile>
+          <mat-grid-tile
+            [colspan]="1">
+            {{user.recipes}} Recette{{user.recipes>1 ? 's':''}}
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+  </div>
+</div>

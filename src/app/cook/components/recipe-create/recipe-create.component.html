@@ -1,0 +1,203 @@
+<div *ngIf="isDataAvailable">
+  <h2 *ngIf="!is_update">Ajouter une recette</h2>
+  <h2 *ngIf="is_update">Mettre à jour la recette {{recipe.name}}</h2>
+  <div class="center" *ngIf="is_loading">
+    <img src="/assets/loader-2_food.gif" alt="loading-gif">
+    <div>{{currentStep}}/{{maxStep}}</div>
+  </div>
+  <mat-horizontal-stepper [linear]="true" #stepper *ngIf="!is_loading">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Informations générales</ng-template>
+        <div class="center">Bienvenu sur le formulaire d'ajout de recette de TipsChef. <br> Suivez les différentes étapes, saisissez les informations nécessaires à votre recette et visualisez-la en ligne.</div>
+
+        <mat-form-field>
+          <mat-label>Tier d'accès : </mat-label>
+          <input matInput placeholder="Saisissez le tier minimum pour accès" formControlName="min_tier" required type="number" min="0" max="3">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nom : </mat-label>
+          <input matInput placeholder="Saisissez un nom de recette" formControlName="name" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Description : </mat-label>
+          <input matInput placeholder="Saisissez un nom de recette" formControlName="description" required>
+        </mat-form-field>
+
+        <div>Thumbnail :</div>
+        <img *ngIf="!!thumbnail" class="margin-right" style="height:100px; width:100px" src="{{thumbnail['path']}}">
+
+        <input class="hidden" id="input-thumbnail-id" type="file" accept="image/*" accept="image/*" (change)="addThumbnail($event)"/>
+        <br>
+        <label for="input-thumbnail-id" class="mat-primary mat-raised-button">Ajouter un thumbnail</label>
+        <br>
+        <div  class="bottom-button">Vidéo :</div>
+        <div *ngIf="!!video">Uploaded video : {{video['data']['name'] ? video['data']['name'] : video['data']['path']}}</div>
+        <input class="hidden" id="input-video-id" type="file" accept="video/*" (change)="addVideo($event)"/>
+        <label for="input-video-id" class="mat-primary mat-raised-button">Ajouter une vidéo</label>
+
+        <div class="bottom-button"  >
+          <span class="tc-spacer"></span>
+          <button  mat-button matStepperNext class="right mat-raised-button mat-accent">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Informations de la recette</ng-template>
+        <div class="center">Ces précisions aideront les autres utilisateurs à trouver votre recette en fonction de leurs attentes et leurs goûts</div>
+
+        <div>Catégorie de plat</div>
+        <mat-form-field appearance="fill">
+          <mat-select formControlName="recipe_category_id">
+            <mat-option *ngFor="let recipeCategory of recipeCategories" [value]="recipeCategory.id">
+              {{recipeCategory.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>Portions </div>
+        <mat-form-field appearance="fill"  class="inline-block">
+          <mat-label>Nombre : </mat-label>
+          <input matInput placeholder="XX"  required type="number" min="0" formControlName="portion_number">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="inline-block">
+          <mat-label>Portion : </mat-label>
+          <input matInput placeholder="Personne, pièce, litre ..." formControlName="portion_unit">
+        </mat-form-field>
+
+        <div>Temps de préparation </div>
+        <mat-form-field appearance="fill"  class="inline-block">
+          <mat-label>Heure : </mat-label>
+          <input matInput placeholder="XX"  required type="number" min="0" formControlName="preparation_hours">
+        </mat-form-field>
+        <div class="inline-block"> : </div>
+        <mat-form-field appearance="fill"  class="inline-block">
+          <mat-label>Minutes : </mat-label>
+          <input matInput placeholder="XX"  required type="number" min="0" formControlName="preparation_minutes">
+        </mat-form-field>
+
+        <div>Temps de cuisson </div>
+        <mat-form-field appearance="fill"  class="inline-block">
+          <mat-label>Heure : </mat-label>
+          <input matInput placeholder="XX"  required type="number" min="0" formControlName="cooking_hours">
+        </mat-form-field>
+        <div class="inline-block"> : </div>
+        <mat-form-field appearance="fill"  class="inline-block">
+          <mat-label>Minutes : </mat-label>
+          <input matInput placeholder="XX"  required type="number" min="0" formControlName="cooking_minutes">
+        </mat-form-field>
+
+        <div>Temps de repos </div>
+        <mat-form-field appearance="fill"  class="inline-block">
+          <mat-label>Heure : </mat-label>
+          <input matInput placeholder="XX"  required type="number" min="0" formControlName="resting_hours">
+        </mat-form-field>
+        <div class="inline-block"> : </div>
+        <mat-form-field appearance="fill"  class="inline-block">
+          <mat-label>Minutes : </mat-label>
+          <input matInput placeholder="XX"  required type="number" min="0" formControlName="resting_minutes">
+        </mat-form-field>
+
+        <div>Type de cuisson </div>
+        <mat-form-field appearance="fill">
+          <mat-select formControlName="recipe_cooking_type_id">
+            <mat-option *ngFor="let recipeCookingType of recipeCookingTypes" [value]="recipeCookingType.id">
+              {{recipeCookingType.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>Difficulté </div>
+        <mat-form-field appearance="fill">
+          <mat-select formControlName="difficulty">
+            <mat-option *ngFor="let value of counter(5)" [value]="value">
+              {{difficultyArray[value]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>Coût </div>
+        <mat-form-field appearance="fill">
+          <mat-select formControlName="cost">
+            <mat-option *ngFor="let value of counter(5)" [value]="value">
+              {{costArray[value]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <img *ngFor="let media of medias; index as i" class="margin-right" style="height:100px; width:100px" src="{{media.path}}" (click)="removeMedias(i)">
+        </div>
+
+        <input class="hidden" id="input-file-id" type="file"  accept="image/*" (change)="addMedias($event)"/>
+        <label for="input-file-id" class="mat-primary mat-raised-button">Ajouter des médias</label>
+
+        <div class="bottom-button">
+          <button  mat-button matStepperPrevious class="mat-accent mat-raised-button">Précédent</button>
+          <span class="tc-spacer"></span>
+          <button  mat-button matStepperNext class="right  mat-raised-button mat-accent">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Ingrédients et étapes</ng-template>
+      <div>Ingrédients :</div>
+      <form *ngFor="let ingredient of ingredients; index as i" [formGroup]="ingredient">
+
+        <mat-form-field appearance="fill"  class="inline-block">
+          <mat-label>Quantité : </mat-label>
+          <input matInput placeholder="XX"  required type="number" min="0" formControlName="quantity">
+        </mat-form-field>
+
+        <div class="inline-block">  &nbsp; </div>
+        <mat-form-field appearance="fill" class="inline-block">
+          <mat-label>Unité : </mat-label>
+          <input matInput placeholder="Litre, gramme, cuillère ..." formControlName="ingredient_unit">
+        </mat-form-field>
+
+        <div class="inline-block">  &nbsp; </div>
+        <mat-form-field appearance="fill" class="inline-block">
+          <mat-label>Ingrédients : </mat-label>
+          <input matInput placeholder="Pomme, farine, boeuf ..." formControlName="ingredient_name">
+        </mat-form-field>
+
+        <button type="button" class="mat-warn mat-raised-button inline-block" *ngIf="ingredients.length > 1" (click)="deleteIngredient(i)">Supprimer ingrédient</button>
+      </form>
+      <button type="button" class="mat-primary mat-raised-button" (click)="addIngredient()">Ajouter un ingrédient</button>
+
+      <br>
+      <div  class="margin-top-20">Étapes :</div>
+      <form *ngFor="let step of steps; index as i" [formGroup]="step">
+
+        <div class="inline-block">  &nbsp; </div>
+        <mat-form-field appearance="fill" class="inline-block">
+          <mat-label>Contenu : </mat-label>
+          <input matInput placeholder="Préchauffer le four à 210°..." formControlName="content">
+        </mat-form-field>
+
+        <button type="button"  class="mat-warn mat-raised-button inline-block" *ngIf="steps.length > 1" (click)="deleteStep(i)">Supprimer étape</button>
+      </form>
+      <button type="button"  class="mat-primary mat-raised-button" (click)="addStep()">Ajouter une étape</button>
+      <div class="bottom-button">
+        <button  mat-button matStepperPrevious class="mat-accent mat-raised-button">Précédent</button>
+        <span class="tc-spacer"></span>
+        <button  mat-button matStepperNext class="right mat-raised-button mat-accent">Suivant</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Finalisation</ng-template>
+      <p class="center">Vous êtes arrivé à la fin de la création de votre recette. Vérifiez les informations saisies et vous pouvez procéder à la création.</p>
+      <div class="bottom-button">
+        <button  mat-button matStepperPrevious class="mat-accent mat-raised-button">Précédent</button>
+        <span class="tc-spacer"></span>
+        <button mat-button type="button" class="right mat-raised-button mat-accent" (click)="createRecipe()" *ngIf="!is_update">Créer</button>
+        <button mat-button type="button" class="right mat-raised-button mat-accent" (click)="createRecipe()" *ngIf="is_update">Mettre à jour</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>

@@ -1,0 +1,63 @@
+<div *ngIf="user">
+  <div class="full-width">
+    <img class="full-width profile-header"
+         src="{{user.background_url? user.background_url : '/assets/no-image-found.jpg'}}" alt="">
+  </div>
+  <div class="display-flex border-top" style="min-height: 80vh">
+    <div class="flex-grow-2 border center">
+      <div class="margin-top">
+        <img src="{{user.profile_url? user.profile_url : '/assets/no-image-found.jpg'}}" alt="" class="profile-picture">
+      </div>
+      <h2>
+        {{user.username}}
+        <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
+      </h2>
+      <div>
+        {{user.description}}
+      </div>
+      <div class="display-flex margin-top">
+        <div class="flex-grow-6 "></div>
+        <div class="flex-grow-6 ">
+          <p>{{user.followers}}</p>
+          <p>Follower{{user.followers > 1 ? 's' : ''}}</p>
+        </div>
+        <div class="flex-grow-6">
+          <p>{{user.likes}}</p>
+          <p>Like{{user.likes > 1 ? 's' : ''}}</p>
+        </div>
+        <div class="flex-grow-6 "></div>
+      </div>
+      <div class="display-flex margin-top">
+        <div class="flex-grow-6 "></div>
+        <div class="flex-grow-6 display-flex">
+          <div class="flex-grow-6 "  *ngIf="user.is_partner">
+            <button (click)="giftSub()"
+                    class="mat-raised-button mat-accent" *ngIf="this.user.subscribed">Offrir un abonnement</button>
+          </div>
+          <div class="flex-grow-6 "  *ngIf="user.is_partner">
+            <button (click)="subscribeUser()"
+                    class="mat-raised-button mat-accent" *ngIf="!this.user.subscribed && user.username != current_username">S'abonner</button>
+          </div>
+          <div class="flex-grow-6 ">
+            <button (click)="followUser()"
+                    class="mat-raised-button mat-accent" *ngIf="user.username != current_username">{{(user && user.following) ? 'Arrêter de suivre' : 'Suivre'}}</button>
+          </div>
+        </div>
+        <div class="flex-grow-6 "></div>
+      </div>
+    </div>
+    <div class="flex-grow-6">
+      <mat-tab-group>
+        <mat-tab label="Recettes">
+          <app-recipe-scroll (loadData)="loadData()" [pagination]="pagination">
+          </app-recipe-scroll>
+        </mat-tab>
+        <mat-tab label="Livres">
+          <app-book-card *ngFor="let book of books" [book]="book">
+
+          </app-book-card>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

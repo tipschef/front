@@ -1,0 +1,51 @@
+<section *ngIf="!!book && !!user">
+  <div class="display-flex" style="min-height: 100vh">
+    <div class="user-column center">
+      <img src="{{user.profile_url}}" class="profile-picture" routerLink="/{{user.username}}" style="cursor:pointer">
+      <h2 routerLink="/{{user.username}}" style="cursor:pointer">
+        {{user.username}}
+        <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
+      </h2>
+      <p>{{user.description}}</p>
+
+
+    </div>
+    <div class="book-column display-flex">
+      <div class="book">
+        <mat-card class="book-card">
+          <mat-card-header>
+            <mat-card-title>
+              <h1 style="width: 100%;">
+                {{book.title}}
+                <button mat-button *ngIf="!isLoading && !bought && !isCreator" class="mat-raised-button mat-accent"
+                        style="float: right; position: absolute; right: 25px" (click)="buyBook()">Acheter
+                </button>
+                <button mat-button *ngIf="isLoading  && !bought" class="mat-raised-button mat-accent mat-button-disabled"
+                        style="float: right; position: absolute; right: 25px">
+                Achat en cours...
+                </button>
+                <button mat-button *ngIf="bought" class="mat-raised-button mat-accent button-bought"
+                        style="float: right; position: absolute; right: 25px" (click)="redirect()">
+                  Déja acheté
+                </button>
+              </h1>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p><b>Auteur : </b> {{user.username}}</p>
+            <p><b>Prix : </b> {{book.price_euro | number:'1.2-2'}} €</p>
+            <p><b>Description :</b></p>
+            <p>{{book.description}}</p>
+            <h2>Recettes :</h2>
+            <div *ngFor="let recipe of book.recipes" class="display-flex recipe-pannel">
+              <img src="{{recipe.thumbnail.path}}" alt="" class="recipe-picture">
+              <div style="width: 100%;">
+                <h3>{{recipe.name}}</h3>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

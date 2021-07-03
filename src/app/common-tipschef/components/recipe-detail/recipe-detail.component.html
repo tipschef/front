@@ -1,0 +1,130 @@
+<section *ngIf="!!recipe && !!userCreator && !!likes">
+  <div class="display-flex">
+    <div class="user-column center">
+      <img src="{{userCreator.profile_url}}" class="profile-picture" routerLink="/{{userCreator.username}}"
+           style="cursor:pointer">
+      <h2 routerLink="/{{userCreator.username}}" style="cursor:pointer">
+        {{userCreator.username}}
+        <mat-icon *ngIf="userCreator.is_partner">verified_user</mat-icon>
+      </h2>
+      <p>{{userCreator.description}}</p>
+      <div class="book-pannel" *ngFor="let book of books">
+        <p class="book-name">
+          {{book.title}}
+        </p>
+        <button mat-button class="right mat-raised-button mat-accent" (click)="redirectBook(book.id)">Voir</button>
+      </div>
+    </div>
+    <div class="recipe-column display-flex">
+      <div class="recipe">
+        <mat-card class="recipe-card">
+          <mat-card-header>
+            <mat-card-title>
+              <span>{{recipe.name}}</span>
+              <span class="header-like mat-accent" (click)="dislike()" *ngIf="likes.liked_by_me == true">
+                {{likes.like_count}}
+                <mat-icon class="mat-accent">favorite</mat-icon>
+              </span>
+              <span class="header-like mat-accent" (click)="like()" *ngIf="likes.liked_by_me == false">
+                {{likes.like_count}}
+                <mat-icon class="mat-accent">favorite_border</mat-icon>
+              </span>
+            </mat-card-title>
+          </mat-card-header>
+
+          <video width="100%" height="400" controls *ngIf="recipe.video != null">
+            <source src="{{recipe.video.path}}" type="video/mp4">
+          </video>
+          <img *ngIf="recipe.video == null" src="{{recipe.thumbnail.path}}" width="100%" height="400">
+
+          <div class="recipe-content-pictures">
+            <img *ngIf="recipe.video != null && recipe.thumbnail != null" src="{{recipe.thumbnail.path}}"
+                 class="recipe-content-pictures-img">
+            <img src="{{recipe.medias[0].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[0] != null">
+            <img src="{{recipe.medias[1].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[1] != null">
+            <img src="{{recipe.medias[2].path}}" class="recipe-content-pictures-img" *ngIf="recipe.medias[2] != null">
+            <img *ngIf="recipe.thumbnail == null" src="{{recipe.medias[3].path}}" class="recipe-content-pictures-img">
+            <div *ngIf="recipe.medias.length > 3" class="pomme">
+              <p *ngIf="recipe.thumbnail != null" class="recipe-content-pictures-img-more">
+                +{{recipe.medias.length - 3}}</p>
+              <p *ngIf="recipe.thumbnail == null" class="recipe-content-pictures-img-more">
+                +{{recipe.medias.length - 4}}</p>
+            </div>
+          </div>
+          <div class="recipe-content-information">
+            <p class="preparation-data">
+              Cuisson: {{recipe.cooking_hours > 0 ? recipe.cooking_hours + ' h ' : ''}}{{recipe.cooking_minutes}}min</p>
+            <p class="preparation-data">
+              Préparation: {{recipe.preparation_hours > 0 ? recipe.preparation_hours + ' h ' : ''}}{{recipe.preparation_minutes}}
+              min</p>
+            <p class="preparation-data">Difficulté: {{difficultyArray[recipe.difficulty]}}</p>
+            <p class="preparation-data">Prix: {{costArray[recipe.cost]}}</p>
+          </div>
+          <div class="recipe-content-ingredients">
+            <h3 class="recipe-title">Ingredients - {{recipe.portion_number}} {{recipe.portion_unit}}</h3>
+            <mat-grid-list cols="2" rowHeight="5:1">
+              <mat-grid-tile class="ingredients"
+                             *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.ingredient_unit}} {{ingredient.ingredient_name}}</mat-grid-tile>
+            </mat-grid-list>
+          </div>
+          <mat-card-content class="recipe-content-preparation">
+            <h3 class="recipe-title">Préparation</h3>
+            <div *ngFor="let step of recipe.steps; let index = index;" class="recipe-content-steps" role="listitem">
+              <h4 class="step-header">Etape {{index + 1}}</h4>
+              <p>{{step.content}}</p>
+            </div>
+          </mat-card-content>
+          <mat-card-content class="recipe-content-commentary">
+            <h3 class="recipe-title">Commentaires ({{comments.length}})</h3>
+            <div class="recipe-content-my-comment" *ngIf="hasRightToComment">
+              <h4 class="comment-header">Poste ton commentaire !</h4>
+              <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill" class="recipe-content-my-comment-text">
+                  <textarea matInput placeholder="Ton commentaire..." class="recipe-content-my-comment-area"
+                            formControlName="comment_content" minlength="2"></textarea>
+                </mat-form-field>
+                <div style="width: 100%">
+                  <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit"
+                          class="recipe-content-my-comment-button">Poster
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="recipe-content-comment-scroll" *ngIf="comments.length > 0">
+              <div class="recipe-content-comment" role="listitem" *ngFor="let comment of comments; let index = index;">
+
+                <div style="width: 100%">
+                  <h4 style="display: inline-block;font-size: 16px; font-weight: bold">
+                    <img
+                      src="{{comment.user.profile_picture ? comment.user.profile_picture: '/assets/no-image-found.jpg'}}"
+                      class="recipe-content-comment-picture">
+                    {{comment.user.username}}
+                    <mat-icon *ngIf="comment.user.is_partner">verified_user</mat-icon>
+                  </h4>
+                  <p
+                    style="display: inline-block; font-size: 8px">{{comment.created_date | date:'dd/MM/yyyy HH:mm'}}</p>
+                  <mat-icon style="cursor: pointer; float: right; right: 0" class="mat-warn"
+                            *ngIf="username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
+                    delete
+                  </mat-icon>
+
+                </div>
+
+                <p>{{comment.content}}</p>
+
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<section *ngIf="!!error">
+  <p>{{error["detail"]}}</p>
+  <p>Required_tier :  {{error["min_tier"]}}</p>
+</section>

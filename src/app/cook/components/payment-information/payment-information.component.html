@@ -1,0 +1,59 @@
+<div class="center" *ngIf="isLoading">
+  <img src="/assets/loader-2_food.gif" alt="loading-gif">
+</div>
+
+<div *ngIf="!isLoading">
+  <h1>Vos informations de paiement</h1>
+
+  <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()" *ngIf="show == false">
+    <mat-grid-list cols="4" rowHeight="3:1">
+
+      <mat-grid-tile>
+        <p>Numéro</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Numéro</mat-label>
+          <input matInput placeholder="4242424242424242" type="text" formControlName="card_number">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <p>Mois d'expiration</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Mois d'expiration</mat-label>
+          <input matInput placeholder="6" type="number" formControlName="card_month" min="0" max="12">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <p>Année d'expiration </p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Année d'expiration</mat-label>
+          <input matInput placeholder="2022" type="number" formControlName="card_year" min="{{minExp}}">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <p>CVC</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>CVC</mat-label>
+          <input matInput placeholder="525" type="text" formControlName="card_cvd" maxlength="3">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <button mat-raised-button color="accent" type="submit" (submit)="onSubmit()">Sauvegarder</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+  <div  *ngIf="show == true">
+    <mat-card>
+      <mat-card-content>
+        <p>
+          Numéro de carte: XXXXXXXXXXXX{{cardNumber}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="delete()">Supprimer</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

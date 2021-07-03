@@ -1,0 +1,20 @@
+<div class="grid-container">
+  <h1>Dashboard</h1>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
+      <app-card title="Nombre de follows">
+        <app-follow-chart></app-follow-chart>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
+      <app-card title="Nombre d'abonnés">
+        <app-sub-chart></app-sub-chart>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
+      <app-card title="Nombre de likes">
+        <app-like-chart></app-like-chart>
+      </app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

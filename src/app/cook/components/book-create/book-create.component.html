@@ -1,0 +1,147 @@
+<div class="center" *ngIf="isLoading">
+  <img src="/assets/loader-2_food.gif" alt="loading-gif">
+</div>
+
+<div class="panel" *ngIf="!isLoading">
+  <div class="form-column">
+    <mat-horizontal-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Page de couverture</ng-template>
+          <div class="bottom-button">
+            <span class="tc-spacer"></span>
+            <button type="button" mat-button class="right mat-raised-button mat-accent" (click)="previewCover()">
+              Prévisualiser
+            </button>
+          </div>
+          <div>Template</div>
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="value">
+              <mat-option *ngFor="let cover_page of templates.cover_pages;let index=index;" [value]="index">
+                {{cover_page.filename}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Nom :</mat-label>
+            <input matInput placeholder="Saisissez un nom de livre" formControlName="name" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Prix :</mat-label>
+            <input matInput placeholder="Saisissez un nom de livre"  formControlName="price_euro" required type="number" min="5" step="0.01">
+          </mat-form-field>
+
+          <div>Image de couverture :</div>
+          <img *ngIf="!!coverPicture" class="margin-right" style="height:100px; width:100px"
+               src="{{coverPicture['path']}}">
+
+          <input class="hidden" id="input-thumbnail-id" type="file" accept="image/*" (change)="addCoverPicture($event)"/>
+          <br>
+          <label for="input-thumbnail-id" class="mat-primary mat-raised-button">Ajouter un image de couverture</label>
+          <br>
+
+          <div class="bottom-button">
+            <button  mat-button matStepperPrevious class="mat-accent mat-raised-button">Précédent</button>
+            <span class="tc-spacer"></span>
+            <button mat-button matStepperNext class="right mat-raised-button mat-accent">Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Page d'introduction</ng-template>
+          <div>
+            <span class="tc-spacer"></span>
+            <button type="button" mat-button class="right mat-raised-button mat-accent" (click)="previewDescription()">
+              Prévisualiser
+            </button>
+          </div>
+
+          <div>Template</div>
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="value">
+              <mat-option *ngFor="let book_description of templates.book_descriptions;let index=index;" [value]="index">
+                {{book_description.filename}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="top-button">Introduction :</div>
+          <mat-form-field appearance="fill" class="full-width-input textarea">
+            <textarea rows="5" cols="40" matInput placeholder="Saisissez une introduction à votre livre"
+                      formControlName="description" required></textarea>
+          </mat-form-field>
+
+
+          <div class="bottom-button">
+            <button  mat-button matStepperPrevious class="mat-accent mat-raised-button">Précédent</button>
+            <span class="tc-spacer"></span>
+            <button mat-button matStepperNext class="right mat-raised-button mat-accent">Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Pages de recette</ng-template>
+
+        <div class="top-button" >
+          <button type="button" mat-button class=" mat-raised-button mat-accent"
+                  (click)="addRecipeFormGroup()">Ajouter une recette au livre
+          </button>
+        </div>
+
+        <div *ngFor="let recipeFormGroup of recipeFormGroups;let index=index;" class="addedRecipe">
+          <form [formGroup]="recipeFormGroup">
+            <mat-form-field appearance="fill" style="display: inline-block">
+              <mat-label>Recette</mat-label>
+              <mat-select formControlName="recipe_id">
+                <mat-option *ngFor="let recipe of recipes;let index=index;" [value]="index">
+                  {{recipe.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="display: inline-block; margin-left: 20px; ">
+              <mat-label>Template</mat-label>
+              <mat-select formControlName="value">
+                <mat-option *ngFor="let recipeTemplate of templates.recipes;let index=index;" [value]="index">
+                  {{recipeTemplate.filename}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div style="width: 100%">
+              <button type="button" style="margin: 10px" mat-button class="mat-raised-button mat-warn" [disabled]="recipeFormGroups.length <= 1"
+                      (click)="deleteRecipe(index)">Supprimer
+              </button>
+              <button type="button" style="float : right;" mat-button class=" mat-raised-button mat-accent"
+                      (click)="previewRecipe(index)">Prévisualiser
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+
+        <div class="bottom-button">
+          <button  mat-button matStepperPrevious class="mat-accent mat-raised-button">Précédent</button>
+          <span class="tc-spacer"></span>
+          <button type="button" mat-button matStepperNext class="right-recipe mat-raised-button mat-accent">Suivant
+          </button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Finalisation</ng-template>
+        <p class="center">Vous êtes arrivé à la fin de la création de votre livre. Vérifiez les informations saisies et vous pouvez procéder à la création.</p>
+        <div class="bottom-button">
+          <button  mat-button matStepperPrevious class="mat-accent mat-raised-button">Précédent</button>
+          <span class="tc-spacer"></span>
+          <button mat-button type="button" class="right mat-raised-button mat-accent" (click)="createBook()">Créer</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+  <div class="preview-column">
+    <app-book-preview innerHtml="{{htmlToDisplay}}">
+
+    </app-book-preview>
+  </div>
+</div>
