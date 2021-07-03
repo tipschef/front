@@ -29,13 +29,13 @@
         <div>Thumbnail :</div>
         <img *ngIf="!!thumbnail" class="margin-right" style="height:100px; width:100px" src="{{thumbnail['path']}}">
 
-        <input class="hidden" id="input-thumbnail-id" type="file" (change)="addThumbnail($event)"/>
+        <input class="hidden" id="input-thumbnail-id" type="file" accept="image/*" accept="image/*" (change)="addThumbnail($event)"/>
         <br>
         <label for="input-thumbnail-id" class="mat-primary mat-raised-button">Ajouter un thumbnail</label>
         <br>
         <div  class="bottom-button">Vidéo :</div>
         <div *ngIf="!!video">Uploaded video : {{video['data']['name'] ? video['data']['name'] : video['data']['path']}}</div>
-        <input class="hidden" id="input-video-id" type="file" (change)="addVideo($event)"/>
+        <input class="hidden" id="input-video-id" type="file" accept="video/*" (change)="addVideo($event)"/>
         <label for="input-video-id" class="mat-primary mat-raised-button">Ajouter une vidéo</label>
 
         <div class="bottom-button"  >
@@ -133,7 +133,7 @@
           <img *ngFor="let media of medias; index as i" class="margin-right" style="height:100px; width:100px" src="{{media.path}}" (click)="removeMedias(i)">
         </div>
 
-        <input class="hidden" id="input-file-id" type="file" (change)="addMedias($event)"/>
+        <input class="hidden" id="input-file-id" type="file"  accept="image/*" (change)="addMedias($event)"/>
         <label for="input-file-id" class="mat-primary mat-raised-button">Ajouter des médias</label>
 
         <div class="bottom-button">

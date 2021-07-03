@@ -37,7 +37,7 @@
           <img *ngIf="!!coverPicture" class="margin-right" style="height:100px; width:100px"
                src="{{coverPicture['path']}}">
 
-          <input class="hidden" id="input-thumbnail-id" type="file" (change)="addCoverPicture($event)"/>
+          <input class="hidden" id="input-thumbnail-id" type="file" accept="image/*" (change)="addCoverPicture($event)"/>
           <br>
           <label for="input-thumbnail-id" class="mat-primary mat-raised-button">Ajouter un image de couverture</label>
           <br>
