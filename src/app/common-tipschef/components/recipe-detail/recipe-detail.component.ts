@@ -19,13 +19,14 @@ import {CreatedBook} from '../../../shared/models/created-book';
 export class RecipeDetailComponent implements OnInit {
 
   recipe: Recipe;
-  user_creator: User;
+  userCreator: User;
   likes: Like;
   error: any;
   comments: Comment[];
   firstFormGroup: FormGroup;
   recipeId: number;
   books: CreatedBook[];
+  subscription_tier: number;
 
 
   constructor(private recipeService: RecipeService,
@@ -49,17 +50,25 @@ export class RecipeDetailComponent implements OnInit {
           this.recipe = httpReturn.body;
           this.userService.getUserById(this.recipe.creator_id).subscribe(httpReturnUser => {
             if (httpReturnUser && httpReturnUser.body) {
-              this.user_creator = httpReturnUser.body;
+              this.userCreator = httpReturnUser.body;
+              this.loadSubscriptionTier();
             }
           });
           this.update_like();
           this.get_commentary();
-
         }
       },
       error => {
         this.error = error.error.detail;
       });
+  }
+
+  loadSubscriptionTier(): void {
+    this.userService.getUserSubscriptionTier(this.userCreator.username).subscribe(httpReturn => {
+      if (httpReturn && httpReturn.body && httpReturn.body.subscription_tier) {
+        this.subscription_tier = httpReturn.body.subscription_tier;
+      }
+    });
   }
 
   loadBooks(): void {
@@ -149,5 +158,9 @@ export class RecipeDetailComponent implements OnInit {
 
   get costArray(): {} {
     return this.recipeService.costArray;
+  }
+
+  get hasRightToComment(): boolean {
+    return (this.userCreator.username === this.username) ||  (this.recipe.min_tier === 0 && this.subscription_tier >= 1);
   }
 }

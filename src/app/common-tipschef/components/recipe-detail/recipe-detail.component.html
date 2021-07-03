@@ -1,17 +1,18 @@
-<section *ngIf="!!recipe && !!user_creator">
+<section *ngIf="!!recipe && !!userCreator && !!likes">
   <div class="display-flex">
     <div class="user-column center">
-      <img src="{{user_creator.profile_url}}" class="profile-picture" routerLink="/{{user_creator.username}}" style="cursor:pointer">
-      <h2 routerLink="/{{user_creator.username}}" style="cursor:pointer">
-        {{user_creator.username}}
-        <mat-icon *ngIf="user_creator.is_partner">verified_user</mat-icon>
+      <img src="{{userCreator.profile_url}}" class="profile-picture" routerLink="/{{userCreator.username}}"
+           style="cursor:pointer">
+      <h2 routerLink="/{{userCreator.username}}" style="cursor:pointer">
+        {{userCreator.username}}
+        <mat-icon *ngIf="userCreator.is_partner">verified_user</mat-icon>
       </h2>
-      <p>{{user_creator.description}}</p>
+      <p>{{userCreator.description}}</p>
       <div class="book-pannel" *ngFor="let book of books">
         <p class="book-name">
           {{book.title}}
         </p>
-        <button  mat-button class="right mat-raised-button mat-accent" (click)="redirectBook(book.id)">Voir</button>
+        <button mat-button class="right mat-raised-button mat-accent" (click)="redirectBook(book.id)">Voir</button>
       </div>
     </div>
     <div class="recipe-column display-flex">
@@ -51,8 +52,11 @@
             </div>
           </div>
           <div class="recipe-content-information">
-            <p class="preparation-data">Cuisson: {{recipe.cooking_hours > 0 ? recipe.cooking_hours + ' h ' : ''}}{{recipe.cooking_minutes}}min</p>
-            <p class="preparation-data">Préparation: {{recipe.preparation_hours > 0 ? recipe.preparation_hours + ' h ' : ''}}{{recipe.preparation_minutes}}min</p>
+            <p class="preparation-data">
+              Cuisson: {{recipe.cooking_hours > 0 ? recipe.cooking_hours + ' h ' : ''}}{{recipe.cooking_minutes}}min</p>
+            <p class="preparation-data">
+              Préparation: {{recipe.preparation_hours > 0 ? recipe.preparation_hours + ' h ' : ''}}{{recipe.preparation_minutes}}
+              min</p>
             <p class="preparation-data">Difficulté: {{difficultyArray[recipe.difficulty]}}</p>
             <p class="preparation-data">Prix: {{costArray[recipe.cost]}}</p>
           </div>
@@ -72,31 +76,43 @@
           </mat-card-content>
           <mat-card-content class="recipe-content-commentary">
             <h3 class="recipe-title">Commentaires ({{comments.length}})</h3>
-            <div class="recipe-content-my-comment">
+            <div class="recipe-content-my-comment" *ngIf="hasRightToComment">
               <h4 class="comment-header">Poste ton commentaire !</h4>
               <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="fill" class="recipe-content-my-comment-text">
                   <textarea matInput placeholder="Ton commentaire..." class="recipe-content-my-comment-area"
                             formControlName="comment_content" minlength="2"></textarea>
                 </mat-form-field>
-                <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit" class="recipe-content-my-comment-button">Poster</button>
+                <div style="width: 100%">
+                  <button mat-raised-button color="accent" (submit)="onSubmit()" type="submit"
+                          class="recipe-content-my-comment-button">Poster
+                  </button>
+                </div>
               </form>
             </div>
 
             <div class="recipe-content-comment-scroll" *ngIf="comments.length > 0">
               <div class="recipe-content-comment" role="listitem" *ngFor="let comment of comments; let index = index;">
-                <img src="{{comment.user.profile_picture ? comment.user.profile_picture: '/assets/no-image-found.jpg'}}" class="recipe-content-comment-picture">
-                <h4 class="comment-header">
-                  {{comment.user.username}}
-                  <mat-icon *ngIf="comment.user.is_partner">verified_user</mat-icon>
-                </h4>
-                <p>{{comment.created_date | date:'dd/mm/yyyy mm:ss'}}</p>
-                <p>{{comment.content}}</p>
-                <button *ngIf="username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
-                  <mat-icon>delete</mat-icon>
-                </button>
 
-                <hr class="solid">
+                <div style="width: 100%">
+                  <h4 style="display: inline-block;font-size: 16px; font-weight: bold">
+                    <img
+                      src="{{comment.user.profile_picture ? comment.user.profile_picture: '/assets/no-image-found.jpg'}}"
+                      class="recipe-content-comment-picture">
+                    {{comment.user.username}}
+                    <mat-icon *ngIf="comment.user.is_partner">verified_user</mat-icon>
+                  </h4>
+                  <p
+                    style="display: inline-block; font-size: 8px">{{comment.created_date | date:'dd/MM/yyyy HH:mm'}}</p>
+                  <mat-icon style="cursor: pointer; float: right; right: 0" class="mat-warn"
+                            *ngIf="username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
+                    delete
+                  </mat-icon>
+
+                </div>
+
+                <p>{{comment.content}}</p>
+
               </div>
             </div>
           </mat-card-content>
