@@ -18,6 +18,10 @@ table {
   color: rgb(255,143,0);
 }
 
+.content-amount{
+  color: #3CB371;
+}
+
 .highlight-name {
   font-size: 18px;
   flex-grow: 6;
