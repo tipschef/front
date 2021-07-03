@@ -6,8 +6,8 @@ import {UserService} from '../../../shared/services/user/user.service';
 import {User} from '../../../shared/models/user.model';
 import {Like} from '../../../shared/models/like';
 import {Comment} from '../../../shared/models/comment';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../shared/services/auth/auth.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../../shared/services/auth/auth.service';
 import {BookService} from '../../../shared/services/book/book.service';
 import {CreatedBook} from '../../../shared/models/created-book';
 
@@ -59,12 +59,12 @@ export class RecipeDetailComponent implements OnInit {
       },
       error => {
         this.error = error.error.detail;
-      }) ;
+      });
   }
 
   loadBooks(): void {
     this.bookService.getBookByRecipe(this.recipeId).subscribe(httpReturn => {
-      if (httpReturn && httpReturn.body){
+      if (httpReturn && httpReturn.body) {
         this.books = httpReturn.body;
       }
     });
@@ -137,9 +137,17 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   get username(): string {
-    if (this.authService.userRoles && this.authService.userRoles.username){
+    if (this.authService.userRoles && this.authService.userRoles.username) {
       return this.authService.userRoles.username;
     }
     return '';
+  }
+
+  get difficultyArray(): {} {
+    return this.recipeService.difficultyArray;
+  }
+
+  get costArray(): {} {
+    return this.recipeService.costArray;
   }
 }

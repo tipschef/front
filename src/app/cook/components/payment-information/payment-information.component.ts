@@ -29,9 +29,11 @@ export class PaymentInformationComponent implements OnInit {
     this.paymentService.getPaymentMethod().subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
         this.isLoading = false;
-          this.show = true;
-          this.cardNumber = httpReturn.body.card_number;
+        this.show = true;
+        this.cardNumber = httpReturn.body.card_number;
       }
+    }, error => {
+      this.isLoading = false;
     });
 
     this.paymentMethod = {} as PaymentMethod;
@@ -44,21 +46,21 @@ export class PaymentInformationComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if ( this.firstFormGroup.valid){
+    if (this.firstFormGroup.valid) {
       this.paymentMethod.number = this.firstFormGroup.value.card_number.toString();
       this.paymentMethod.exp_month = this.firstFormGroup.value.card_month;
       this.paymentMethod.exp_year = this.firstFormGroup.value.card_year;
       this.paymentMethod.cvc = this.firstFormGroup.value.card_cvd;
       this.paymentService.createPaymentMethod(this.paymentMethod).subscribe(httpReturn => {
         if (httpReturn && httpReturn.body) {
-          console.log('Account created');
+          this.show = true;
         }
       });
     }
 
   }
 
-  delete(): void{
+  delete(): void {
     this.paymentService.deletePaymentMethod().subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
         this.show = false;

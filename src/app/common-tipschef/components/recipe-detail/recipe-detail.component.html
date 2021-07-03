@@ -51,10 +51,10 @@
             </div>
           </div>
           <div class="recipe-content-information">
-            <p class="preparation-data">Cuisson: {{recipe.cooking_hours}}h{{recipe.cooking_minutes}}min</p>
-            <p class="preparation-data">Préparation: {{recipe.preparation_hours}}h{{recipe.preparation_minutes}}min</p>
-            <p class="preparation-data">Difficulté: {{recipe.difficulty}}</p>
-            <p class="preparation-data">Prix: {{recipe.cost}}</p>
+            <p class="preparation-data">Cuisson: {{recipe.cooking_hours > 0 ? recipe.cooking_hours + ' h ' : ''}}{{recipe.cooking_minutes}}min</p>
+            <p class="preparation-data">Préparation: {{recipe.preparation_hours > 0 ? recipe.preparation_hours + ' h ' : ''}}{{recipe.preparation_minutes}}min</p>
+            <p class="preparation-data">Difficulté: {{difficultyArray[recipe.difficulty]}}</p>
+            <p class="preparation-data">Prix: {{costArray[recipe.cost]}}</p>
           </div>
           <div class="recipe-content-ingredients">
             <h3 class="recipe-title">Ingredients - {{recipe.portion_number}} {{recipe.portion_unit}}</h3>

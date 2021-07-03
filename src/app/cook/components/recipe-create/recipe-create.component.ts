@@ -465,4 +465,12 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
   }
 
+  get difficultyArray(): {} {
+    return this.recipeService.difficultyArray;
+  }
+
+  get costArray(): {} {
+    return this.recipeService.costArray;
+  }
+
 }
