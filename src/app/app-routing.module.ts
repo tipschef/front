@@ -68,6 +68,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./admin-tipschef/admin-tipschef.module').then(m => m.AdminTipschefModule),
+    canActivate: [AuthGuard],
+    data: {roles: ['admin']}
+  },
+  {
     path: 'recipe/:recipe_id',
     component: RecipeDetailComponent,
     pathMatch: 'full',

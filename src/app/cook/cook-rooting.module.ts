@@ -4,13 +4,13 @@ import {CookComponent} from './cook.component';
 import {AuthGuard} from '../common-tipschef/guard/auth.guard';
 import {RecipeListComponent} from './components/recipe-list/recipe-list.component';
 import {RecipeCreateComponent} from './components/recipe-create/recipe-create.component';
-import {UserInformationComponent} from "./components/user-information/user-information.component";
-import {PaymentInformationComponent} from "./components/payment-information/payment-information.component";
-import {BankAccountInformationComponent} from "./components/bank-account-information/bank-account-information.component";
+import {UserInformationComponent} from './components/user-information/user-information.component';
+import {PaymentInformationComponent} from './components/payment-information/payment-information.component';
+import {BankAccountInformationComponent} from './components/bank-account-information/bank-account-information.component';
 import {BookListComponent} from './components/book-list/book-list.component';
 import {BookCreateComponent} from './components/book-create/book-create.component';
-import {DashComponent} from "./components/dash/dash.component";
-import {PayslipComponent} from "./components/payslip/payslip.component";
+import {DashComponent} from './components/dash/dash.component';
+import {PayslipComponent} from './components/payslip/payslip.component';
 
 const routes: Routes = [
   {

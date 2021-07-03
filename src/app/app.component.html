@@ -42,6 +42,10 @@
     <mat-icon>library_books</mat-icon>
     <span>Vos livres achetés</span>
   </button>
+  <button mat-menu-item routerLink="/admin/user" *ngIf="is_admin">
+    <mat-icon >admin_panel_settings</mat-icon>
+    <span>Administration</span>
+  </button>
   <button mat-menu-item (click)="disconnect()" *ngIf="isLoggedIn">
     <mat-icon>logout</mat-icon>
     <span>Déconnexion</span>

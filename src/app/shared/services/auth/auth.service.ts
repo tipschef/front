@@ -57,8 +57,8 @@ export class AuthService {
     });
   }
 
-  is_cook(): boolean {
-    return this.userRoles !== undefined && this.userRoles?.is_cook;
+  is_admin(): boolean {
+    return this.userRoles !== undefined && this.userRoles?.is_admin;
   }
 
   is_partner(): boolean {

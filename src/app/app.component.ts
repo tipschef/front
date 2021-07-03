@@ -29,9 +29,9 @@ export class AppComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
-  /*get is_cook(): boolean {
-    return this.authService.is_cook();
-  }*/
+  get is_admin(): boolean {
+    return this.authService.is_admin();
+  }
 
   get username(): string {
     if (this.authService.userRoles && this.authService.userRoles.username) {

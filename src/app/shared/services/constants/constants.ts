@@ -39,4 +39,9 @@ export const constants = {
   BOOK_USER: '/book/user',
   BOOK_PURCHASE: '/book/buy',
   BOOK_PURCHASE_CHECK: '/book/check',
+  ADMIN_USERS: '/admin/users',
+  ADMIN_PARTNER_ADD: '/admin/partner/add',
+  ADMIN_ADMIN_ADD: '/admin/admin/add',
+  ADMIN_HIGHLIGHT_ADD: '/admin/highlight/add',
+  ADMIN_HIGHLIGHT_REMOVE: '/admin/highlight/remove',
 };
