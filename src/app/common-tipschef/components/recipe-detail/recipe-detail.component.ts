@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {RecipeService} from '../../../shared/services/recipe/recipe.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Recipe} from '../../../shared/models/recipe';
@@ -10,11 +10,15 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../shared/services/auth/auth.service';
 import {BookService} from '../../../shared/services/book/book.service';
 import {CreatedBook} from '../../../shared/models/created-book';
+import SwiperCore, { Pagination } from 'swiper/core';
+
+SwiperCore.use([Pagination]);
 
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.css']
+  styleUrls: ['./recipe-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RecipeDetailComponent implements OnInit {
 
@@ -28,6 +32,7 @@ export class RecipeDetailComponent implements OnInit {
   books: CreatedBook[];
   subscriptionTier: number;
   offset: number;
+  displaySwiper: boolean;
 
 
   constructor(private recipeService: RecipeService,
@@ -41,6 +46,7 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.comments = [];
+    this.displaySwiper = false;
     this.offset = new Date().getTimezoneOffset();
 
     this.recipeId = parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10);
@@ -165,5 +171,13 @@ export class RecipeDetailComponent implements OnInit {
 
   get hasRightToComment(): boolean {
     return (this.userCreator.username === this.username) ||  (this.recipe.min_tier === 0 && this.subscriptionTier >= 1);
+  }
+
+  displaySwiperClick(): void {
+    this.displaySwiper = true;
+  }
+
+  closeSwiperClick(): void {
+    this.displaySwiper = false;
   }
 }
