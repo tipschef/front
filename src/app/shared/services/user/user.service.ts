@@ -81,7 +81,10 @@ export class UserService {
 
   getUserById(userId: number): Observable<HttpResponse<User>> {
     const url = this.constantsService.getConstant('USER_ID');
-    return this.http.get<User>(url + userId, {observe: 'response'});
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<User>(url + userId, {headers, observe: 'response'});
   }
 
   getAvailableFollowers(username: string): Observable<HttpResponse<any>> {

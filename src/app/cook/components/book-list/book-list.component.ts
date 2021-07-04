@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {BookService} from '../../../shared/services/book/book.service';
-import {Book} from '../../../shared/models/book';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -25,11 +24,7 @@ export class BookListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.bookService.getMyBooks().subscribe(httpReturn => {
-      if (httpReturn && httpReturn.body) {
-        this.books = httpReturn.body;
-      }
-    });
+
   }
 
   ngAfterViewInit(): void {

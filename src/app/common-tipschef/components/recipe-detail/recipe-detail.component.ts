@@ -26,7 +26,8 @@ export class RecipeDetailComponent implements OnInit {
   firstFormGroup: FormGroup;
   recipeId: number;
   books: CreatedBook[];
-  subscription_tier: number;
+  subscriptionTier: number;
+  offset: number;
 
 
   constructor(private recipeService: RecipeService,
@@ -40,6 +41,8 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.comments = [];
+    this.offset = new Date().getTimezoneOffset();
+
     this.recipeId = parseInt(this.route.snapshot.paramMap.get('recipe_id'), 10);
     this.loadBooks();
     this.firstFormGroup = this.formBuilder.group({
@@ -66,7 +69,7 @@ export class RecipeDetailComponent implements OnInit {
   loadSubscriptionTier(): void {
     this.userService.getUserSubscriptionTier(this.userCreator.username).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body && httpReturn.body.subscription_tier) {
-        this.subscription_tier = httpReturn.body.subscription_tier;
+        this.subscriptionTier = httpReturn.body.subscription_tier;
       }
     });
   }
@@ -161,6 +164,6 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   get hasRightToComment(): boolean {
-    return (this.userCreator.username === this.username) ||  (this.recipe.min_tier === 0 && this.subscription_tier >= 1);
+    return (this.userCreator.username === this.username) ||  (this.recipe.min_tier === 0 && this.subscriptionTier >= 1);
   }
 }

@@ -1,0 +1,41 @@
+<div class="content">
+  <h1>Vos follows</h1>
+  <mat-form-field>
+    <mat-label>Filtre</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Username">
+  </mat-form-field>
+  <div class="mat-elevation-z8 ">
+    <table mat-table [dataSource]="this.dataSource" class="mat-elevation-z8" matSort>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom d'utilisateur </th>
+        <td mat-cell *matCellDef="let follows" (click)="redirect(follows)" class="tipschef-button button-clickable" >
+          <p class="highlight-name">
+            {{follows.username}}
+            <mat-icon *ngIf="follows.is_partner">verified_user</mat-icon>
+          </p>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de début</th>
+        <td mat-cell *matCellDef="let follows"> {{follows.date| date:'dd/MM/yyyy HH:mm':'+0400'}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let follows">
+          <button mat-button class="mat-raised-button mat-accent button-bought tipschef-button" (click)="unfollow(follows)">
+            Unfollow
+          </button>
+        </td>
+
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row ; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

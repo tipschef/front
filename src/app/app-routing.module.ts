@@ -14,6 +14,7 @@ import {TipschefSubscriptionComponent} from './common-tipschef/components/tipsch
 import {GiftSubscriptionComponent} from './common-tipschef/components/gift-subscription/gift-subscription.component';
 import {BookPurchaseComponent} from "./common-tipschef/components/book-purchase/book-purchase.component";
 import {SubscriptionListComponent} from './common-tipschef/components/subscription-list/subscription-list.component';
+import {FollowComponent} from "./common-tipschef/components/follow/follow.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,12 @@ const routes: Routes = [
   {
     path: 'home',
     component: WallComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'follow',
+    component: FollowComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },
@@ -66,6 +73,12 @@ const routes: Routes = [
     path: 'cook',
     loadChildren: () => import('./cook/cook.module').then(m => m.CookModule),
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin-tipschef/admin-tipschef.module').then(m => m.AdminTipschefModule),
+    canActivate: [AuthGuard],
+    data: {roles: ['admin']}
   },
   {
     path: 'recipe/:recipe_id',

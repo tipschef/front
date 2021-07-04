@@ -28,6 +28,7 @@ import { SubChartComponent } from './cook/components/charts/sub-chart/sub-chart.
 import { FollowChartComponent } from './cook/components/charts/follow-chart/follow-chart.component';
 import { BookPurchaseComponent } from './common-tipschef/components/book-purchase/book-purchase.component';
 import { PayslipComponent } from './cook/components/payslip/payslip.component';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { PayslipComponent } from './cook/components/payslip/payslip.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

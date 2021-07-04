@@ -3,6 +3,7 @@ export const constants = {
   USER_UPDATE: '/users/update/',
   USER_ID: '/users/id/',
   USER_SEARCH: '/users/search/',
+  USER_FOLLOW: '/users/follow',
   USER_DASHBOARD: '/users/dashboard/',
   USER_HIGHLIGHT: '/users/highlight/',
   USER_SUBSCRIPTION: '/users/subscribe',
@@ -39,4 +40,9 @@ export const constants = {
   BOOK_USER: '/book/user',
   BOOK_PURCHASE: '/book/buy',
   BOOK_PURCHASE_CHECK: '/book/check',
+  ADMIN_USERS: '/admin/users',
+  ADMIN_PARTNER_ADD: '/admin/partner/add',
+  ADMIN_ADMIN_ADD: '/admin/admin/add',
+  ADMIN_HIGHLIGHT_ADD: '/admin/highlight/add',
+  ADMIN_HIGHLIGHT_REMOVE: '/admin/highlight/remove',
 };
