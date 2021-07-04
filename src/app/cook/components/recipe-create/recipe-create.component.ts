@@ -33,6 +33,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
   maxStep: number;
   currentStep: number;
 
+  tier_limit: number;
+
   thumbnail: {};
   video: {};
 
@@ -56,6 +58,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     this.ingredients = [];
     this.steps = [];
     this.mediaToDelete = [];
+
+    this.tier_limit = this.is_partner ? 3 : 0;
 
     this.recipeService.getAllRecipeCategories().subscribe(httpResponse => {
       this.recipeCategories = httpResponse.body;
@@ -90,7 +94,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
   fill_form(): void {
     this.firstFormGroup = this.formBuilder.group({
-      min_tier: [this.recipe.min_tier, [Validators.required, Validators.min(0), Validators.max(3)]],
+      min_tier: [this.recipe.min_tier, [Validators.required, Validators.min(0), Validators.max(this.tier_limit)]],
       name: [this.recipe.name.trim(), [Validators.required, Validators.maxLength(155)]],
       description: [this.recipe.description.trim(), [Validators.required, Validators.maxLength(155)]],
     });
@@ -154,7 +158,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     this.recipe = this.recipeService.init_recipe();
 
     this.firstFormGroup = this.formBuilder.group({
-      min_tier: [0, [Validators.required, Validators.min(0), Validators.max(3)]],
+      min_tier: [0, [Validators.required, Validators.min(0), Validators.max(this.tier_limit)]],
       name: ['', [Validators.required, Validators.maxLength(155)]],
       description: ['', [Validators.required, Validators.maxLength(155)]],
     });
@@ -488,6 +492,10 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
   get costArray(): {} {
     return this.recipeService.costArray;
+  }
+
+  get is_partner(): boolean{
+    return this.authService.userRoles.is_partner;
   }
 
 }
