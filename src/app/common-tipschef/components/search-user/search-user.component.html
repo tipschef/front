@@ -25,9 +25,9 @@
           {{user.username}}
           <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
         </h2>
-        <p class="description-div">
+        <div class="description-div">
           {{!!user.description? user.description : 'Aucune description'}}
-        </p>
+        </div>
         <mat-grid-list cols="4" rowHeight="25px">
           <mat-grid-tile
             [colspan]="1">

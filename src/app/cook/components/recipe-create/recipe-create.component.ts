@@ -99,7 +99,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
       recipe_category_id: [this.recipe.recipe_category_id, Validators.required],
       recipe_cooking_type_id: [this.recipe.recipe_cooking_type_id, Validators.required],
       portion_number: [this.recipe.portion_number, [Validators.required]],
-      portion_unit: [this.recipe.portion_unit, Validators.required],
+      portion_unit: [this.recipe.portion_unit, [Validators.required, Validators.maxLength(155)]],
       preparation_hours: [this.recipe.preparation_hours, [Validators.required]],
       preparation_minutes: [this.recipe.preparation_minutes, [Validators.required]],
       cooking_hours: [this.recipe.cooking_hours, [Validators.required]],
@@ -113,8 +113,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     for (let ingredient of this.recipe.ingredients) {
       this.ingredients.push(this.formBuilder.group({
         quantity: [ingredient.quantity],
-        ingredient_unit: [ingredient.ingredient_unit, Validators.required],
-        ingredient_name: [ingredient.ingredient_name, Validators.required]
+        ingredient_unit: [ingredient.ingredient_unit, [Validators.required, Validators.maxLength(155)]],
+        ingredient_name: [ingredient.ingredient_name, [Validators.required, Validators.maxLength(155)]]
       }));
     }
 
@@ -122,7 +122,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
     for (let step of this.recipe.steps) {
       this.steps.push(this.formBuilder.group({
-        content: [step.content, Validators.required],
+        content: [step.content, [Validators.required, Validators.maxLength(22)]],
       }));
     }
 
@@ -155,14 +155,14 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
     this.firstFormGroup = this.formBuilder.group({
       min_tier: [0, [Validators.required, Validators.min(0), Validators.max(3)]],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(155)]],
+      description: ['', [Validators.required, Validators.maxLength(155)]],
     });
     this.secondFormGroup = this.formBuilder.group({
       recipe_category_id: [1, Validators.required],
       recipe_cooking_type_id: [1, Validators.required],
       portion_number: [0, [Validators.required]],
-      portion_unit: ['', Validators.required],
+      portion_unit: ['', [Validators.required, Validators.maxLength(155)]],
       preparation_hours: [0, [Validators.required]],
       preparation_minutes: [0, [Validators.required]],
       cooking_hours: [0, [Validators.required]],
@@ -174,12 +174,12 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     });
     this.ingredients.push(this.formBuilder.group({
       quantity: [0],
-      ingredient_unit: ['', Validators.required],
-      ingredient_name: ['', Validators.required]
+      ingredient_unit: ['', [Validators.required, Validators.maxLength(155)]],
+      ingredient_name: ['', [Validators.required, Validators.maxLength(155)]]
     }));
 
     this.steps.push(this.formBuilder.group({
-      content: ['', Validators.required],
+      content: ['', [Validators.required, Validators.maxLength(200)]],
     }));
     this.isDataAvailable = true;
   }
@@ -188,13 +188,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     return Array.from({length: size}, (_, i) => i + 1);
   }
 
-  print(): void {
-    console.log(this.recipe);
-    console.log(this.firstFormGroup);
-    console.log(this.secondFormGroup);
-    console.log(this.ingredients);
-    console.log(this.steps);
-  }
 
   addMedias(event: any): void {
     const files = event.target.files;

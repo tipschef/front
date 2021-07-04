@@ -68,7 +68,6 @@ export class TipschefSubscriptionComponent implements OnInit {
         this.router.navigate(['/' + this.username]);
       }
     }, error => {
-      console.log(error.error);
       if (error && error.error && error.error['detail'] && error.error['detail'] === 'The user does not have payment method'){
         this.router.navigate(['/cook/payment-information']);
       }
