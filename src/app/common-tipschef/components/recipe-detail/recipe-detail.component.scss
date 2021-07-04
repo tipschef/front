@@ -68,6 +68,7 @@
   border: 2px solid #BDB8BF;
   border-radius: 8px;
   object-fit: cover;
+  margin-right: 80px;
 }
 
 .recipe-content-commentary{
@@ -103,7 +104,6 @@
 
 .recipe-content-pictures{
   display: flex;
-  justify-content: space-between;
 }
 
 .pomme{
@@ -165,8 +165,6 @@ hr.solid {
 
 .book-pannel {
   width: 80%;
-  border-right: 1px solid #ccc;
-  box-shadow: 1px 1px 1px 1px;
   margin: 25px auto auto;
   text-align: center;
   padding: 10px;
@@ -190,4 +188,50 @@ hr.solid {
   border: 1px solid #ccc;
   margin: 25px;
   padding: 15px;
+}
+@import "~swiper/swiper";
+@import "~swiper/components/pagination/pagination";
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 80%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tc-spacer {
+  flex: 1 1 auto;
+}
+
+.swiper-pannel {
+  width: 100%;
+  height: 80vh;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
