@@ -2,7 +2,7 @@
   <section *ngIf="!!recipe && !!userCreator && !!likes">
     <div class="display-flex">
       <div class="user-column center">
-        <img src="{{userCreator.profile_url}}" class="profile-picture" routerLink="/{{userCreator.username}}"
+        <img src="{{userCreator.profile_url? userCreator.profile_url : '/assets/no-image-found.jpg'}}" class="profile-picture" routerLink="/{{userCreator.username}}"
              style="cursor:pointer">
         <h2 routerLink="/{{userCreator.username}}" style="cursor:pointer">
           {{userCreator.username}}
@@ -95,11 +95,11 @@
                   </div>
                 </form>
               </div>
-              <div style="width: 100%; text-align: center" *ngIf="!hasRightToComment">
+              <div style="width: 100%; text-align: center" *ngIf="!hasRightToComment && userCreator.is_partner">
                 Si vous aussi vous voulez interagir avec la communauté de <b>{{userCreator.username}}</b>, n'hésitez pas
                 à
                 vous
-                <a href="{{'/subscribe/' + this.userCreator.username}}">abonner</a> !
+                <a href="{{'/subscribe/' + this.userCreator.username}}"> abonner</a> !
               </div>
 
               <div class="recipe-content-comment-scroll" *ngIf="comments.length > 0">

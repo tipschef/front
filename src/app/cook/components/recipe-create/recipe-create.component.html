@@ -13,7 +13,7 @@
 
         <mat-form-field>
           <mat-label>Tier d'accès : </mat-label>
-          <input matInput placeholder="Saisissez le tier minimum pour accès" formControlName="min_tier" required type="number" min="0" max="3">
+          <input matInput placeholder="Saisissez le tier minimum pour accès" formControlName="min_tier" required type="number" min="0" max="{{tier_limit}}">
         </mat-form-field>
 
         <mat-form-field>
