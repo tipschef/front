@@ -23,6 +23,7 @@ import { TipschefSubscriptionComponent } from './components/tipschef-subscriptio
 import { GiftSubscriptionComponent } from './components/gift-subscription/gift-subscription.component';
 import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
 import { FollowComponent } from './components/follow/follow.component';
+import {SwiperModule} from 'swiper/angular';
 
 
 @NgModule({
@@ -46,12 +47,13 @@ import { FollowComponent } from './components/follow/follow.component';
         RecipeCardComponent,
         SafeHtmlPipe
     ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    ScrollingModule,
-    RouterModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        MaterialModule,
+        ScrollingModule,
+        RouterModule,
+        ReactiveFormsModule,
+        SwiperModule
+    ]
 })
 export class CommonTipschefModule { }

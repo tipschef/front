@@ -29,6 +29,7 @@ import { FollowChartComponent } from './cook/components/charts/follow-chart/foll
 import { BookPurchaseComponent } from './common-tipschef/components/book-purchase/book-purchase.component';
 import { PayslipComponent } from './cook/components/payslip/payslip.component';
 import {DatePipe} from '@angular/common';
+import {SwiperModule} from 'swiper/angular';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import {DatePipe} from '@angular/common';
     MatIconModule,
     MatButtonModule,
     LayoutModule,
-    ChartsModule
+    ChartsModule,
+    SwiperModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
