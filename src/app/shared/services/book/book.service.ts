@@ -84,7 +84,6 @@ export class BookService {
     const headers = {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
-    console.log(html);
     // tslint:disable-next-line
     return this.http.post<any>(url, {'html': html}, {headers, observe: 'response'});
   }

@@ -59,8 +59,6 @@ export class ProfileComponent implements OnInit {
         this.user = httpReturn.body;
 
       }
-    }, error => {
-      console.log('User does not exist');
     });
   }
 

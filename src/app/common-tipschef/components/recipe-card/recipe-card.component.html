@@ -10,7 +10,7 @@
   <img class="card-image clickable" mat-card-image src="{{recipe.thumbnail?.path ? recipe.thumbnail.path:'/assets/no-image-found.jpg'}}" alt="Photo of a Shiba Inu" (click)="redirect()">
   <mat-card-content (click)="redirect()" class="clickable" *ngIf="recipe.can_be_seen">
     <h2>{{recipe.name}}</h2>
-    <p>
+    <p  style="word-wrap: break-word;">
       {{recipe.description}}
     </p>
   </mat-card-content>

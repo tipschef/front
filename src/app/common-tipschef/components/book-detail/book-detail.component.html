@@ -6,9 +6,7 @@
         {{user.username}}
         <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>
       </h2>
-      <p>{{user.description}}</p>
-
-
+      <p  style="word-wrap: break-word;">{{user.description}}</p>
     </div>
     <div class="book-column display-flex">
       <div class="book">
@@ -35,7 +33,7 @@
             <p><b>Auteur : </b> {{user.username}}</p>
             <p><b>Prix : </b> {{book.price_euro | number:'1.2-2'}} €</p>
             <p><b>Description :</b></p>
-            <p>{{book.description}}</p>
+            <p  style="word-wrap: break-word;">{{book.description}}</p>
             <h2>Recettes :</h2>
             <div *ngFor="let recipe of book.recipes" class="display-flex recipe-pannel">
               <img src="{{recipe.thumbnail.path}}" alt="" class="recipe-picture">

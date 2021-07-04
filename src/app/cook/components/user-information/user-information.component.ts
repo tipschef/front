@@ -35,9 +35,9 @@ export class UserInformationComponent implements OnInit {
     this.firstFormGroup = this.formBuilder.group({
       user_email: [this.user.email, [Validators.required, Validators.email]],
       user_username: [this.user.username, [Validators.maxLength(50)]],
-      user_description: [this.user.description, [Validators.maxLength(120)]],
-      user_firstname: [this.user.firstname, [Validators.maxLength(50)]],
-      user_lastname: [this.user.lastname, [Validators.maxLength(50)]],
+      user_description: [this.user.description ?? '', [Validators.maxLength(120)]],
+      user_firstname: [this.user.firstname ?? '', [Validators.maxLength(50)]],
+      user_lastname: [this.user.lastname ?? '', [Validators.maxLength(50)]],
       user_password: ['', [Validators.maxLength(50)]],
     });
   }
@@ -75,7 +75,6 @@ export class UserInformationComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => {
         this.profilePicture = {'data': file, 'path': reader.result, 'is_created': false};
-        console.log(this.profilePicture);
       };
     }
   }
@@ -114,7 +113,6 @@ export class UserInformationComponent implements OnInit {
     this.user.email = this.firstFormGroup.value.user_email;
     this.user.description = this.firstFormGroup.value.user_description;
     this.user.password = this.firstFormGroup.value.user_password;
-    console.log(this.user);
 
     this.userService.updateUser(this.user).subscribe(httpReturn => {
       if (httpReturn && httpReturn.body) {
@@ -130,6 +128,7 @@ export class UserInformationComponent implements OnInit {
             }
           })
         }
+        this.snackBar.open('Vos informations ont été mises à jour.', 'Fermer');
         this.getUserData()
       }
     });

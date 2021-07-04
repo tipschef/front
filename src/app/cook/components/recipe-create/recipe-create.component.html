@@ -18,12 +18,12 @@
 
         <mat-form-field>
           <mat-label>Nom : </mat-label>
-          <input matInput placeholder="Saisissez un nom de recette" formControlName="name" required>
+          <input matInput placeholder="Saisissez un nom de recette" formControlName="name"  maxlength="155"  required>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Description : </mat-label>
-          <input matInput placeholder="Saisissez un nom de recette" formControlName="description" required>
+          <input matInput placeholder="Saisissez un nom de recette" formControlName="description" maxlength="155" required>
         </mat-form-field>
 
         <div>Thumbnail :</div>
@@ -66,7 +66,7 @@
 
         <mat-form-field appearance="fill" class="inline-block">
           <mat-label>Portion : </mat-label>
-          <input matInput placeholder="Personne, pièce, litre ..." formControlName="portion_unit">
+          <input matInput placeholder="Personne, pièce, litre ..." maxlength="155" formControlName="portion_unit">
         </mat-form-field>
 
         <div>Temps de préparation </div>
@@ -156,13 +156,13 @@
         <div class="inline-block">  &nbsp; </div>
         <mat-form-field appearance="fill" class="inline-block">
           <mat-label>Unité : </mat-label>
-          <input matInput placeholder="Litre, gramme, cuillère ..." formControlName="ingredient_unit">
+          <input matInput maxlength="155" placeholder="Litre, gramme, cuillère ..." formControlName="ingredient_unit">
         </mat-form-field>
 
         <div class="inline-block">  &nbsp; </div>
         <mat-form-field appearance="fill" class="inline-block">
           <mat-label>Ingrédients : </mat-label>
-          <input matInput placeholder="Pomme, farine, boeuf ..." formControlName="ingredient_name">
+          <input matInput maxlength="155" placeholder="Pomme, farine, boeuf ..." formControlName="ingredient_name">
         </mat-form-field>
 
         <button type="button" class="mat-warn mat-raised-button inline-block" *ngIf="ingredients.length > 1" (click)="deleteIngredient(i)">Supprimer ingrédient</button>
@@ -174,9 +174,9 @@
       <form *ngFor="let step of steps; index as i" [formGroup]="step">
 
         <div class="inline-block">  &nbsp; </div>
-        <mat-form-field appearance="fill" class="inline-block">
+        <mat-form-field appearance="fill" class="inline-block" style="width: 400px">
           <mat-label>Contenu : </mat-label>
-          <input matInput placeholder="Préchauffer le four à 210°..." formControlName="content">
+          <textarea matInput maxlength="200" placeholder="Préchauffer le four à 210°..." formControlName="content"></textarea>
         </mat-form-field>
 
         <button type="button"  class="mat-warn mat-raised-button inline-block" *ngIf="steps.length > 1" (click)="deleteStep(i)">Supprimer étape</button>

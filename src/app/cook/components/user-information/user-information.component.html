@@ -21,18 +21,23 @@
         <textarea matInput maxlength="120" formControlName="user_description"></textarea>
       </mat-form-field>
       <br>
-      <div style="display: flex">
-        <div style="display: grid; margin-right: 20px">
-          <img *ngIf="!!profilePicture || !!user.profile_url" src="{{!!profilePicture? profilePicture['path']:user.profile_url}}" class="profile-images" >
-          <label for="input-profile-id" class="mat-primary mat-raised-button">Ajouter une photo de profil</label>
-          <input class="hidden" id="input-profile-id" type="file" (change)="addProfilePicture($event)"
-                 accept="image/*"/>
+      <div>
+        <div style="display: inline-block; margin-right: 20px">
+          <div style="display: flex; flex-direction: column ">
+            <label for="input-profile-id" class="mat-primary mat-raised-button">Ajouter une photo de profil</label>
+            <img *ngIf="!!profilePicture || !!user.profile_url" src="{{!!profilePicture? profilePicture['path']:user.profile_url}}" class="profile-images" >
+            <input class="hidden" id="input-profile-id" type="file" (change)="addProfilePicture($event)"
+                   accept="image/*"/>
+          </div>
         </div>
-        <div style="display: grid">
-          <img *ngIf="!!backgroundPicture || !!user.background_url" src="{{!!backgroundPicture? backgroundPicture['path']:user.background_url}}" class="profile-images" >
-          <label for="input-background-id" class="mat-primary mat-raised-button">Ajouter une photo de fond</label>
-          <input class="hidden" id="input-background-id" type="file" (change)="addBackgroundPicture($event)"
-                 accept="image/*"/>
+        <div style="display: inline-block">
+          <div style="display: flex; flex-direction: column ">
+            <label for="input-background-id" class="mat-primary mat-raised-button">Ajouter une photo de fond</label>
+            <img *ngIf="!!backgroundPicture || !!user.background_url" src="{{!!backgroundPicture? backgroundPicture['path']:user.background_url}}" class="profile-images" >
+            <input class="hidden" id="input-background-id" type="file" (change)="addBackgroundPicture($event)"
+                   accept="image/*"/>
+          </div>
+
         </div>
       </div>
 
