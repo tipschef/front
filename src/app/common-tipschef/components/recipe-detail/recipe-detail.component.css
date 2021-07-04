@@ -165,8 +165,6 @@ hr.solid {
 
 .book-pannel {
   width: 80%;
-  border-right: 1px solid #ccc;
-  box-shadow: 1px 1px 1px 1px;
   margin: 25px auto auto;
   text-align: center;
   padding: 10px;

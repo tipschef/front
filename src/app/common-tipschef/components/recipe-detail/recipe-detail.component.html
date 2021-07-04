@@ -8,12 +8,16 @@
         <mat-icon *ngIf="userCreator.is_partner">verified_user</mat-icon>
       </h2>
       <p>{{userCreator.description}}</p>
-      <div class="book-pannel" *ngFor="let book of books">
-        <p class="book-name">
-          {{book.title}}
-        </p>
+      <mat-card class="book-pannel" *ngFor="let book of books">
+        <mat-card-header>
+          <mat-card-title>
+            <p class="book-name">
+              {{book.title}}
+            </p>
+          </mat-card-title>
+        </mat-card-header>
         <button mat-button class="right mat-raised-button mat-accent" (click)="redirectBook(book.id)">Voir</button>
-      </div>
+      </mat-card>
     </div>
     <div class="recipe-column display-flex">
       <div class="recipe">
@@ -53,9 +57,11 @@
           </div>
           <div class="recipe-content-information">
             <p class="preparation-data">
-              Cuisson: {{recipe.cooking_hours > 0 ? recipe.cooking_hours + ' h ' : ''}}{{("0" + recipe.cooking_minutes).slice(-2)}} min</p>
+              Cuisson: {{recipe.cooking_hours > 0 ? recipe.cooking_hours + ' h ' : ''}}{{("0" + recipe.cooking_minutes).slice(-2)}}
+              min</p>
             <p class="preparation-data">
-              Préparation: {{recipe.preparation_hours > 0 ? recipe.preparation_hours + ' h ' : ''}}{{("0" + recipe.preparation_minutes).slice(-2)}} min</p>
+              Préparation: {{recipe.preparation_hours > 0 ? recipe.preparation_hours + ' h ' : ''}}{{("0" + recipe.preparation_minutes).slice(-2)}}
+              min</p>
             <p class="preparation-data">Difficulté: {{difficultyArray[recipe.difficulty]}}</p>
             <p class="preparation-data">Prix: {{costArray[recipe.cost]}}</p>
           </div>
@@ -90,7 +96,8 @@
               </form>
             </div>
             <div style="width: 100%; text-align: center" *ngIf="!hasRightToComment">
-              Si vous aussi vous voulez interagir avec la communauté de <b>{{userCreator.username}}</b>, n'hésitez pas à vous
+              Si vous aussi vous voulez interagir avec la communauté de <b>{{userCreator.username}}</b>, n'hésitez pas à
+              vous
               <a href="{{'/subscribe/' + this.userCreator.username}}">abonner</a> !
             </div>
 
@@ -103,7 +110,7 @@
                       src="{{comment.user.profile_picture ? comment.user.profile_picture: '/assets/no-image-found.jpg'}}"
                       class="recipe-content-comment-picture">
                     {{comment.user.username}}
-                    <mat-icon  *ngIf="comment.user.is_partner">verified_user</mat-icon>
+                    <mat-icon *ngIf="comment.user.is_partner">verified_user</mat-icon>
                   </h4>
                   <p
                     style="display: inline-block; font-size: 8px; margin-left: 10px">{{comment.created_date | date:'dd/MM/yyyy HH:mm':'+0400'}}</p>
