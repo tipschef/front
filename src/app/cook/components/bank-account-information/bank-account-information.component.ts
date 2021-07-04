@@ -60,6 +60,11 @@ export class BankAccountInformationComponent implements OnInit {
 
 
   onSubmit(): void {
+    if ( !this.idRecto || !this.idVerso) {
+      this.snackBar.open('Vous n\'avez pas téléversé les fichiers nécessaires.', 'Fermer');
+      return ;
+    }
+
     if ( this.firstFormGroup.valid){
       const birthdate = this.firstFormGroup.value.bank_birthdate.getFullYear() + '-' + this.firstFormGroup.value.bank_birthdate.getMonth() + '-' + this.firstFormGroup.value.bank_birthdate.getDate();
       const phone = this.firstFormGroup.value.bank_phone[0] === '0' ? '+33' +
