@@ -3,7 +3,7 @@
     <div class="highlight-title"><h1>Cuisiniers du moment</h1></div>
 
     <div class="user-column center">
-      <div class="highlight-pannel" *ngFor="let hightlighted_user of highlighted"
+      <mat-card class="highlight-pannel" *ngFor="let hightlighted_user of highlighted"
            (click)="redirect(hightlighted_user.username)">
         <img
           src="{{hightlighted_user.profile_picture? hightlighted_user.profile_picture : '/assets/no-image-found.jpg'}}"
@@ -14,7 +14,7 @@
           {{hightlighted_user.username}}
           <mat-icon *ngIf="hightlighted_user.is_partner">verified_user</mat-icon>
         </p>
-      </div>
+      </mat-card>
     </div>
   </div>
   <div class="recipes-card">
