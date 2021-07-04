@@ -59,7 +59,7 @@ export class BookCreateComponent implements OnInit {
 
     this.secondFormGroup = this.formBuilder.group({
       value: [0, Validators.required],
-      description: ['', [Validators.required, Validators.maxLength(250)]]
+      description: ['', [Validators.required, Validators.maxLength(600)]]
     });
 
     this.recipeFormGroups = [];
