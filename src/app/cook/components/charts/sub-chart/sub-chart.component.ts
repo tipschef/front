@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import {Dashboard} from "../../../../shared/models/dashboard";
-import {DashboardService} from "../../../../shared/services/dashboard/dashboard.service";
+import {Dashboard} from '../../../../shared/models/dashboard';
+import {DashboardService} from '../../../../shared/services/dashboard/dashboard.service';
+import {Recipe} from '../../../../shared/models/recipe';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-sub-chart',
@@ -10,41 +12,33 @@ import {DashboardService} from "../../../../shared/services/dashboard/dashboard.
   styleUrls: ['./sub-chart.component.css']
 })
 export class SubChartComponent implements OnInit {
+  @Input() dashboard: Dashboard[];
 
-  public dashboard: Dashboard[]
-
-  public lineChartData: ChartDataSets[] = [
+  lineChartData: ChartDataSets[] = [
     { data: [], label: 'Abonnés' },
-  ]
-  public lineChartLabels: Label[] = [];
-  public lineChartOptions: ChartOptions = {
+  ];
+  lineChartLabels: Label[] = [];
+  lineChartOptions: ChartOptions = {
     responsive: true,
   };
-  public lineChartColors: Color[] = [
+  lineChartColors: Color[] = [
     {
       borderColor: 'black',
       backgroundColor: 'rgba(255,145,0,0.6)',
     },
   ];
-  public lineChartLegend = true;
-  public lineChartType: ChartType = 'line';
-  public lineChartPlugins = [];
+  lineChartLegend = true;
+  lineChartType: ChartType = 'line';
+  lineChartPlugins = [];
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private datePipe: DatePipe) {
   }
 
-  ngOnInit() {
-    this.dashboardService.getDashboardData().subscribe(httpReturn => {
-      if (httpReturn && httpReturn.body) {
-        this.dashboard = httpReturn.body;
-        for( let m of this.dashboard){
-          const date = new Date(m.date);
-          this.lineChartLabels.push(('0' + date.getDay()).slice(-2) +"/"+ ('0' + date.getMonth()).slice(-2) + " " + ('0' + date.getHours()).slice(-2) + ":" +('0' + date.getMinutes()).slice(-2));
-          this.lineChartData[0].data.push(m.sub);
-        }
-
-      }
-    })
+  ngOnInit(): void {
+    for ( const m of this.dashboard){
+      this.lineChartLabels.push(this.datePipe.transform(m.date, 'dd/MM/yyyy HH:mm', '+0400'));
+      this.lineChartData[0].data.push(m.sub);
+    }
   }
 
 }
