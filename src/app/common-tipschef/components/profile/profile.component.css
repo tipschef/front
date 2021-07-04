@@ -24,6 +24,7 @@
 
 .flex-grow-2 {
   flex-grow: 2;
+  max-width: 450px;
 }
 
 .flex-grow-6 {

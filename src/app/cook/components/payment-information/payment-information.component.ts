@@ -52,7 +52,7 @@ export class PaymentInformationComponent implements OnInit {
       this.paymentMethod.exp_year = this.firstFormGroup.value.card_year;
       this.paymentMethod.cvc = this.firstFormGroup.value.card_cvd;
       this.paymentService.createPaymentMethod(this.paymentMethod).subscribe(httpReturn => {
-        if (httpReturn && httpReturn.body) {
+        if (httpReturn && httpReturn.status === 200) {
           this.show = true;
         }
       });
