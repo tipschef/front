@@ -58,8 +58,6 @@
 
 .highlight-pannel {
   width: 80%;
-  border-right: 1px solid #ccc;
-  box-shadow: 1px 1px 1px 1px;
   margin: 25px auto auto;
   text-align: center;
   padding: 10px;
@@ -68,6 +66,8 @@
   align-items: center;
   flex-direction: row;
 }
+
+
 .highlight-pannel:hover {
   background-color: #ff9100;
   color: #f1f1f1;
