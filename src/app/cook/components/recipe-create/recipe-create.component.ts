@@ -159,8 +159,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
       description: ['', Validators.required],
     });
     this.secondFormGroup = this.formBuilder.group({
-      recipe_category_id: ['', Validators.required],
-      recipe_cooking_type_id: ['', Validators.required],
+      recipe_category_id: [1, Validators.required],
+      recipe_cooking_type_id: [1, Validators.required],
       portion_number: [0, [Validators.required]],
       portion_unit: ['', Validators.required],
       preparation_hours: [0, [Validators.required]],
@@ -169,8 +169,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
       cooking_minutes: [0, [Validators.required]],
       resting_hours: [0, [Validators.required]],
       resting_minutes: [0, [Validators.required]],
-      difficulty: [0, [Validators.required]],
-      cost: [0, [Validators.required]],
+      difficulty: [1, [Validators.required]],
+      cost: [1, [Validators.required]],
     });
     this.ingredients.push(this.formBuilder.group({
       quantity: [0],
