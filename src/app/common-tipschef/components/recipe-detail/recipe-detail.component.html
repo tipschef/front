@@ -53,15 +53,14 @@
           </div>
           <div class="recipe-content-information">
             <p class="preparation-data">
-              Cuisson: {{recipe.cooking_hours > 0 ? recipe.cooking_hours + ' h ' : ''}}{{("0" + recipe.cooking_minutes).slice(-2)}}min</p>
+              Cuisson: {{recipe.cooking_hours > 0 ? recipe.cooking_hours + ' h ' : ''}}{{("0" + recipe.cooking_minutes).slice(-2)}} min</p>
             <p class="preparation-data">
-              Préparation: {{recipe.preparation_hours > 0 ? recipe.preparation_hours + ' h ' : ''}}{{("0" + recipe.preparation_minutes).slice(-2)}}
-              min</p>
+              Préparation: {{recipe.preparation_hours > 0 ? recipe.preparation_hours + ' h ' : ''}}{{("0" + recipe.preparation_minutes).slice(-2)}} min</p>
             <p class="preparation-data">Difficulté: {{difficultyArray[recipe.difficulty]}}</p>
             <p class="preparation-data">Prix: {{costArray[recipe.cost]}}</p>
           </div>
           <div class="recipe-content-ingredients">
-            <h3 class="recipe-title">Ingredients - {{recipe.portion_number}} {{recipe.portion_unit}}</h3>
+            <h3 class="recipe-title">Ingrédients - {{recipe.portion_number}} {{recipe.portion_unit}}</h3>
             <mat-grid-list cols="2" rowHeight="5:1">
               <mat-grid-tile class="ingredients"
                              *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.ingredient_unit}} {{ingredient.ingredient_name}}</mat-grid-tile>
@@ -90,6 +89,10 @@
                 </div>
               </form>
             </div>
+            <div style="width: 100%; text-align: center" *ngIf="!hasRightToComment">
+              Si vous aussi vous voulez interagir avec la communauté de <b>{{userCreator.username}}</b>, n'hésitez pas à vous
+              <a href="{{'/subscribe/' + this.userCreator.username}}">abonner</a> !
+            </div>
 
             <div class="recipe-content-comment-scroll" *ngIf="comments.length > 0">
               <div class="recipe-content-comment" role="listitem" *ngFor="let comment of comments; let index = index;">
@@ -100,10 +103,10 @@
                       src="{{comment.user.profile_picture ? comment.user.profile_picture: '/assets/no-image-found.jpg'}}"
                       class="recipe-content-comment-picture">
                     {{comment.user.username}}
-                    <mat-icon *ngIf="comment.user.is_partner">verified_user</mat-icon>
+                    <mat-icon  *ngIf="comment.user.is_partner">verified_user</mat-icon>
                   </h4>
                   <p
-                    style="display: inline-block; font-size: 8px">{{comment.created_date | date:'dd/MM/yyyy HH:mm':'+0400'}}</p>
+                    style="display: inline-block; font-size: 8px; margin-left: 10px">{{comment.created_date | date:'dd/MM/yyyy HH:mm':'+0400'}}</p>
                   <mat-icon style="cursor: pointer; float: right; right: 0" class="mat-warn"
                             *ngIf="username == comment.user.username" (click)="deleteCommentFromRecipeId(comment.id)">
                     delete
