@@ -91,15 +91,15 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
   fill_form(): void {
     this.firstFormGroup = this.formBuilder.group({
       min_tier: [this.recipe.min_tier, [Validators.required, Validators.min(0), Validators.max(3)]],
-      name: [this.recipe.name, [Validators.required, Validators.maxLength(155)]],
-      description: [this.recipe.description, [Validators.required, Validators.maxLength(155)]],
+      name: [this.recipe.name.trim(), [Validators.required, Validators.maxLength(155)]],
+      description: [this.recipe.description.trim(), [Validators.required, Validators.maxLength(155)]],
     });
 
     this.secondFormGroup = this.formBuilder.group({
       recipe_category_id: [this.recipe.recipe_category_id, Validators.required],
       recipe_cooking_type_id: [this.recipe.recipe_cooking_type_id, Validators.required],
       portion_number: [this.recipe.portion_number, [Validators.required]],
-      portion_unit: [this.recipe.portion_unit, [Validators.required, Validators.maxLength(155)]],
+      portion_unit: [this.recipe.portion_unit.trim(), [Validators.required, Validators.maxLength(155)]],
       preparation_hours: [this.recipe.preparation_hours, [Validators.required]],
       preparation_minutes: [this.recipe.preparation_minutes, [Validators.required]],
       cooking_hours: [this.recipe.cooking_hours, [Validators.required]],
@@ -113,8 +113,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     for (let ingredient of this.recipe.ingredients) {
       this.ingredients.push(this.formBuilder.group({
         quantity: [ingredient.quantity],
-        ingredient_unit: [ingredient.ingredient_unit, [Validators.required, Validators.maxLength(155)]],
-        ingredient_name: [ingredient.ingredient_name, [Validators.required, Validators.maxLength(155)]]
+        ingredient_unit: [ingredient.ingredient_unit.trim(), [Validators.required, Validators.maxLength(155)]],
+        ingredient_name: [ingredient.ingredient_name.trim(), [Validators.required, Validators.maxLength(155)]]
       }));
     }
 
@@ -122,7 +122,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
 
     for (let step of this.recipe.steps) {
       this.steps.push(this.formBuilder.group({
-        content: [step.content, [Validators.required, Validators.maxLength(22)]],
+        content: [step.content.trim(), [Validators.required, Validators.maxLength(22)]],
       }));
     }
 
@@ -320,13 +320,13 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     this.is_loading = true;
 
     this.recipe.min_tier = this.firstFormGroup.value.min_tier;
-    this.recipe.description = this.firstFormGroup.value.description;
-    this.recipe.name = this.firstFormGroup.value.name;
+    this.recipe.description = this.firstFormGroup.value.description.trim();
+    this.recipe.name = this.firstFormGroup.value.name.trim();
 
     this.recipe.recipe_category_id = this.secondFormGroup.value.recipe_category_id;
     this.recipe.recipe_cooking_type_id = this.secondFormGroup.value.recipe_cooking_type_id;
     this.recipe.portion_number = this.secondFormGroup.value.portion_number;
-    this.recipe.portion_unit = this.secondFormGroup.value.portion_unit;
+    this.recipe.portion_unit = this.secondFormGroup.value.portion_unit.trim();
     this.recipe.preparation_hours = this.secondFormGroup.value.preparation_hours;
     this.recipe.preparation_minutes = this.secondFormGroup.value.preparation_minutes;
     this.recipe.cooking_hours = this.secondFormGroup.value.cooking_hours;
@@ -339,8 +339,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     for (const ingredient of this.ingredients) {
       this.recipe.ingredients.push({
         quantity: ingredient.value.quantity,
-        ingredient_name: ingredient.value.ingredient_name,
-        ingredient_unit: ingredient.value.ingredient_unit
+        ingredient_name: ingredient.value.ingredient_name.trim(),
+        ingredient_unit: ingredient.value.ingredient_unit.trim()
       });
     }
     this.recipe.steps = [];
@@ -348,7 +348,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewInit {
     for (const step of this.steps) {
       this.recipe.steps.push({
         order: order,
-        content: step.value.content
+        content: step.value.content.trim()
       });
       order += 1;
     }

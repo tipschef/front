@@ -1,7 +1,7 @@
 <section *ngIf="!!book && !!user">
   <div class="display-flex" style="min-height: 100vh">
     <div class="user-column center">
-      <img src="{{user.profile_url}}" class="profile-picture" routerLink="/{{user.username}}" style="cursor:pointer">
+      <img src="{{user.profile_url? user.profile_url : '/assets/no-image-found.jpg'}}" class="profile-picture" routerLink="/{{user.username}}" style="cursor:pointer">
       <h2 routerLink="/{{user.username}}" style="cursor:pointer">
         {{user.username}}
         <mat-icon *ngIf="user.is_partner">verified_user</mat-icon>

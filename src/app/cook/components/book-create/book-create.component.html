@@ -25,7 +25,7 @@
 
           <mat-form-field>
             <mat-label>Nom :</mat-label>
-            <input matInput placeholder="Saisissez un nom de livre" formControlName="name" required>
+            <input matInput placeholder="Saisissez un nom de livre" formControlName="name" required maxlength="155" >
           </mat-form-field>
 
           <mat-form-field>
@@ -70,7 +70,7 @@
           <div class="top-button">Introduction :</div>
           <mat-form-field appearance="fill" class="full-width-input textarea">
             <textarea rows="5" cols="40" matInput placeholder="Saisissez une introduction à votre livre"
-                      formControlName="description" required></textarea>
+                      formControlName="description" required maxlength="600" ></textarea>
           </mat-form-field>
 
 
