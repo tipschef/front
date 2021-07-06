@@ -96,4 +96,12 @@ export class RecipeListComponent implements OnInit, AfterViewInit {
   redirect(recipe): void {
     this.router.navigate(['/recipe/' + recipe.id]);
   }
+
+  get difficultArray(): {} {
+    return this.recipeService.difficultyArray;
+  }
+
+  get costArray(): {} {
+    return this.recipeService.costArray;
+  }
 }

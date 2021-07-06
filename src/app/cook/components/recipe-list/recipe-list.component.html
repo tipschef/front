@@ -16,12 +16,12 @@
 
     <ng-container matColumnDef="difficulty">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Difficulté </th>
-      <td mat-cell *matCellDef="let recipe"> {{recipe.difficulty}} </td>
+      <td mat-cell *matCellDef="let recipe"> {{difficultArray[recipe.difficulty]}} </td>
     </ng-container>
 
     <ng-container matColumnDef="cost">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Coût </th>
-      <td mat-cell *matCellDef="let recipe"> {{recipe.cost}} </td>
+      <td mat-cell *matCellDef="let recipe"> {{costArray[recipe.cost]}} </td>
     </ng-container>
 
     <ng-container matColumnDef="recipe_category_id">

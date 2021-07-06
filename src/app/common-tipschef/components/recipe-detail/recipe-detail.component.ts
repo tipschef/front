@@ -170,7 +170,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   get hasRightToComment(): boolean {
-    return (this.userCreator.username === this.username) ||  (this.recipe.min_tier === 0 && this.subscriptionTier >= 1);
+    return (this.userCreator.username === this.username) ||  (this.recipe.min_tier >= 0 && this.subscriptionTier >= 1);
   }
 
   displaySwiperClick(): void {
