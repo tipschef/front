@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PayslipComponent } from './payslip.component';
+import {PayslipComponent} from './payslip.component';
 
 describe('PayslipComponent', () => {
   let component: PayslipComponent;

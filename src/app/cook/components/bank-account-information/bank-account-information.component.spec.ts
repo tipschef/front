@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BankAccountInformationComponent } from './bank-account-information.component';
+import {BankAccountInformationComponent} from './bank-account-information.component';
 
 describe('BankAccountInformationComponent', () => {
   let component: BankAccountInformationComponent;

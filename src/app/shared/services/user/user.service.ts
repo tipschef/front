@@ -1,6 +1,6 @@
 /* tslint:disable:object-literal-shorthand */
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ConstantsService} from '../constants/constants.service';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user.model';

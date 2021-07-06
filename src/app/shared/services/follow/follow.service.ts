@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {ConstantsService} from "../constants/constants.service";
-import {AuthService} from "../auth/auth.service";
-import {Observable} from "rxjs";
-import {Payslip} from "../../models/payslip";
-import {Follow} from "../../models/follow";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {ConstantsService} from '../constants/constants.service';
+import {AuthService} from '../auth/auth.service';
+import {Observable} from 'rxjs';
+import {Follow} from '../../models/follow';
 
 @Injectable({
   providedIn: 'root'

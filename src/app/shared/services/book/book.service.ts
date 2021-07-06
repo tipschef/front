@@ -4,7 +4,6 @@ import {ConstantsService} from '../constants/constants.service';
 import {AuthService} from '../auth/auth.service';
 import {Observable} from 'rxjs';
 import {TemplateList} from '../../models/template-list';
-import {Recipe} from '../../models/recipe';
 import {Media} from '../../models/media';
 import {Book} from '../../models/book';
 import {CreatedBook} from '../../models/created-book';

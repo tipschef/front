@@ -7,7 +7,6 @@ import {AuthData} from '../../models/auth-data.model';
 import {UserRoles} from '../../models/user-roles';
 import {map} from 'rxjs/operators';
 import {LocalStorageService} from '../local-storage/local-storage.service';
-import {rejects} from 'assert';
 
 @Injectable({
   providedIn: 'root'

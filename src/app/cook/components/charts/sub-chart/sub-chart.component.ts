@@ -1,9 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
+import {Color, Label} from 'ng2-charts';
 import {Dashboard} from '../../../../shared/models/dashboard';
-import {DashboardService} from '../../../../shared/services/dashboard/dashboard.service';
-import {Recipe} from '../../../../shared/models/recipe';
 import {DatePipe} from '@angular/common';
 
 @Component({
