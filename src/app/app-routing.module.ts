@@ -15,6 +15,7 @@ import {GiftSubscriptionComponent} from './common-tipschef/components/gift-subsc
 import {BookPurchaseComponent} from "./common-tipschef/components/book-purchase/book-purchase.component";
 import {SubscriptionListComponent} from './common-tipschef/components/subscription-list/subscription-list.component';
 import {FollowComponent} from "./common-tipschef/components/follow/follow.component";
+import {MessageComponent} from './common-tipschef/components/message/message.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,12 @@ const routes: Routes = [
     path: 'log-in',
     component: LogInComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'message',
+    component: MessageComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',

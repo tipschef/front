@@ -13,4 +13,8 @@ export class ConstantsService {
   getConstant(key: string): string {
     return environment.api + environment.api_version + constants[key];
   }
+
+  getWebsocketConstant(): string {
+    return environment.socket_endpoint;
+  }
 }

@@ -24,6 +24,7 @@ import { GiftSubscriptionComponent } from './components/gift-subscription/gift-s
 import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
 import { FollowComponent } from './components/follow/follow.component';
 import {SwiperModule} from 'swiper/angular';
+import { MessageComponent } from './components/message/message.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {SwiperModule} from 'swiper/angular';
     TipschefSubscriptionComponent,
     GiftSubscriptionComponent,
     SubscriptionListComponent,
-    FollowComponent
+    FollowComponent,
+    MessageComponent
   ],
     exports: [
         RecipeCardComponent,
