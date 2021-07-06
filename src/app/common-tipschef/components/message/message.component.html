@@ -1,0 +1,68 @@
+<mat-sidenav-container class="message-container">
+  <mat-sidenav  fixedTopGap="56" opened="true" mode="side" [fixedInViewport]="false" class="message-sidenav">
+    <mat-nav-list>
+      <div mat-subheader>Mes contacts</div>
+      <a mat-list-item *ngFor="let discussion of discussions" (click)="updateInterlocuteur(discussion)">{{discussion.interlocutor_username}}
+        {{!discussion.seen ? '(Nouveau message)': ''}}
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="message-content">
+
+    <mat-card style="width: 80%; height: 80vh; margin: auto" *ngIf="!!currentInterlocutor">
+      <mat-card-header>
+        <mat-card-title style="font-size: 30px">
+          {{currentInterlocutor.interlocutor_username}}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="width: 90%; height: 100%; margin: auto"  >
+        <div #scrollMe style="width: 100%; height: 100%; margin: auto">
+          <mat-card   style="width: 90%; height: 80%; overflow-y: scroll; margin: auto auto 15px;" >
+            <mat-card-content>
+              <div style="width: 100%"  *ngFor="let message of this.messages">
+                <mat-card style="width: 25%; margin-bottom: 10px" *ngIf="message.sender_id === currentInterlocutor.interlocutor_id">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <p style="display: inline-block; margin-right: 8px">{{message.sender_id === currentInterlocutor.interlocutor_id ? currentInterlocutor.interlocutor_username : currUsername}} </p>
+                      <p style="display: inline-block; font-size: 10px">{{message.date_create | date:'dd/MM/yyyy HH:mm':'+0400' }}</p>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content style="word-wrap: break-word;">
+                    {{message.content}}
+                  </mat-card-content>
+                </mat-card>
+                <mat-card style="width: 25%; margin-bottom: 10px; margin-left: 800px" *ngIf="message.sender_id !== currentInterlocutor.interlocutor_id">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <p style="display: inline-block; margin-right: 8px">{{message.sender_id === currentInterlocutor.interlocutor_id ? currentInterlocutor.interlocutor_username : currUsername}} </p>
+                      <p style="display: inline-block; font-size: 10px">{{message.date_create | date:'dd/MM/yyyy HH:mm':'+0400' }}</p>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content style="word-wrap: break-word;">
+                    {{message.content}}
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <mat-card style="width: 90%; margin: auto">
+            <mat-card-content>
+              <form [formGroup]="form" (ngSubmit)="sendMessage()">
+                <div style="width: 100%">
+                  <mat-form-field class="display_input_text" appearance="fill">
+                    <input matInput placeholder="Envoyer un message ..." formControlName="text" required maxlength="225" autocomplete="off">
+                  </mat-form-field>
+
+                  <button mat-raised-button color="primary" style="width: 10%"  (click)="sendMessage()">Envoyer</button>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+
+      </mat-card-content>
+    </mat-card>
+  </mat-sidenav-content>
+</mat-sidenav-container>

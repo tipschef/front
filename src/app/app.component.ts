@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './shared/services/auth/auth.service';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   title = 'TipsChef';
   firstFormGroup: FormGroup;
   userSearch: string;
-
 
   constructor(private authService: AuthService,
               private router: Router,

@@ -1,0 +1,26 @@
+.message-container {
+  position: fixed;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.message-sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  background: #ff9100;
+}
+
+.message-content {
+  padding: 15px;
+  background: white;
+}
+
+.display_input_text {
+  width: 85%;
+  display: inline-block;
+  margin-right: 15px;
+}

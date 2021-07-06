@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  api: 'https://gcr-tipschef-dev-europe-west1-api-5iymse6mzq-ew.a.run.app',
+  api: 'https://gcr-tipschef-prod-europe-west1-api-lnzjt4rypq-ew.a.run.app',
+  socket_endpoint: 'wss://gcr-tipschef-prod-europe-west1-api-lnzjt4rypq-ew.a.run.app/message',
   api_version: '/v1',
 };

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api: 'http://localhost:5050',
+  socket_endpoint: 'ws://localhost:5050/message',
   api_version: '/v1',
 };
 

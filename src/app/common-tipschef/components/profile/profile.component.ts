@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
 
   pagination: Pagination;
 
+  tier_level: number;
 
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -29,7 +30,7 @@ export class ProfileComponent implements OnInit {
               private bookService: BookService,
               private userService: UserService,
               private authService: AuthService
-              ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -57,7 +58,15 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserByUsername(this.username).subscribe(httpReturn => {
       if (httpReturn?.body) {
         this.user = httpReturn.body;
+        this.loadTier();
+      }
+    });
+  }
 
+  loadTier(): void {
+    this.userService.getUserSubscriptionTier(this.username).subscribe(httpReturn => {
+      if (httpReturn?.body?.subscription_tier){
+        this.tier_level = httpReturn.body.subscription_tier;
       }
     });
   }
@@ -97,9 +106,17 @@ export class ProfileComponent implements OnInit {
   }
 
   get current_username(): string {
-    if (this.authService.userRoles && this.authService.userRoles.username){
+    if (this.authService.userRoles && this.authService.userRoles.username) {
       return this.authService.userRoles.username;
     }
     return '';
+  }
+
+  createDiscussion(): void {
+    this.userService.postDiscussion(this.username).subscribe(httpReturn => {
+      if (httpReturn?.body) {
+        this.route.navigate(['/message']);
+      }
+    });
   }
 }

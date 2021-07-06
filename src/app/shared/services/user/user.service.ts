@@ -9,6 +9,8 @@ import {CreateSubscription} from '../../models/create-subscription';
 import {Tier} from '../../models/tier';
 import {GiftSubscription} from '../../models/gift-subscription';
 import {CreatedSubscription} from '../../models/created-subscription';
+import {Discussion} from '../../models/discussion';
+import {TipschefMessage} from '../../models/tipschef-message';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +47,32 @@ export class UserService {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
     return this.http.post<any>(url, createSubscription, {headers, observe: 'response'});
+  }
+
+
+  postDiscussion(userId: string): Observable<HttpResponse<any>> {
+    const url = this.constantsService.getConstant('USER_DISCUSSION');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.post<any>(url + '/' + userId, {}, {headers, observe: 'response'});
+  }
+
+
+  getDiscussions(): Observable<HttpResponse<Array<Discussion>>> {
+    const url = this.constantsService.getConstant('USER_DISCUSSION');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<Discussion>>(url, {headers, observe: 'response'});
+  }
+
+  getMessages(discussionId: number): Observable<HttpResponse<Array<TipschefMessage>>> {
+    const url = this.constantsService.getConstant('USER_MESSAGE');
+    const headers = {
+      Authorization: `Bearer ${this.authService.authData.access_token}`
+    };
+    return this.http.get<Array<TipschefMessage>>(url + '/' + discussionId, {headers, observe: 'response'});
   }
 
   getOngoingSubscription(): Observable<HttpResponse<Array<CreatedSubscription>>> {
@@ -120,7 +148,7 @@ export class UserService {
     const headers = {
       Authorization: `Bearer ${this.authService.authData.access_token}`
     };
-    return this.http.get<any>(url + '/' + username , {headers, observe: 'response'});
+    return this.http.get<any>(url + '/' + username, {headers, observe: 'response'});
   }
 
   followUser(username: string): Observable<HttpResponse<any>> {
