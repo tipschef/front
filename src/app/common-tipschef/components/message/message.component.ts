@@ -38,6 +38,9 @@ export class MessageComponent implements OnInit, OnDestroy {
     chatSub$.subscribe(
       message => {
         const tipschefMessage = JSON.parse(message.data) as TipschefMessage;
+        console.log(tipschefMessage);
+        console.log(this.currentInterlocutor);
+        console.log(this.authService);
         if (tipschefMessage.sender_id === this.currentInterlocutor.interlocutor_id
             || tipschefMessage.sender_id === this.authService.userRoles.id) {
           this.messages.push(tipschefMessage);
