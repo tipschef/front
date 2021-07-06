@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LikeChartComponent } from './like-chart.component';
+import {LikeChartComponent} from './like-chart.component';
 
 describe('AnnualSalesChartComponent', () => {
   let component: LikeChartComponent;

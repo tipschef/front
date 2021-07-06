@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CookComponent } from './cook.component';
+import {CookComponent} from './cook.component';
 
 describe('CookComponent', () => {
   let component: CookComponent;

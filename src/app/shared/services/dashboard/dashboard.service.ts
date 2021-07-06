@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {ConstantsService} from "../constants/constants.service";
-import {AuthService} from "../auth/auth.service";
-import {Observable} from "rxjs";
-import {Dashboard} from "../../models/dashboard";
-import {map} from "rxjs/operators";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {ConstantsService} from '../constants/constants.service';
+import {AuthService} from '../auth/auth.service';
+import {Observable} from 'rxjs';
+import {Dashboard} from '../../models/dashboard';
 
 @Injectable({
   providedIn: 'root'

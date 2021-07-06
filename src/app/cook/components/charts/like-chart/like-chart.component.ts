@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
-import {DashboardService} from '../../../../shared/services/dashboard/dashboard.service';
 import {Dashboard} from '../../../../shared/models/dashboard';
 import {DatePipe} from '@angular/common';
 

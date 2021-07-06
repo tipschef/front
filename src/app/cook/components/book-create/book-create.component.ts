@@ -5,9 +5,8 @@ import {TemplateList} from '../../../shared/models/template-list';
 import {BookService} from '../../../shared/services/book/book.service';
 import {AuthService} from '../../../shared/services/auth/auth.service';
 import {Recipe} from '../../../shared/models/recipe';
-import {MatTableDataSource} from '@angular/material/table';
 import {RecipeService} from '../../../shared/services/recipe/recipe.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

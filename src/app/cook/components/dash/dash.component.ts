@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {map} from 'rxjs/operators';
-import {Breakpoints, BreakpointObserver} from '@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Dashboard} from '../../../shared/models/dashboard';
 import {DashboardService} from '../../../shared/services/dashboard/dashboard.service';
 

@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../shared/services/auth/auth.service';
 import {PaymentService} from '../../../shared/services/payment/payment.service';
 import {AccountPayment} from '../../../shared/models/account_payment';
-import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

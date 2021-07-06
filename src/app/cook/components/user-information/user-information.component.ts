@@ -1,10 +1,9 @@
 /* tslint:disable */
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../shared/services/auth/auth.service";
-import {UserService} from "../../../shared/services/user/user.service";
-import {User} from "../../../shared/models/user.model";
-import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../../shared/services/auth/auth.service';
+import {UserService} from '../../../shared/services/user/user.service';
+import {User} from '../../../shared/models/user.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

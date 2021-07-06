@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SubChartComponent } from './sub-chart.component';
+import {SubChartComponent} from './sub-chart.component';
 
 describe('SubChartComponent', () => {
   let component: SubChartComponent;
